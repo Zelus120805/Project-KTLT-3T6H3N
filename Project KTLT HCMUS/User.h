@@ -7,6 +7,14 @@ struct User {
     string userName;
     string passWord;
 };
-void userRegister();
+struct nodeUser {
+    User user;
+    nodeUser* next;
+};
+struct listUser {
+    nodeUser* head;
+};
+void userRegister(listUser& lst);
 void userLogIn();
+void changePassword(listUser& lst);
 #endif
