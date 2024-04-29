@@ -7,5 +7,6 @@ struct User {
     string userName;
     string passWord;
 };
-
+void userRegister();
+void userLogIn();
 #endif
