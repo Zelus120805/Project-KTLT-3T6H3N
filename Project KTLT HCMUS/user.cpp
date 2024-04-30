@@ -13,25 +13,26 @@ void userRegister(listUser& lst)
 	std::cout << "Password: ";
 	std::cin >> user.passWord;
 	account << user.userName << "," << user.passWord << "\n";
-	if (lst.head == nullptr)
+	nodeUser* newNode = new nodeUser;
+	newNode->user = user;
+	newNode->next = NULL;
+	if (lst.head == NULL)
 	{
-		lst.head->user = user;
-		lst.head->next = nullptr;
+		lst.head = newNode;
 	}
 	else
 	{
 		nodeUser* temp = new nodeUser();
 		temp = lst.head;
-		while (temp != nullptr)
+		while (temp ->next!= nullptr)
 		{
 			temp = temp->next;
 		}
-		temp->user = user;
-		temp->next = nullptr;
+		temp->next = newNode;
 	}
 	account.close();
 }
-void userLogIn()
+void userLogIn(listUser& lst)
 {
 	std::ifstream account;
 	account.open("account.txt");
@@ -48,29 +49,30 @@ void userLogIn()
 	while (!account.eof())
 	{
 		User user1;
-		int check = 0;
 		getline(account, temp, ',');
 		user1.userName = temp;
 		getline(account, temp, '\n');
 		user1.passWord = temp;
 		if (user1.userName == user.userName && user1.passWord == user.passWord)
 		{
-			std::cout << "Go to home page" << "\n";
+			workSession(lst, user);//Neu ten dang nhap va mat khau dung thi vao phien dang nhap
 			return;
 		}
 	}
 	std::cout << "Account does not exist" << "\n";
+	system("cls");//Them ham xoa man hinh cho dep
 	account.close();
 }
 
-void changePassword(listUser& lst)
+void changePassword(listUser& lst,User user1)
 {
 	User user;
 	std::cout << "Username: ";
 	std::cin >> user.userName;
-	std::cout << "Password: ";
-	std::cin >> user.passWord;
-
+	do {
+		std::cout << "Password: ";
+		std::cin >> user.passWord;
+	} while (user1.passWord != user.passWord);
 	nodeUser* tempNode = new nodeUser();
 	tempNode = lst.head;
 	while (tempNode != nullptr)
@@ -81,6 +83,8 @@ void changePassword(listUser& lst)
 			std::cout << "New password: ";
 			std::cin >> change;
 			tempNode->user.passWord = change;
+			system("cls");
+			std::cout << "Your password has been changed!\n";
 			break;
 		}
 		tempNode = tempNode->next;
@@ -94,4 +98,62 @@ void changePassword(listUser& lst)
 		tempNode = tempNode->next;
 	}
 	account.close();
+}
+void readAccountFile(listUser& lst)
+{
+	std::ifstream account;
+	account.open("account.txt");
+	if (account.is_open() == false)
+	{
+		return;
+	}
+	nodeUser* newNode = new nodeUser();
+	string temp;
+	getline(account,temp, ',');
+	newNode->user.userName = temp;
+	getline(account, temp, '\n');
+	newNode->user.passWord = temp;
+	newNode->next = nullptr;
+	lst.head = newNode;
+	while (!account.eof())
+	{
+		nodeUser* temp1 = lst.head;
+		while (temp1->next != NULL)
+		{
+			temp1 = temp1->next;
+		}
+		newNode = new nodeUser();
+		getline(account, temp, ',');
+		newNode->user.userName = temp;
+		getline(account, temp, '\n');
+		newNode->user.passWord = temp;
+		newNode->next = nullptr;
+		temp1->next = newNode;
+	}
+}
+void workSession(listUser& lst, User& user)
+{
+	system("cls");
+	if (user.userName.length() == 0)
+	{
+		return;
+	}
+
+	int section;
+	while (true)
+	{
+		std::cout << "Hello " << user.userName << "\n";
+		std::cout << "1. Change password" << "\n";
+		std::cout << "2. Log out" << "\n";
+		cin >> section;
+		if (section == 1)
+		{
+			changePassword(lst,user);
+		}
+		if (section == 2)
+		{
+			system("cls");
+			break;
+		}
+	}
 }
