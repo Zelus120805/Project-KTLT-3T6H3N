@@ -1,8 +1,8 @@
 #include "User.h"
-void userRegister(listUser& lst)
+void userRegister(listUser& lst, const char fileName[])
 {
 	std::ofstream account;
-	account.open("account.txt", std::ios_base::app);
+	account.open(fileName, std::ios_base::app);
 	if (account.is_open() == false)
 	{
 		return;
@@ -55,7 +55,7 @@ void userLogIn(listUser& lst)
 		user1.passWord = temp;
 		if (user1.userName == user.userName && user1.passWord == user.passWord)
 		{
-			workSession(lst, user);//Neu ten dang nhap va mat khau dung thi vao phien dang nhap
+			workSession( user);//Neu ten dang nhap va mat khau dung thi vao phien dang nhap
 			return;
 		}
 	}
@@ -63,6 +63,10 @@ void userLogIn(listUser& lst)
 	system("cls");//Them ham xoa man hinh cho dep
 	account.close();
 }
+
+#include <iostream>
+#include <fstream>
+#include <string>
 
 void changePassword(const string userName, const string newPass)
 {
@@ -97,25 +101,26 @@ void changePassword(const string userName, const string newPass)
 		name.clear();
 		pass.clear();
 	}
-
-	if (count == 0) std::cout << "Can't find entered username";
-
 	oldFile.close();
 	newFile.close();
+	if (count == 0) std::cout << "Can't find entered username";
+	string line;
+	std::ifstream new_File("temp.txt");
+	std::ofstream old_File("account.txt");
 
-	remove("account.txt");
-	if (rename("temp.txt", "account.txt") == 0) {
-		std::cout << "Password is changed" << std::endl;
+	if (!new_File.is_open() || !old_File.is_open()) {
+		std::cout << "Can't change the password" << std::endl;
 		return;
 	}
-	else
+	while (getline(new_File, line))
 	{
-		std::cout << "Password changes failed" << std::endl;
-		return;
+		old_File << line << "\n";
 	}
+	cout << "Your pass has been changed" << std::endl;
 }
 
-void workSession(listUser& lst, User& user)
+
+void workSession( User& user)
 {
 	system("cls");
 	if (user.userName.length() == 0)
@@ -132,7 +137,9 @@ void workSession(listUser& lst, User& user)
 		cin >> section;
 		if (section == 1)
 		{
-			changePassword(lst,user);
+			string newPass;
+			std::cin >> newPass;
+			changePassword(user.userName,newPass);
 		}
 		if (section == 2)
 		{

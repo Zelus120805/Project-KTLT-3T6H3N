@@ -14,9 +14,9 @@ struct nodeUser {
 struct listUser {
     nodeUser* head;
 };
-void userRegister(listUser& lst);
+void userRegister(listUser& lst,const char fileName[]);
 void userLogIn(listUser& lst);
-void changePassword(listUser& lst,User user1);
-void workSession(listUser& lst,User& user);
-void readAccountFile(listUser& lst);
+void changePassword(const string userName, const string newPass);
+void workSession(User& user);
+//void readAccountFile(listUser& lst);
 #endif

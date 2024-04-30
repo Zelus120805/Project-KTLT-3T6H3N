@@ -7,7 +7,8 @@ int main()
 	int section;
 	listUser lst;
 	lst.head = nullptr;
-	readAccountFile(lst);
+	//readAccountFile(lst);
+	//readAccountFile(lst);
 	while (true)
 	{
 		std::cout << "1. Register \n";
