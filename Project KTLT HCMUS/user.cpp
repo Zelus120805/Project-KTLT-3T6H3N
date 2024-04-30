@@ -64,73 +64,57 @@ void userLogIn(listUser& lst)
 	account.close();
 }
 
-void changePassword(listUser& lst,User user1)
+void changePassword(const string userName, const string newPass)
 {
-	User user;
-	std::cout << "Username: ";
-	std::cin >> user.userName;
-	do {
-		std::cout << "Password: ";
-		std::cin >> user.passWord;
-	} while (user1.passWord != user.passWord);
-	nodeUser* tempNode = new nodeUser();
-	tempNode = lst.head;
-	while (tempNode != nullptr)
-	{
-		if (user.userName == tempNode->user.userName)
-		{
-			string change;
-			std::cout << "New password: ";
-			std::cin >> change;
-			tempNode->user.passWord = change;
-			system("cls");
-			std::cout << "Your password has been changed!\n";
-			break;
-		}
-		tempNode = tempNode->next;
-	}
-	tempNode = lst.head;
-	std::ofstream account;
-	account.open("account.txt");
-	while (tempNode != nullptr)
-	{
-		account << tempNode->user.userName << "," << tempNode->user.passWord << "\n";
-		tempNode = tempNode->next;
-	}
-	account.close();
-}
-void readAccountFile(listUser& lst)
-{
-	std::ifstream account;
-	account.open("account.txt");
-	if (account.is_open() == false)
-	{
+	std::ifstream oldFile("account.txt");
+	std::ofstream newFile("temp.txt");
+
+	if (!oldFile.is_open() || !newFile.is_open()) {
+		std::cout << "Can't open file" << std::endl;
 		return;
 	}
-	nodeUser* newNode = new nodeUser();
-	string temp;
-	getline(account,temp, ',');
-	newNode->user.userName = temp;
-	getline(account, temp, '\n');
-	newNode->user.passWord = temp;
-	newNode->next = nullptr;
-	lst.head = newNode;
-	while (!account.eof())
-	{
-		nodeUser* temp1 = lst.head;
-		while (temp1->next != NULL)
+
+	std::string name, pass;
+	int count = 0;
+
+	while (getline(oldFile, name, ',')) {
+		getline(oldFile, pass);
+		if (name.empty() || pass.empty()) break;
+
+		if (count == 0)
 		{
-			temp1 = temp1->next;
+			if (name == userName)
+			{
+				newFile << name << "," << newPass << "\n";
+				count++;
+			}
+			else
+				newFile << name << "," << pass << "\n";
 		}
-		newNode = new nodeUser();
-		getline(account, temp, ',');
-		newNode->user.userName = temp;
-		getline(account, temp, '\n');
-		newNode->user.passWord = temp;
-		newNode->next = nullptr;
-		temp1->next = newNode;
+		else
+			newFile << name << "," << pass << "\n";
+
+		name.clear();
+		pass.clear();
+	}
+
+	if (count == 0) std::cout << "Can't find entered username";
+
+	oldFile.close();
+	newFile.close();
+
+	remove("account.txt");
+	if (rename("temp.txt", "account.txt") == 0) {
+		std::cout << "Password is changed" << std::endl;
+		return;
+	}
+	else
+	{
+		std::cout << "Password changes failed" << std::endl;
+		return;
 	}
 }
+
 void workSession(listUser& lst, User& user)
 {
 	system("cls");
