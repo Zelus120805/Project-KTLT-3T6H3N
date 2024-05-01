@@ -56,6 +56,9 @@
     <ClCompile Include="mainUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mainFunctionOfManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="account.txt">
@@ -64,5 +67,13 @@
     <Text Include="temp.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="accountStudent.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="path">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

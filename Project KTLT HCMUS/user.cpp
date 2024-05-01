@@ -55,7 +55,7 @@ void userLogIn(listUser& lst)
 		user1.passWord = temp;
 		if (user1.userName == user.userName && user1.passWord == user.passWord)
 		{
-			workSession( user);//Neu ten dang nhap va mat khau dung thi vao phien dang nhap
+			//workSession( user);//Neu ten dang nhap va mat khau dung thi vao phien dang nhap
 			return;
 		}
 	}
@@ -64,87 +64,85 @@ void userLogIn(listUser& lst)
 	account.close();
 }
 
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "privateUser.h"
 
-void changePassword(const string userName, const string newPass)
-{
-	std::ifstream oldFile("account.txt");
-	std::ofstream newFile("temp.txt");
-
-	if (!oldFile.is_open() || !newFile.is_open()) {
-		std::cout << "Can't open file" << std::endl;
-		return;
-	}
-
-	std::string name, pass;
-	int count = 0;
-
-	while (getline(oldFile, name, ',')) {
-		getline(oldFile, pass);
-		if (name.empty() || pass.empty()) break;
-
-		if (count == 0)
-		{
-			if (name == userName)
-			{
-				newFile << name << "," << newPass << "\n";
-				count++;
-			}
-			else
-				newFile << name << "," << pass << "\n";
-		}
-		else
-			newFile << name << "," << pass << "\n";
-
-		name.clear();
-		pass.clear();
-	}
-	oldFile.close();
-	newFile.close();
-	if (count == 0) std::cout << "Can't find entered username";
-	string line;
-	std::ifstream new_File("temp.txt");
-	std::ofstream old_File("account.txt");
-
-	if (!new_File.is_open() || !old_File.is_open()) {
-		std::cout << "Can't change the password" << std::endl;
-		return;
-	}
-	while (getline(new_File, line))
-	{
-		old_File << line << "\n";
-	}
-	cout << "Your pass has been changed" << std::endl;
-}
-
-
-void workSession( User& user)
-{
-	system("cls");
-	if (user.userName.length() == 0)
-	{
-		return;
-	}
-
-	int section;
-	while (true)
-	{
-		std::cout << "Hello " << user.userName << "\n";
-		std::cout << "1. Change password" << "\n";
-		std::cout << "2. Log out" << "\n";
-		cin >> section;
-		if (section == 1)
-		{
-			string newPass;
-			std::cin >> newPass;
-			changePassword(user.userName,newPass);
-		}
-		if (section == 2)
-		{
-			system("cls");
-			break;
-		}
-	}
-}
+//void changePassword(listStudent *lst, const char fileName[],const string userName, const string newPass)
+//{
+//	std::ifstream oldFile(fileName);
+//	std::ofstream newFile("temp.txt");
+//
+//	if (!oldFile.is_open() || !newFile.is_open()) {
+//		std::cout << "Can't open file" << std::endl;
+//		return;
+//	}
+//
+//	std::string name, pass;
+//	int count = 0;
+//
+//	while (getline(oldFile, name, ',')) {
+//		getline(oldFile, pass);
+//		if (name.empty() || pass.empty()) break;
+//
+//		if (count == 0)
+//		{
+//			if (name == userName)
+//			{
+//				newFile << name << "," << newPass << "\n";
+//				count++;
+//			}
+//			else
+//				newFile << name << "," << pass << "\n";
+//		}
+//		else
+//			newFile << name << "," << pass << "\n";
+//
+//		name.clear();
+//		pass.clear();
+//	}
+//	oldFile.close();
+//	newFile.close();
+//	if (count == 0) std::cout << "Can't find entered username";
+//	string line;
+//	std::ifstream new_File("temp.txt");
+//	std::ofstream old_File(fileName);
+//
+//	if (!new_File.is_open() || !old_File.is_open()) {
+//		std::cout << "Can't change the password" << std::endl;
+//		return;
+//	}
+//	while (getline(new_File, line))
+//	{
+//		old_File << line << "\n";
+//	}
+//	cout << "Your pass has been changed" << std::endl;
+//}
+//
+//
+//void workSession( User& user)
+//{
+//	system("cls");
+//	if (user.userName.length() == 0)
+//	{
+//		return;
+//	}
+//
+//	int section;
+//	while (true)
+//	{
+//		std::cout << "Hello " << user.userName << "\n";
+//		std::cout << "1. Change password" << "\n";
+//		std::cout << "2. Log out" << "\n";
+//		cin >> section;
+//		if (section == 1)
+//		{
+//			string newPass;
+//			std::cin >> newPass;
+//			//changePassword(user.userName,newPass);
+//		}
+//		if (section == 2)
+//		{
+//			system("cls");
+//			break;
+//		}
+//	}
+//}

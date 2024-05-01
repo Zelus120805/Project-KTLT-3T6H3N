@@ -16,7 +16,5 @@ struct listUser {
 };
 void userRegister(listUser& lst,const char fileName[]);
 void userLogIn(listUser& lst);
-void changePassword(const string userName, const string newPass);
-void workSession(User& user);
 //void readAccountFile(listUser& lst);
 #endif
