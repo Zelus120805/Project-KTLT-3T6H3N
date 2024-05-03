@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\NewFilter1">
+      <UniqueIdentifier>{42746f47-57e3-410e-9dc6-ae870a80e308}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h">
@@ -69,6 +72,18 @@
     </Text>
     <Text Include="accountStudent.txt">
       <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="SchoolYear.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2020-2021.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2024-2025.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="2023-2024.txt">
+      <Filter>Resource Files\NewFilter1</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

@@ -217,3 +217,30 @@ bool isStudentExisted(listStudent lst, string userName)
 	}
 	return false;
 }
+
+void writeStudentToFile(listStudent lst, const char fileName[])
+{
+	std::ofstream accountStudent(fileName,std::ios_base::app);
+	if (accountStudent.is_open() == false)
+	{
+		return;
+	}
+	nodeStudent* temp = lst.head;
+	if (lst.head == NULL)
+	{
+		return;
+	}
+	while (temp != NULL)
+	{
+		accountStudent << temp->student.account.userName << ",";
+		accountStudent << temp->student.account.passWord << ",";
+		accountStudent << temp->student.info.idStudent << ",";
+		accountStudent << temp->student.info.lastName << ",";
+		accountStudent << temp->student.info.firstName << ",";
+		accountStudent << temp->student.info.gender << ",";
+		accountStudent << temp->student.info.d.year << "," << temp->student.info.d.month << "," << temp->student.info.d.day << ",";
+		accountStudent << temp->student.info.socialId << "\n";
+		temp = temp->next;
+	}
+
+}

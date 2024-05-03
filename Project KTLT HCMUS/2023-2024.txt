@@ -1,0 +1,12 @@
+23CTT4|
+aeaefff,123,23120358,Nguyen,Tien Thanh,Male,3,7,7,082205004030
+aeaefff123,123,1,Nguyen,Van A,male,2004,2,0,123
+code_khong_bug,project_10d,23120300,3T6H,3N,m,2005,3,3,123
+dakfjekw,fewafjawkef,123456,foweajfl;a,feawoiefjawef,1,1,1,1,2
+H2FSbF6,H2FSbF6,12,Nguyen,Van A,M,2004,4,4,123
+23CTT3|
+aeaefff,123,23120358,Nguyen,Tien Thanh,Male,3,7,7,082205004030
+aeaefff123,123,1,Nguyen,Van A,male,2004,2,0,123
+code_khong_bug,project_10d,23120300,3T6H,3N,m,2005,3,3,123
+dakfjekw,fewafjawkef,123456,foweajfl;a,feawoiefjawef,1,1,1,1,2
+H2FSbF6,H2FSbF6,12,Nguyen,Van A,M,2004,4,4,123

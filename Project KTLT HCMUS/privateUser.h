@@ -31,4 +31,5 @@ void studentLogIn(listStudent &lst,const char fileName[]);
 void workSessionOfStudent(nodeStudent*& node);
 void viewInfo(nodeStudent* Student);
 bool isStudentExisted(listStudent lst, string userName);
+void writeStudentToFile(listStudent lst, const char fileName[]);
 #endif

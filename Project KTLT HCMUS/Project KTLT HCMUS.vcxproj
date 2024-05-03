@@ -145,8 +145,12 @@
     <ClCompile Include="user.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="2020-2021.txt" />
+    <Text Include="2023-2024.txt" />
+    <Text Include="2024-2025.txt" />
     <Text Include="account.txt" />
     <Text Include="accountStudent.txt" />
+    <Text Include="SchoolYear.txt" />
     <Text Include="temp.txt" />
   </ItemGroup>
   <ItemGroup>
