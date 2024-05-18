@@ -11,6 +11,7 @@ struct studentInformation {
     string gender;
     Date d;
     string socialId;
+    string inClass;
 };
 
 #endif

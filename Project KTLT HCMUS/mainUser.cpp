@@ -18,7 +18,7 @@ void studentRegister(listStudent& lst, const char fileName[])
 	std::cout << "ID student: ";
 	std::cin >> Student->student.info.idStudent;
 	std::cout << "Date of birth (yyyy mm dd): ";
-	std::cin >> Student->student.info.d.year >> Student->student.info.d.month >> Student->student.info.d.day;
+	std::cin >> Student->student.info.d.day >> Student->student.info.d.month >> Student->student.info.d.year;
 	std::cout << "Social ID: ";
 	std::cin >> Student->student.info.socialId;
 	if (isStudentExisted(lst,Student->student.account.userName))
@@ -38,8 +38,8 @@ void studentRegister(listStudent& lst, const char fileName[])
 		accountStudent << Student->student.info.lastName << ",";
 		accountStudent << Student->student.info.firstName << ",";
 		accountStudent << Student->student.info.gender << ",";
-		accountStudent << Student->student.info.d.year << "," << Student->student.info.d.month << "," << Student->student.info.d.day << ",";
-		accountStudent << Student->student.info.socialId << "\n";
+		accountStudent << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year << ",";
+		accountStudent << Student->student.info.socialId << ",";
 	}
 	else
 	{
@@ -60,9 +60,10 @@ void studentRegister(listStudent& lst, const char fileName[])
 		accountStudent << Student->student.info.lastName << ",";
 		accountStudent << Student->student.info.firstName << ",";
 		accountStudent << Student->student.info.gender << ",";
-		accountStudent << Student->student.info.d.year << "," << Student->student.info.d.month << "," << Student->student.info.d.day<< ",";
-		accountStudent << Student->student.info.socialId << "\n";
+		accountStudent << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year<< ",";
+		accountStudent << Student->student.info.socialId << ",";
 	}
+		accountStudent << Student->student.info.inClass<< ",\n";
 	}
 	
 void readFileStudent(listStudent& lst, const char fileName[])
@@ -74,14 +75,23 @@ void readFileStudent(listStudent& lst, const char fileName[])
 	}
 	string temp;
 	accountStudent.seekg(0, std::ios::beg);
-
+//	getline(accountStudent, temp);
 	nodeStudent* Student1 = new nodeStudent();
 	Student1->next = nullptr;
+	
 	getline(accountStudent, temp, ',');
 	if (temp == "")
 	{
 		return;
 	}
+	accountStudent.seekg(0, std::ios::beg);
+	getline(accountStudent, temp);
+	if (temp == "")
+		return;
+
+
+//	accountStudent.seekg(0, std::ios::beg);
+	getline(accountStudent, temp,',');
 	Student1->student.account.userName = temp;
 	getline(accountStudent, temp, ',');
 	Student1->student.account.passWord = temp;
@@ -93,14 +103,17 @@ void readFileStudent(listStudent& lst, const char fileName[])
 	Student1->student.info.firstName = temp;
 	getline(accountStudent, temp, ',');
 	Student1->student.info.gender = temp;
-	getline(accountStudent, temp, ',');
-	Student1->student.info.d.year = std::stoi(temp);
-	getline(accountStudent, temp, ',');
+	getline(accountStudent, temp, '/');
+	Student1->student.info.d.day = std::stoi(temp);
+	getline(accountStudent, temp, '/');
 	Student1->student.info.d.month = std::stoi(temp);
 	getline(accountStudent, temp, ',');
-	Student1->student.info.d.day = std::stoi(temp);
-	getline(accountStudent, temp, '\n');
+	Student1->student.info.d.year= std::stoi(temp);
+	getline(accountStudent, temp, ',');
 	Student1->student.info.socialId = temp;
+	getline(accountStudent, temp, '\n');
+	Student1->student.info.inClass = temp;
+//	Student1->student.info.inClass 
 	lst.head = Student1;
 	nodeStudent* Temp = lst.head;
 	while (!accountStudent.eof())
@@ -124,19 +137,21 @@ void readFileStudent(listStudent& lst, const char fileName[])
 		Student->student.info.firstName = temp;
 		getline(accountStudent, temp, ',');
 		Student->student.info.gender = temp;
+		getline(accountStudent, temp, '/');
+		Student->student.info.d.day = std::stoi(temp);
+		getline(accountStudent, temp, '/');
+		Student->student.info.d.month = std::stoi(temp);
 		getline(accountStudent, temp, ',');
 		Student->student.info.d.year = std::stoi(temp);
 		getline(accountStudent, temp, ',');
-		Student->student.info.d.month = std::stoi(temp);
-		getline(accountStudent, temp, ',');
-		Student->student.info.d.day = std::stoi(temp);
-		getline(accountStudent, temp, '\n');
 		Student->student.info.socialId = temp;
+		getline(accountStudent, temp, '\n');
+		Student->student.info.inClass = temp;
 		Temp->next = Student;
 		Temp = Student;
 	}
 }
-void studentLogIn(listStudent& lst, const char fileName[])
+void studentLogIn(listStudent& lst, const char fileName[], listCourse list)
 {
 	std::ifstream accountStudent(fileName);
 	if (!accountStudent.is_open())
@@ -154,14 +169,14 @@ void studentLogIn(listStudent& lst, const char fileName[])
 	{
 		if (temp->student.account.userName == Username && temp->student.account.passWord == Password)
 		{
-			workSessionOfStudent(temp);
+			workSessionOfStudent(temp,list);
 			return;
 		}
 		temp = temp->next;
 	}
 	std::cout << "Fail to log in\n";
 }
-void workSessionOfStudent(nodeStudent*& node)
+void workSessionOfStudent(nodeStudent*& node, listCourse list)
 {
 	system("cls");
 	int section;
@@ -169,6 +184,7 @@ void workSessionOfStudent(nodeStudent*& node)
 	std::cout << "1. Changepass\n";
 	std::cout << "2. View info\n";
 	std::cout << "3. LogOut\n";
+	std::cout << "4. Register Course\n";
 	while (true)
 	{
 		std::cin >> section;
@@ -182,6 +198,40 @@ void workSessionOfStudent(nodeStudent*& node)
 			system("cls");
 			return;
 		}
+		if (section == 4)
+		{
+			nodeCourse* temp = list.head;
+			if (temp == NULL)
+			{
+				cout << "Khong co khoa hoc" << endl;
+			}
+			else
+			{
+				int i = 1, sub;
+				while (temp != NULL)
+				{
+					cout << i << ". " << temp->crs.info.courseName << " - " << temp->crs.info.className << "\n";
+					temp = temp->Next;
+					i++;
+				}
+				i = 1;
+				temp = list.head;
+				cout << "Select course: ";
+				cin >> sub;
+				while (temp != NULL)
+				{
+					if (i == sub)
+					{
+						addAStudentToCourse(temp, node);
+						break;
+					}
+					i++;
+					temp = temp->Next;
+				}
+
+			}
+		}
+
 	}
 }
 void viewInfo(nodeStudent* Student)
@@ -197,8 +247,9 @@ void viewInfo(nodeStudent* Student)
 	std::cout << "Last name: " << Student->student.info.lastName << "\n";
 	std::cout << "First name: " << Student->student.info.firstName << "\n";
 	std::cout <<"Gender: "<< Student->student.info.gender << "\n";
-	std::cout << "Date of birth " << Student->student.info.d.year << "," << Student->student.info.d.month << "," << Student->student.info.d.day << "\n";
+	std::cout << "Date of birth " << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year << "\n";
 	std::cout << "Social ID: " << Student->student.info.socialId << "\n";
+	std::cout << "Class: " << Student->student.info.inClass << "\n";
 }
 bool isStudentExisted(listStudent lst, string userName)
 {
@@ -238,9 +289,10 @@ void writeStudentToFile(listStudent lst, const char fileName[])
 		accountStudent << temp->student.info.lastName << ",";
 		accountStudent << temp->student.info.firstName << ",";
 		accountStudent << temp->student.info.gender << ",";
-		accountStudent << temp->student.info.d.year << "," << temp->student.info.d.month << "," << temp->student.info.d.day << ",";
-		accountStudent << temp->student.info.socialId << "\n";
+		accountStudent << temp->student.info.d.day << "/" << temp->student.info.d.month << "/" << temp->student.info.d.year << ",";
+		accountStudent << temp->student.info.socialId << ",";
+		accountStudent << temp->student.info.inClass << "\n";
 		temp = temp->next;
 	}
-
 }
+

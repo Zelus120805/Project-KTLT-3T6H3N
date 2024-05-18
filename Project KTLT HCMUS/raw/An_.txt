@@ -1,0 +1,2 @@
+MTH00001,Calculus 1B,23CTT5,Nguyen Van Thuy,4,Thu,0,0,0,0
+CSC100001,Programming,23CTT5,Nguyen Le Hoang Dung,4,Fri,0,0,0,0

@@ -30,9 +30,6 @@
     <ClInclude Include="Class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Course.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Semester.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,7 +42,7 @@
     <ClInclude Include="Score.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="studentCourses.h">
+    <ClInclude Include="Course.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -75,15 +72,6 @@
     </Text>
     <Text Include="SchoolYear.txt">
       <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2020-2021.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2024-2025.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="2023-2024.txt">
-      <Filter>Resource Files\NewFilter1</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,7 @@
+CSC100002,Programming,23CTT5,Nguyen Le Hoang Dung,4,3,50,Thu
+MTH00008,Calculus 1B,23CTT5,Nguyen Vu Huy,3,0,80,Thu
+MTH00030,Discrete Math,23CTT5,Nguyen Anh Thi,3,0,80,Fri
+
+
+
+

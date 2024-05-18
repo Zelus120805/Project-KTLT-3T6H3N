@@ -2,7 +2,6 @@
 #define _H_COURSE_H_
 
 #include "studentInformation.h"
-#include "Score.h"
 struct courseInfo {
     string idCourse;
     string courseName;
@@ -16,22 +15,29 @@ struct courseInfo {
     // studentInformation* listOfStudent;
     // Score* listOfScore;
 };
-struct inCourse
-{
-    studentInformation student;
-    courseInfo course;
-    Score scoreOfCourse;
-    inCourse* nextCourse;
-    inCourse* nextPerson;
-};
 
 struct Course
 {
-    courseInfo course;
-    inCourse* headOfList;
+    courseInfo info;
+ //   listStudent* lstStudentInCourse;
+ //   Score score;
 };
-//S1 (07:30), S2 (09:30), S3(13:30) and S4 (15:30)).
+struct nodeCourse
+{
+    Course crs;
+    nodeCourse* Next;
+};
+struct listCourse
+{
+    nodeCourse* head;
+};
 
+//Them mot hoc sinh vao danh sach hoc sinh, ghi ra file "Monhoc.txt", them vao enrolledList cua sinh vien do
+
+
+//Tao mot khoa hoc
+//S1 (07:30), S2 (09:30), S3(13:30) and S4 (15:30)).
+ 
 //struct listOfCourse {
 //    Course* listOfCourses;
 //};

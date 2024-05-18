@@ -30,6 +30,7 @@ struct listOfSchoolYear
 {
     nodeSchoolYear* head;
 };
+
 void createSchoolYear(listOfSchoolYear& lst);
 void addTailSchoolYear(listOfSchoolYear& lst, schoolYear addition);
 void readSchoolYear(listOfSchoolYear& lst);
@@ -37,5 +38,6 @@ void operateWithSchoolYear(listOfSchoolYear& lst);
 void writeStudentToFileClass(Class a,const char fileName[]);
 void createClass(listClass &lst);
 void add1StudentToClass(Class& myClass,const char fileName[]);
-
+void standardizeFile(const char fileName[]);
+//void assignClassToStudent(listClass lst,)
 #endif

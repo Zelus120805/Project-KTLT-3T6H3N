@@ -2,12 +2,14 @@
 #define _H_SEMESTER_H_
 
 #include "Date.h"
-
+#include "Class.h"
 struct Semester {
     int noSemester;
-    string schoolYear;
+    schoolYear SchoolYear;
     Date start;
     Date end;
 };
+
+
 
 #endif
