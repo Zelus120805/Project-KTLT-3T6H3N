@@ -278,8 +278,10 @@ void createNewCourse(listCourse& lst)
 	std::cin.ignore();
 	std::cout << "Input ID course: ";
 	getline(std::cin,newCourse->crs.info.idCourse);
+
 	std::cout << "Input courseName: ";
 	getline(std::cin, newCourse->crs.info.courseName);
+
 	std::cout << "Input Class name: ";
 	getline(std::cin, newCourse->crs.info.className);
 	std::cout << "Input teacher's Name: ";
@@ -294,7 +296,7 @@ void createNewCourse(listCourse& lst)
 	newCourse->Next = NULL;
 
 	//Tạo file danh sách lớp 
-	string fileListStudent = "./raw/"+ newCourse->crs.info.courseName + "_" + newCourse->crs.info.className;
+	string fileListStudent = "./raw/"+ newCourse->crs.info.courseName + "_" + newCourse->crs.info.className + ".txt";
 	std::ofstream listStudentInCourse(fileListStudent, std::ios_base::app);
 	if (listStudentInCourse.is_open() == false)
 	{
@@ -330,7 +332,7 @@ void addAStudentToCourse(nodeCourse*& course, nodeStudent* student)
 	string nameFile = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className +".txt";
 	std::ofstream fileList(nameFile, std::ios_base::app);
 
-	string studentFile = "./raw/"+student->student.info.firstName + "_Course" +".txt";
+	string studentFile = "./raw/" + to_string(student->student.info.idStudent) + "_Course" + ".txt";
 	std::ofstream fileStudent(studentFile, std::ios_base::app);
 
 	if (!fileList.is_open()||!fileStudent.is_open())
@@ -428,4 +430,100 @@ void readCourseFile(listCourse& lst)
 		newCourse.info.dayOfWeek = temp;
 		addTailCourse(lst, newCourse);
 	}
+}
+
+void addTailStudent(listStudent& lst, nodeStudent* newNode)
+{
+	if (lst.head == NULL)
+	{
+		lst.head = newNode;
+		return;
+	}
+	nodeStudent* temp = lst.head;
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = newNode;
+}
+
+//Đọc sinh viên từ file.csv
+void readStudentFromCSV(listStudent& lst, const string fileName)
+{
+	ifstream fileStudent(fileName);
+	if (!fileStudent.is_open())
+	{
+		return;
+	}
+	//Đọc dòng đầu
+	string temp;
+	getline(fileStudent, temp);
+	lst.head = NULL;
+
+	while (!fileStudent.eof())
+	{
+		nodeStudent* Student = new nodeStudent();
+		Student->next = NULL;
+		getline(fileStudent, temp, ',');
+		if (temp == "")
+		{
+			delete Student;
+			return;
+		}
+		Student->student.info.idStudent = std::stoi(temp);
+		getline(fileStudent, temp, ',');
+
+		Student->student.info.lastName = temp;
+		getline(fileStudent, temp, ',');
+
+		Student->student.info.firstName = temp;
+		getline(fileStudent, temp, ',');
+
+		Student->student.info.gender = temp;
+		getline(fileStudent, temp, '/');
+
+		Student->student.info.d.day = std::stoi(temp);
+		getline(fileStudent, temp, '/');
+		Student->student.info.d.month = std::stoi(temp);
+		getline(fileStudent, temp, ',');
+		Student->student.info.d.year = std::stoi(temp);
+		getline(fileStudent, temp, ',');
+
+		Student->student.info.socialId = temp;
+		getline(fileStudent, temp, '\n');
+
+		Student->student.info.inClass = temp;
+		addTailStudent(lst, Student);
+	
+	}
+
+	fileStudent.close();
+}
+
+
+
+//Thêm n sinh viên vào khóa học từ file CSV
+void addNStudentFromFile(nodeCourse*& course, const string fileName)
+{
+	ifstream fileStudent(fileName);
+	if (!fileStudent.is_open())
+	{
+		std::cout << "Khong the doc file" << endl;
+		return;
+	}
+	//Đọc từng sinh viên
+	listStudent lst;
+	lst.head = NULL;
+	readStudentFromCSV(lst, fileName);
+	//readFileStudent(lst, fileName.c_str());
+	
+	string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
+	ofstream fileCourse(courseName, ios_base::app);
+	nodeStudent* temp = lst.head;
+	while (temp != NULL)
+	{
+		addAStudentToCourse(course, temp);
+		temp = temp->next;
+	}
+	std::cout << "Da them thanh cong\n";
 }

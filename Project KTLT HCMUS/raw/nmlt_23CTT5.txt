@@ -1,0 +1,6 @@
+No,Student ID,Student Last Name,Student First Name,Gender,Other Mark(Assignment),Midterm Mark,Final Mark,Average Mark1,20126001,Phan Hanh,An,Male,0,0,0,0
+2,20126003,Tran Quang,Minh,Female,0,0,0,0
+3,20126009,Tu Khanh,Duy,Male,0,0,0,0
+4,20126010,Nguyen Thi My,Duyen,Female,0,0,0,0
+5,20126012,Tran Ngoc Thu,Giang,Male,0,0,0,0
+6,20126016,Pham Quang,Huy,Female,0,0,0,0
