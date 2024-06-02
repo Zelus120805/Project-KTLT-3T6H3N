@@ -4,8 +4,7 @@
 #include "Date.h"
 
 struct studentInformation {
-    int idStudent;
-    string fullName;
+    long idStudent;
     string firstName;
     string lastName;
     string gender;

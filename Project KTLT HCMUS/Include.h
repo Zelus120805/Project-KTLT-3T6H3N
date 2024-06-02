@@ -4,7 +4,9 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
-#include<string>
+#include <string>
+#include <conio.h>
+#include <windows.h>
 using namespace std;
 
 #endif

@@ -1,26 +1,50 @@
 #include "privateUser.h"
-void studentRegister(listStudent& lst, const char fileName[])
+#include "Windows.h"
+
+void studentRegister(listStudent& lst, const char fileName[], int x, int y, int height)
 {
 	//Ghi ra file
 	nodeStudent* Student = new nodeStudent();
 	Student->next = nullptr;
-	std::cout << "Username: ";
+	gotoXY(x + strlen("1. Username: "), y);
+	// std::cout << "Username: ";
 	std::cin >> Student->student.account.userName;
-	std::cout << "Password: ";
+	gotoXY(x + strlen("2. Password: "), y + height * 1);
+	// std::cout << "Password: ";
 	std::cin >> Student->student.account.passWord;
-	std::cout << "Lastname: ";
-	std::cin >> Student->student.info.lastName;
 	std::cin.ignore();
-	std::cout << "Firstname: ";
-	std::getline( std::cin,Student->student.info.firstName);
-	std::cout << "Gender: ";
+
+	std::string fullName;
+	gotoXY(x + strlen("3. Fullname: "), y + height * 2);
+	// std::cout << "Lastname: ";
+	std::getline(std::cin, fullName);
+	size_t index = fullName.find(' ');
+	if (index != string::npos)
+	{
+		Student->student.info.lastName = fullName.substr(0, index);
+		Student->student.info.firstName = fullName.substr(index + 1);
+	}
+	else
+	{
+		Student->student.info.lastName = fullName;
+		Student->student.info.firstName = "";
+	}
+
+	gotoXY(x + strlen("4. Gender: "), y + height * 3);
+	// std::cout << "Gender: ";
 	std::cin >> Student->student.info.gender;
-	std::cout << "ID student: ";
+	gotoXY(x + strlen("5. ID student: "), y + height * 4);
+	// std::cout << "ID student: ";
 	std::cin >> Student->student.info.idStudent;
-	std::cout << "Date of birth (yyyy mm dd): ";
+	gotoXY(x + strlen("6. Date of birth (dd mm yyyy): "), y + height * 5);
+	// std::cout << "Date of birth (yyyy mm dd): ";
 	std::cin >> Student->student.info.d.day >> Student->student.info.d.month >> Student->student.info.d.year;
-	std::cout << "Social ID: ";
+	gotoXY(x + strlen("7. Social ID: "), y + height * 6);
+	// std::cout << "Social ID: ";
 	std::cin >> Student->student.info.socialId;
+	gotoXY(x + strlen("8. Class: "), y + height * 7);
+	std::cin >> Student->student.info.inClass;
+
 	if (isStudentExisted(lst,Student->student.account.userName))
 	{
 		system("cls");
@@ -29,17 +53,13 @@ void studentRegister(listStudent& lst, const char fileName[])
 	}
 	std::ofstream accountStudent;
 	accountStudent.open(fileName, std::ios_base::app);
+	if (accountStudent.is_open() == false)
+	{
+		return;
+	}
 	if (lst.head == NULL)
 	{
 		lst.head = Student;
-		accountStudent << Student->student.account.userName << ",";
-		accountStudent << Student->student.account.passWord << ",";
-		accountStudent << Student->student.info.idStudent << ",";
-		accountStudent << Student->student.info.lastName << ",";
-		accountStudent << Student->student.info.firstName << ",";
-		accountStudent << Student->student.info.gender << ",";
-		accountStudent << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year << ",";
-		accountStudent << Student->student.info.socialId << ",";
 	}
 	else
 	{
@@ -49,22 +69,18 @@ void studentRegister(listStudent& lst, const char fileName[])
 			temp = temp->next;
 		}
 		temp->next = Student;
-		if (accountStudent.is_open() == false)
-		{
-			
-			return;
-		}
-		accountStudent << Student->student.account.userName << ",";
-		accountStudent << Student->student.account.passWord << ",";
-		accountStudent << Student->student.info.idStudent << ",";
-		accountStudent << Student->student.info.lastName << ",";
-		accountStudent << Student->student.info.firstName << ",";
-		accountStudent << Student->student.info.gender << ",";
-		accountStudent << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year<< ",";
-		accountStudent << Student->student.info.socialId << ",";
 	}
-		accountStudent << Student->student.info.inClass<< ",\n";
-	}
+
+	accountStudent << Student->student.account.userName << ",";
+	accountStudent << Student->student.account.passWord << ",";
+	accountStudent << Student->student.info.idStudent << ",";
+	accountStudent << Student->student.info.lastName << ",";
+	accountStudent << Student->student.info.firstName << ",";
+	accountStudent << Student->student.info.gender << ",";
+	accountStudent << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year << ",";
+	accountStudent << Student->student.info.socialId << ",";
+	accountStudent << Student->student.info.inClass << "\n";
+}
 	
 void readFileStudent(listStudent& lst, const char fileName[])
 {

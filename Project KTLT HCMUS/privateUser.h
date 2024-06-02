@@ -27,7 +27,7 @@ struct managerUser {
     string name;
 };
 
-void studentRegister(listStudent&lst,const char fileName[]);
+void studentRegister(listStudent&lst,const char fileName[], int x, int y, int height);
 void readFileStudent(listStudent& lst, const char fileName[]);
 void studentLogIn(listStudent &lst,const char fileName[],listCourse list);
 void workSessionOfStudent(nodeStudent*& node, listCourse list);
