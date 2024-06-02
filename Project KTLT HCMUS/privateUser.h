@@ -52,4 +52,10 @@ void addTailCourse(listCourse& lst, Course newCourse);
 
 //Đọc file khóa học mỗi khi khởi chạy chương trình
 void readCourseFile(listCourse& lst);
+
+void addTailStudent(listStudent& lst, nodeStudent* newNode);
+//Đọc sinh viên từ .CSV
+void readStudentFromCSV(listStudent& lst, const string fileName);
+//Thêm N sinh viên từ file .CSV
+void addNStudentFromFile(nodeCourse*& course, const string fileName);
 #endif
