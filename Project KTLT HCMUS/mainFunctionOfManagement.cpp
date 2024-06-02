@@ -512,7 +512,7 @@ void addNStudentFromFile(nodeCourse*& course, const string fileName)
 		return;
 	}
 	//Đọc từng sinh viên
-	listStudent lst;
+	listStudent lst = { };
 	lst.head = NULL;
 	readStudentFromCSV(lst, fileName);
 	//readFileStudent(lst, fileName.c_str());
