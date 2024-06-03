@@ -19,6 +19,9 @@ int main()
 	readCourseFile(listOfCourse);
 	readFileStudent(lst, "accountStudent.txt");
 	chooseOptionMenuLogin(lst, list, listOfCourse);
-	
+	deleteAllCourse(listOfCourse);
+	deleteAllSchoolYear(list);
+	deleteAllStudent(lst);
 	system("cls");
+	return 0;
 }

@@ -1,3 +1,4 @@
 CSC10002,KTLT,23CTT5,nlhdung,4,Thu,0,0,0,0
 CSC10001,nmlt,23CTT5,abc,4,Fri,0,0,0,0
 CSC10001,nmlt,23CTT5,abc,4,Fri,0,0,0,0
+MTH00003,Calculus 1B,23CTT5,abc,4,Sun,0,0,0,0
