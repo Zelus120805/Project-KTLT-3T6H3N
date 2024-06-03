@@ -1,4 +1,18 @@
-﻿  main.cpp
+﻿  Menu.cpp
+  Windows.cpp
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Windows.cpp(16,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Windows.cpp(18,26): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
   mainFunctionOfManagement.cpp
+  mainUser.cpp
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\mainUser.cpp(9,55): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\mainUser.cpp(12,55): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\mainUser.cpp(16,30): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\mainUser.cpp(30,50): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\mainUser.cpp(34,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\mainUser.cpp(39,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\mainUser.cpp(44,52): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\mainUser.cpp(47,51): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  user.cpp
   Generating Code...
   Project KTLT HCMUS.vcxproj -> D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\x64\Debug\Project KTLT HCMUS.exe

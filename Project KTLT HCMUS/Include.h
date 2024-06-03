@@ -5,6 +5,7 @@
 #include <cstring>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include <conio.h>
 #include <windows.h>
 using namespace std;

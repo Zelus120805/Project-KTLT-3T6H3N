@@ -6,18 +6,15 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y, int 
 	//Ghi ra file
 	nodeStudent* Student = new nodeStudent();
 	Student->next = nullptr;
-	gotoXY(x + strlen("1. Username: "), y);
+	inputAtPosition(Student->student.account.userName, x + strlen("1. Username: "), y);
 	// std::cout << "Username: ";
-	std::cin >> Student->student.account.userName;
-	gotoXY(x + strlen("2. Password: "), y + height * 1);
+
+	inputAtPosition(Student->student.account.passWord, x + strlen("2. Password: "), y + height * 1);
 	// std::cout << "Password: ";
-	std::cin >> Student->student.account.passWord;
-	std::cin.ignore();
 
 	std::string fullName;
-	gotoXY(x + strlen("3. Fullname: "), y + height * 2);
+	inputAtPosition(fullName, x + strlen("3. Fullname: "), y + height * 2);
 	// std::cout << "Lastname: ";
-	std::getline(std::cin, fullName);
 	size_t index = fullName.find(' ');
 	if (index != string::npos)
 	{
@@ -30,20 +27,24 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y, int 
 		Student->student.info.firstName = "";
 	}
 
-	gotoXY(x + strlen("4. Gender: "), y + height * 3);
+	inputAtPosition(Student->student.info.gender, x + strlen("4. Gender: "), y + height * 3);
 	// std::cout << "Gender: ";
-	std::cin >> Student->student.info.gender;
-	gotoXY(x + strlen("5. ID student: "), y + height * 4);
+
+	std::string id;
+	inputAtPosition(id, x + strlen("5. ID student: "), y + height * 4);
 	// std::cout << "ID student: ";
-	std::cin >> Student->student.info.idStudent;
-	gotoXY(x + strlen("6. Date of birth (dd mm yyyy): "), y + height * 5);
+	Student->student.info.idStudent = stol(id);
+
+	std::string brith;
+	inputAtPosition(brith, x + strlen("6. Date of birth (dd mm yyyy): "), y + height * 5);
 	// std::cout << "Date of birth (yyyy mm dd): ";
-	std::cin >> Student->student.info.d.day >> Student->student.info.d.month >> Student->student.info.d.year;
-	gotoXY(x + strlen("7. Social ID: "), y + height * 6);
+	stringstream ss(brith);
+	ss >> Student->student.info.d.day >> Student->student.info.d.month >> Student->student.info.d.year;
+
+	inputAtPosition(Student->student.info.socialId, x + strlen("7. Social ID: "), y + height * 6);
 	// std::cout << "Social ID: ";
-	std::cin >> Student->student.info.socialId;
-	gotoXY(x + strlen("8. Class: "), y + height * 7);
-	std::cin >> Student->student.info.inClass;
+
+	inputAtPosition(Student->student.info.inClass, x + strlen("8. Class: "), y + height * 7);
 
 	if (isStudentExisted(lst,Student->student.account.userName))
 	{
