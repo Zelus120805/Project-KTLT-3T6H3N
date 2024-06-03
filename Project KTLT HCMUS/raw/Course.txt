@@ -1,2 +1,5 @@
+MTH00003,Calculus 1B,23CTT5,abc,4,1,50,Sun
 CSC10001,nmlt,23CTT5,abc,4,6,50,Fri
 CSC10002,KTLT,23CTT5,nlhdung,4,0,4,Thu
+, 5,,5,5,0,5,53
+,4,4,4,4,0,4,4

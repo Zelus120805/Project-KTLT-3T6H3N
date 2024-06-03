@@ -278,7 +278,7 @@ void createNewCourse(listCourse& lst)
 	std::cin.ignore();
 	std::cout << "Input ID course: ";
 	getline(std::cin,newCourse->crs.info.idCourse);
-
+	cin.ignore();
 	std::cout << "Input courseName: ";
 	getline(std::cin, newCourse->crs.info.courseName);
 
@@ -526,4 +526,93 @@ void addNStudentFromFile(nodeCourse*& course, const string fileName)
 		temp = temp->next;
 	}
 	std::cout << "Da them thanh cong\n";
+	fileStudent.close();
+}
+
+void readFileStaff(listStaff& lst, const char fileName[])
+{
+	ifstream fileStaff(fileName);
+	if (!fileStaff.is_open())
+	{
+		cout << "Khong the mo file de doc" << endl;
+		return;
+	}
+	string temp;
+	while (!fileStaff.eof())
+	{
+		staffUser Staff;
+		getline(fileStaff, temp, ',');
+		if (temp == "")
+		{
+			return;
+		}
+		Staff.account.userName = temp;
+		getline(fileStaff, temp, ',');
+		Staff.account.passWord = temp;
+		getline(fileStaff, temp, ',');
+		Staff.IDofStaff = std::stoi(temp);
+		getline(fileStaff, temp, ',');
+		Staff.lastName = temp;
+		getline(fileStaff, temp, ',');
+		Staff.firstName = temp;
+		getline(fileStaff, temp, ',');
+		Staff.gender = temp;
+		getline(fileStaff, temp, '/');
+		Staff.d.day = std::stoi(temp);
+		getline(fileStaff, temp, '/');
+		Staff.d.month = std::stoi(temp);
+		getline(fileStaff, temp, ',');
+		Staff.d.year = std::stoi(temp);
+		getline(fileStaff, temp, ',');
+		Staff.socialId = temp;
+		getline(fileStaff, temp, '\n');
+		addTailStaff(lst, Staff);
+	}
+	fileStaff.close();
+}
+
+//Xóa sạch sinh viên
+void deleteAllStudent(listStudent& lst)
+{
+	if (lst.head == NULL)
+	{
+		std::cout << "List rong" << endl;
+		return;
+	}
+	while (lst.head != NULL)
+	{
+		nodeStudent* deletion = lst.head;
+		lst.head = lst.head->next;
+		delete deletion;
+	}
+}
+//Xóa sạch course
+void deleteAllCourse(listCourse& lst)
+{
+	if (lst.head == NULL)
+	{
+		std::cout << "List rong" << endl;
+		return;
+	}
+	while (lst.head != NULL)
+	{
+		nodeCourse* deletion = lst.head;
+		lst.head = lst.head->Next;
+		delete deletion;
+	}
+}
+//Xóa sạch schoolyear
+void deleteAllSchoolYear(listOfSchoolYear& lst)
+{
+	if (lst.head == NULL)
+	{
+		std::cout << "List rong" << endl;
+		return;
+	}
+	while (lst.head != NULL)
+	{
+		nodeSchoolYear* deletion = lst.head;
+		lst.head = lst.head->nextYear;
+		delete deletion;
+	}
 }

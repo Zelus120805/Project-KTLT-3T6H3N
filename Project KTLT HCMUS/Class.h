@@ -39,5 +39,6 @@ void writeStudentToFileClass(Class a,const char fileName[]);
 void createClass(listClass &lst);
 void add1StudentToClass(Class& myClass,const char fileName[]);
 void standardizeFile(const char fileName[]);
+void deleteAllSchoolYear(listOfSchoolYear& lst);
 //void assignClassToStudent(listClass lst,)
 #endif

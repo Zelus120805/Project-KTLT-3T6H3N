@@ -103,10 +103,15 @@ void chooseOptionMenuLogin(listStudent& listST, listOfSchoolYear& listSY, listCo
                 }
                 else if (oldY == y + height * 3)
                 {
+                    
                     createNewCourse(listOfCourse);
                 }
                 else if (oldY == y + height * 4)
+                {
+
                     return;
+                }
+                    
 
                 count = 0;
             }
