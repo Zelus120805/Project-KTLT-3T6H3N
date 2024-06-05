@@ -127,27 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Class.h" />
-    <ClInclude Include="Course.h" />
-    <ClInclude Include="Date.h" />
-    <ClInclude Include="Include.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="privateUser.h" />
-    <ClInclude Include="Score.h" />
-    <ClInclude Include="Semester.h" />
-    <ClInclude Include="studentInformation.h" />
-    <ClInclude Include="User.h" />
-    <ClInclude Include="Windows.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="mainFunctionOfManagement.cpp" />
-    <ClCompile Include="mainUser.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="user.cpp" />
-    <ClCompile Include="Windows.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="account.txt" />
     <Text Include="accountStudent.txt" />
     <Text Include="SchoolYear.txt" />
@@ -155,6 +134,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="path" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Windows.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

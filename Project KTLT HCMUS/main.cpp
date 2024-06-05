@@ -1,8 +1,6 @@
-﻿#include "Class.h"
-#include "Course.h"
-//#include "privateUser.h"
-#include "Semester.h"
+﻿#include "include.h"
 #include "Menu.h"
+#include "Windows.h"
 listStudent lst;
 
 listOfSchoolYear list;

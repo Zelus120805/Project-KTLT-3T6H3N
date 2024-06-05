@@ -1,8 +1,7 @@
 #ifndef _H_MENU_H_
 #define _H_MENU_H_
 
-#include "Windows.h"
-#include "Semester.h"
+#include "include.h"
 
 void drawBox(int x, int y, int width, int height, std::string option);
 void drawNBox(int x, int y, int width, int height, int nBox, std::string* option);
