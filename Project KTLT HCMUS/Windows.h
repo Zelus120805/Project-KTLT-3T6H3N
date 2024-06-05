@@ -3,7 +3,6 @@
 
 #include "Include.h"
 
-void inputAtPosition(std::string& input, int x, int y);
 void ShowCur(bool showCursor);
 void gotoXY(int x, int y);
 

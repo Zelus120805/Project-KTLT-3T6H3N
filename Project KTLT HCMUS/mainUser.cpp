@@ -6,12 +6,15 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y, int 
 	//Ghi ra file
 	nodeStudent* Student = new nodeStudent();
 	Student->next = nullptr;
-	inputAtPosition(Student->student.account.userName, x + strlen("1. Username: "), y);
+	gotoXY(x + strlen("1. Username: "), y);
+	getline(cin, Student->student.account.userName);
 
-	inputAtPosition(Student->student.account.passWord, x + strlen("2. Password: "), y + height * 1);
+	gotoXY(x + strlen("2. Password: "), y + height * 1);
+	getline(cin, Student->student.account.passWord);
 
 	std::string fullName;
-	inputAtPosition(fullName, x + strlen("3. Fullname: "), y + height * 2);
+	gotoXY(x + strlen("3. Fullname: "), y + height * 2);
+	getline(cin, fullName);
 	size_t index = fullName.find(' ');
 	if (index != string::npos)
 	{
@@ -24,20 +27,23 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y, int 
 		Student->student.info.firstName = "";
 	}
 
-	inputAtPosition(Student->student.info.gender, x + strlen("4. Gender: "), y + height * 3);
 
-	std::string id;
-	inputAtPosition(id, x + strlen("5. ID student: "), y + height * 4);
-	Student->student.info.idStudent = stol(id);
+	gotoXY(x + strlen("4. Gender: "), y + height * 3);
+	getline(cin, Student->student.info.gender);
 
-	std::string brith;
-	inputAtPosition(brith, x + strlen("6. Date of birth (dd mm yyyy): "), y + height * 5);
-	stringstream ss(brith);
-	ss >> Student->student.info.d.day >> Student->student.info.d.month >> Student->student.info.d.year;
+	gotoXY(x + strlen("5. ID student: "), y + height * 4);
+	cin >> Student->student.info.idStudent; cin.ignore();
 
-	inputAtPosition(Student->student.info.socialId, x + strlen("7. Social ID: "), y + height * 6);
 
-	inputAtPosition(Student->student.info.inClass, x + strlen("8. Class: "), y + height * 7);
+	gotoXY(x + strlen("6. Date of birth (dd mm yyyy): "), y + height * 5);
+	cin >> Student->student.info.d.day >> Student->student.info.d.month >> Student->student.info.d.year;
+	cin.ignore();
+
+	gotoXY(x + strlen("7. Social ID: "), y + height * 6);
+	getline(cin, Student->student.info.socialId);
+
+	gotoXY(x + strlen("8. Class: "), y + height * 7);
+	getline(cin, Student->student.info.inClass);
 
 	if (isStudentExisted(lst,Student->student.account.userName))
 	{
