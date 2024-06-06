@@ -181,6 +181,8 @@ void staffRegister(listStaff& lst, const char fileName[], int x, int y, int heig
 
 void readFileStaff(listStaff& lst, const char fileName[]);
 
+void staffLogIn(listStaff& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse);
+
 bool isStaffExisted(listStaff lst, string userName);
 
 void viewInfoStaff(nodeStaff* staff);

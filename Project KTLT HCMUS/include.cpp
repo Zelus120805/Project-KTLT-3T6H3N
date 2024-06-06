@@ -1001,7 +1001,7 @@ void readFileStaff(listStaff& lst, const char fileName[])
 	}
 	fileStaff.close();
 }
-
+//Xem thông tin staff
 void viewInfoStaff(nodeStaff* staff)
 {
 	if (staff == NULL)
@@ -1017,6 +1017,34 @@ void viewInfoStaff(nodeStaff* staff)
 	std::cout << "Gender: " << staff->staff.gender << "\n";
 	std::cout << "Date of birth " << staff->staff.d.day << "/" << staff->staff.d.month << "/" << staff->staff.d.year << "\n";
 	std::cout << "Social ID: " << staff->staff.socialId << "\n";
+}
+
+//Đăng nhập staff
+void staffLogIn(listStaff& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
+{
+	ifstream fileStaff("accountStaff.txt");
+	if (!fileStaff.is_open())
+	{
+		cout << "Cannot open file\n";
+		return;
+	}
+	string Username, Password, name, pass;
+	std::cout << "Username: ";
+	std::cin >> Username;
+	std::cout << "Password: ";
+	std::cin >> Password;
+	nodeStaff* temp = new nodeStaff();
+	temp = staff.head;
+	while (temp != NULL)
+	{
+		if (temp->staff.account.userName == Username && temp->staff.account.passWord == Password)
+		{
+			workSessionOfStaff(temp,lstSchoolYear,lstCourse);
+			return;
+		}
+		temp = temp->next;
+	}
+	std::cout << "Fail to log in\n";
 }
 //Phiên làm việc của staff
 void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
@@ -1158,8 +1186,20 @@ void chooseOptionMenuLogin(listStaff&listS,listStudent& listST, listOfSchoolYear
 				}
 				else if (oldY == y + height * 1)
 				{
-					readFileStudent(listST, "accountStudent.txt");
-					studentLogIn(listST, "accountStudent.txt", listOfCourse);//Sua tham so ham LogIn de vao phien dang nhap cua user do.
+					int optn;
+					cout << "Staff or student";
+					cin >> optn;
+					cin.ignore();
+					if (optn == 1)
+					{
+						readFileStaff(listS, "accountStaff.txt");
+						staffLogIn(listS, listSY, listOfCourse);
+					}
+					else
+					{
+						readFileStudent(listST, "accountStudent.txt");
+						studentLogIn(listST, "accountStudent.txt", listOfCourse);//Sua tham so ham LogIn de vao phien dang nhap cua user do.
+					}
 				}
 				else if (oldY == y + height * 2)
 				{
