@@ -18,7 +18,7 @@ int main()
 	lstStaff.head = NULL;
 	readCourseFile(listOfCourse);
 	readFileStudent(lst, "accountStudent.txt");
-	chooseOptionMenuLogin(lstStaff,lst, list, listOfCourse);
+	chooseOptionMenuLogin(lstStaff, lst, list, listOfCourse);
 	deleteAllCourse(listOfCourse);
 	deleteAllSchoolYear(list);
 	deleteAllStudent(lst);

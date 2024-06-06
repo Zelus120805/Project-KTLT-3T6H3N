@@ -1,2 +1,17 @@
-﻿  main.cpp
+﻿  include.cpp
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(635,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(638,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(642,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(657,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(660,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(664,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(668,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(671,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(984,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(987,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(993,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(1008,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(1011,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(1014,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\include.cpp(1017,11): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Project KTLT HCMUS.vcxproj -> D:\github\Project-KTLT-3T6H3N\Project KTLT HCMUS\x64\Debug\Project KTLT HCMUS.exe

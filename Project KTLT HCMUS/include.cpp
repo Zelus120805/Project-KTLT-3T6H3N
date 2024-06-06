@@ -259,6 +259,102 @@ void operateWithSchoolYear(listOfSchoolYear& lst)
 	}
 }
 
+void viewListCourse(listCourse lst)
+{
+	nodeCourse* temp = lst.head;
+	if (temp == NULL)
+	{
+		cout << "Khong co khoa hoc nao\n";
+		return;
+	}
+	int i = 1;
+	while (temp != NULL)
+	{
+		cout << i << "." << temp->crs.info.idCourse << " - " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
+		i++;
+		temp = temp->Next;
+	}
+	delete temp;
+}
+
+void viewListStudentsInCourse(listCourse lst)
+{
+	viewListCourse(lst);
+	int choice;
+	cout << "Nhap lop muon xem danh sach hoc sinh: ";
+	cin >> choice;
+	if (choice < 1)
+	{
+		cout << " Khong hop le.\n";
+		return;
+	};
+	nodeCourse* temp = lst.head;
+	int i = 1;
+	while (temp != NULL)
+	{
+		if (i != choice)
+		{
+			i++;
+			temp = temp->Next;
+		}
+		else
+		{
+			ifstream fin;
+			string fileName = "./raw/" + temp->crs.info.courseName + "_" + temp->crs.info.className + ".txt";
+			fin.open(fileName);
+			if (fin.is_open() == false)
+			{
+				cout << "Khong the tao file\n";
+				return;
+			}
+			string tempFirstLine;
+			getline(fin,tempFirstLine);
+			string tempLine;
+			int stt = 1;
+			while (!fin.eof())
+			{
+				getline(fin,tempLine);
+				if (tempLine == "")
+				{
+					break;
+				}
+				cout << stt << ".";
+				int dem = 0;
+				//Chạy 2 lần while để tới Last Name
+				while (tempLine[dem] != ',')
+				{
+					dem++;
+				}
+				dem++;
+				while (tempLine[dem] != ',')
+				{
+					dem++;
+				}
+				dem++;
+				// ghi Last Name
+				while (tempLine[dem] != ',')
+				{
+					cout << tempLine[dem];
+					dem++;
+				}
+				dem++;
+				cout << " ";
+				// ghi First Name
+				while (tempLine[dem] != ',')
+				{
+					cout << tempLine[dem];
+					dem++;
+				}
+				cout << endl;
+				stt++;
+			}
+			break;
+		}
+	}
+}
+
+
+
 void writeACourseToFile(nodeCourse* course, const string fileName)
 {
 	std::ofstream fileCourse(fileName, std::ios_base::app);

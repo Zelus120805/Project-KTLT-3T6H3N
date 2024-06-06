@@ -193,6 +193,7 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 
 //--------------------
 void viewListCourse(listCourse lst);
+void viewListStudentsInCourse(listCourse lst);
 
 //Ghi thông tin môn học ra file lưu trữ
 void writeACourseToFile(nodeCourse* course, const string fileName);
