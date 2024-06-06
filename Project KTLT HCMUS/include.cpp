@@ -1,11 +1,8 @@
 ﻿#include "include.h"
 #include "Menu.h"
 #include "Windows.h"
-/*mainFunctionOfManagement*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+//Nhóm hàm thao tác của Staff-------------------------------------------------
 void createSchoolYear(listOfSchoolYear& lst)
 {
 	nodeSchoolYear* newNode = new nodeSchoolYear();
@@ -94,10 +91,6 @@ void createClass(listClass& lst)
 	temp->next = newNode;
 
 }
-
-
-
-//Để đây chút viết hàm ghi student xong quay trở lại viết
 void writeStudentToFileClass(Class a, const char fileName[])
 {
 	std::ofstream fileClass(fileName, std::ios_base::app);
@@ -265,7 +258,7 @@ void operateWithSchoolYear(listOfSchoolYear& lst)
 		}
 	}
 }
-//--------------------------------------
+
 void writeACourseToFile(nodeCourse* course, const string fileName)
 {
 	std::ofstream fileCourse(fileName, std::ios_base::app);
@@ -404,7 +397,7 @@ void addTailCourse(listCourse& lst, Course newCourse)
 	temp->Next = newNode;
 }
 
-//Đọc file khóa học mỗi khi chạy chương trình//Chút viết tiếp, viết hàm addTail Khóa học đã
+//Đọc file khóa học mỗi khi chạy chương trình
 void readCourseFile(listCourse& lst)
 {
 	std::ifstream fileCourse("./raw/Course.txt");
@@ -507,8 +500,6 @@ void readStudentFromCSV(listStudent& lst, const string fileName)
 	fileStudent.close();
 }
 
-
-
 //Thêm n sinh viên vào khóa học từ file CSV
 void addNStudentFromFile(nodeCourse*& course, const string fileName)
 {
@@ -536,100 +527,10 @@ void addNStudentFromFile(nodeCourse*& course, const string fileName)
 	fileStudent.close();
 }
 
-void readFileStaff(listStaff& lst, const char fileName[])
-{
-	ifstream fileStaff(fileName);
-	if (!fileStaff.is_open())
-	{
-		cout << "Khong the mo file de doc" << endl;
-		return;
-	}
-	string temp;
-	while (!fileStaff.eof())
-	{
-		staffUser Staff;
-		getline(fileStaff, temp, ',');
-		if (temp == "")
-		{
-			return;
-		}
-		Staff.account.userName = temp;
-		getline(fileStaff, temp, ',');
-		Staff.account.passWord = temp;
-		getline(fileStaff, temp, ',');
-		Staff.IDofStaff = std::stoi(temp);
-		getline(fileStaff, temp, ',');
-		Staff.lastName = temp;
-		getline(fileStaff, temp, ',');
-		Staff.firstName = temp;
-		getline(fileStaff, temp, ',');
-		Staff.gender = temp;
-		getline(fileStaff, temp, '/');
-		Staff.d.day = std::stoi(temp);
-		getline(fileStaff, temp, '/');
-		Staff.d.month = std::stoi(temp);
-		getline(fileStaff, temp, ',');
-		Staff.d.year = std::stoi(temp);
-		getline(fileStaff, temp, ',');
-		Staff.socialId = temp;
-		getline(fileStaff, temp, '\n');
-		addTailStaff(lst, Staff);
-	}
-	fileStaff.close();
-}
 
-//Xóa sạch sinh viên
-void deleteAllStudent(listStudent& lst)
-{
-	if (lst.head == NULL)
-	{
-		std::cout << "List rong" << endl;
-		return;
-	}
-	while (lst.head != NULL)
-	{
-		nodeStudent* deletion = lst.head;
-		lst.head = lst.head->next;
-		delete deletion;
-	}
-}
-//Xóa sạch course
-void deleteAllCourse(listCourse& lst)
-{
-	if (lst.head == NULL)
-	{
-		std::cout << "List rong" << endl;
-		return;
-	}
-	while (lst.head != NULL)
-	{
-		nodeCourse* deletion = lst.head;
-		lst.head = lst.head->Next;
-		delete deletion;
-	}
-}
-//Xóa sạch schoolyear
-void deleteAllSchoolYear(listOfSchoolYear& lst)
-{
-	if (lst.head == NULL)
-	{
-		std::cout << "List rong" << endl;
-		return;
-	}
-	while (lst.head != NULL)
-	{
-		nodeSchoolYear* deletion = lst.head;
-		lst.head = lst.head->nextYear;
-		delete deletion;
-	}
-}
-/*mainUser*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+//---------------------------------------------------------------------------
+
+//Nhóm hàm thao tác tài khoản của sinh viên ------------------------------------------------------
 void studentRegister(listStudent& lst, const char fileName[], int x, int y, int height)
 {
 	//Ghi ra file
@@ -710,7 +611,6 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y, int 
 	accountStudent << Student->student.info.socialId << ",";
 	accountStudent << Student->student.info.inClass << "\n";
 }
-
 void readFileStudent(listStudent& lst, const char fileName[])
 {
 	std::ifstream accountStudent(fileName);
@@ -940,7 +840,8 @@ void writeStudentToFile(listStudent lst, const char fileName[])
 		temp = temp->next;
 	}
 }
-//Nhóm hàm thao tác c?a staff
+//------------------------------------------------------------------------------------------------
+//Nhóm hàm thao tác của staff
 void addTailStaff(listStaff& lst, staffUser newStaff)
 {
 	nodeStaff* newNode = new nodeStaff();
@@ -959,18 +860,37 @@ void addTailStaff(listStaff& lst, staffUser newStaff)
 	temp->next = newNode;
 }
 
+//Quản lí đã tồn tại?
+bool isStaffExisted(listStaff lst, string userName)
+{
+	if (lst.head == nullptr)
+	{
+		return false;
+	}
+	nodeStaff* temp = lst.head;
+	while (temp != NULL)
+	{
+		if (temp->staff.account.userName == userName)
+		{
+			return true;
+		}
+		temp = temp->next;
+	}
+	return false;
+}
+
+//Quản lí đăng kí
 void staffRegister(listStaff& lst, const char fileName[], int x, int y, int height)
 {
-
 	//Ghi ra file
-	nodeStaff* staff = new nodeStaff();
-	staff->next = NULL;
+	nodeStaff* Staff = new nodeStaff();
+	Staff->next = nullptr;
 	gotoXY(x + strlen("1. Username: "), y);
 	// std::cout << "Username: ";
-	std::cin >> staff->staff.account.userName;
+	std::cin >> Staff->staff.account.userName;
 	gotoXY(x + strlen("2. Password: "), y + height * 1);
 	// std::cout << "Password: ";
-	std::cin >> staff->staff.account.passWord;
+	std::cin >> Staff->staff.account.passWord;
 	std::cin.ignore();
 
 	std::string fullName;
@@ -980,61 +900,158 @@ void staffRegister(listStaff& lst, const char fileName[], int x, int y, int heig
 	size_t index = fullName.find(' ');
 	if (index != string::npos)
 	{
-		staff->staff.lastName = fullName.substr(0, index);
-		staff->staff.firstName = fullName.substr(index + 1);
+		Staff->staff.lastName = fullName.substr(0, index);
+		Staff->staff.firstName = fullName.substr(index + 1);
 	}
 	else
 	{
-		staff->staff.lastName = fullName;
-		staff->staff.firstName = "";
+		Staff->staff.lastName = fullName;
+		Staff->staff.firstName = "";
 	}
 
 	gotoXY(x + strlen("4. Gender: "), y + height * 3);
 	// std::cout << "Gender: ";
-	std::cin >> staff->staff.gender;
-	gotoXY(x + strlen("5. ID staff: "), y + height * 4);
-	// std::cout << "ID staff: ";
-	std::cin >> staff->staff.IDofStaff;
+	std::cin >> Staff->staff.gender;
+	gotoXY(x + strlen("5. ID Staff: "), y + height * 4);
+	// std::cout << "ID Staff: ";
+	std::cin >> Staff->staff.IDofStaff;
 	gotoXY(x + strlen("6. Date of birth (dd mm yyyy): "), y + height * 5);
 	// std::cout << "Date of birth (yyyy mm dd): ";
-	std::cin >> staff->staff.d.day >> staff->staff.d.month >> staff->staff.d.year;
+	std::cin >> Staff->staff.d.day >> Staff->staff.d.month >> Staff->staff.d.year;
 	gotoXY(x + strlen("7. Social ID: "), y + height * 6);
 	// std::cout << "Social ID: ";
-	std::cin >> staff->staff.socialId;
+	std::cin >> Staff->staff.socialId;
 
-	//?o?n này ki?m tra s? t?n t?i c?a tài kho?n, chút vi?t sau
-	/*if (isstaffExisted(lst,staff->staff.account.userName))
+	if (isStaffExisted(lst, Staff->staff.account.userName))
 	{
 		system("cls");
 		std::cout << "Username has existed \n";
 		return;
-	}*/
+	}
 
-	std::ofstream accountstaff;
-	accountstaff.open(fileName, std::ios_base::app);
-	if (accountstaff.is_open() == false)
+	std::ofstream accountStaff;
+	accountStaff.open(fileName, std::ios_base::app);
+	if (accountStaff.is_open() == false)
 	{
 		return;
 	}
-	addTailStaff(lst, staff->staff);
+	if (lst.head == NULL)
+	{
+		lst.head = Staff;
+	}
+	else
+	{
+		nodeStaff* temp = lst.head;
+		while (temp->next != nullptr)
+		{
+			temp = temp->next;
+		}
+		temp->next = Staff;
+	}
 
-	accountstaff << staff->staff.account.userName << ",";
-	accountstaff << staff->staff.account.passWord << ",";
-	accountstaff << staff->staff.IDofStaff << ",";
-	accountstaff << staff->staff.lastName << ",";
-	accountstaff << staff->staff.firstName << ",";
-	accountstaff << staff->staff.gender << ",";
-	accountstaff << staff->staff.d.day << "/" << staff->staff.d.month << "/" << staff->staff.d.year << ",";
-	accountstaff << staff->staff.socialId << ",";
+	accountStaff << Staff->staff.account.userName << ",";
+	accountStaff << Staff->staff.account.passWord << ",";
+	accountStaff << Staff->staff.IDofStaff << ",";
+	accountStaff << Staff->staff.lastName << ",";
+	accountStaff << Staff->staff.firstName << ",";
+	accountStaff << Staff->staff.gender << ",";
+	accountStaff << Staff->staff.d.day << "/" << Staff->staff.d.month << "/" << Staff->staff.d.year << ",";
+	accountStaff << Staff->staff.socialId << ",";
 }
-/*Menu*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+//Đọc file staff
+void readFileStaff(listStaff& lst, const char fileName[])
+{
+	ifstream fileStaff(fileName);
+	if (!fileStaff.is_open())
+	{
+		cout << "Khong the mo file de doc" << endl;
+		return;
+	}
+	string temp;
+	while (!fileStaff.eof())
+	{
+		staffUser Staff;
+		getline(fileStaff, temp, ',');
+		if (temp == "")
+		{
+			return;
+		}
+		Staff.account.userName = temp;
+		getline(fileStaff, temp, ',');
+		Staff.account.passWord = temp;
+		getline(fileStaff, temp, ',');
+		Staff.IDofStaff = std::stoi(temp);
+		getline(fileStaff, temp, ',');
+		Staff.lastName = temp;
+		getline(fileStaff, temp, ',');
+		Staff.firstName = temp;
+		getline(fileStaff, temp, ',');
+		Staff.gender = temp;
+		getline(fileStaff, temp, '/');
+		Staff.d.day = std::stoi(temp);
+		getline(fileStaff, temp, '/');
+		Staff.d.month = std::stoi(temp);
+		getline(fileStaff, temp, ',');
+		Staff.d.year = std::stoi(temp);
+		getline(fileStaff, temp, ',');
+		Staff.socialId = temp;
+		getline(fileStaff, temp, '\n');
+		addTailStaff(lst, Staff);
+	}
+	fileStaff.close();
+}
+
+void viewInfoStaff(nodeStaff* staff)
+{
+	if (staff == NULL)
+	{
+		return;
+	}
+	std::cout << "YOUR INFO\n";
+	std::cout << "Username: " << staff->staff.account.userName << "\n";
+	std::cout << "Password: " << staff->staff.account.passWord << "\n";
+	std::cout << "ID Staff: " << staff->staff.IDofStaff << "\n";
+	std::cout << "Last name: " << staff->staff.lastName << "\n";
+	std::cout << "First name: " << staff->staff.firstName << "\n";
+	std::cout << "Gender: " << staff->staff.gender << "\n";
+	std::cout << "Date of birth " << staff->staff.d.day << "/" << staff->staff.d.month << "/" << staff->staff.d.year << "\n";
+	std::cout << "Social ID: " << staff->staff.socialId << "\n";
+}
+//Phiên làm việc của staff
+void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
+{
+	system("cls");
+	int optn;
+	cout << "Hello " << staff->staff.firstName << "\n";
+	cout << "1. View Info\n";
+	cout << "2. Change Password\n";
+	cout << "3. Log out\n";
+	cout << "4. School year\n";
+	cout << "5. Semester\n";
+	cout << "6. Create Class\n";
+	cout << "7. Course\n";
+	while (true)
+	{
+		cin >> optn;
+		cin.ignore();
+		switch (optn)
+		{
+		case 2:
+		{
+			viewInfoStaff(staff);
+			break;
+		}
+		case 3:
+			return;
+		}
+	}
+		
+
+}
+//------------------------------------------------------------------------------------------------
+
+/*Menu*/
 void drawBox(int x, int y, int width, int height, std::string option)
 {
 
@@ -1094,7 +1111,7 @@ void menuLogin(int x, int y, int width, int height, int nBox)
 	delete[] option;
 }
 
-void chooseOptionMenuLogin(listStudent& listST, listOfSchoolYear& listSY, listCourse& listOfCourse)
+void chooseOptionMenuLogin(listStaff&listS,listStudent& listST, listOfSchoolYear& listSY, listCourse& listOfCourse)
 {
 	int x = 40, y = 5, width = 50, height = 2, nBox = 5;
 	int newX = x, newY = y;
@@ -1124,8 +1141,20 @@ void chooseOptionMenuLogin(listStudent& listST, listOfSchoolYear& listSY, listCo
 			{
 				if (oldY == y)
 				{
-					menuStudentRegister(40, 5, 50, 2, 8);
-					studentRegister(listST, "accountStudent.txt", x + 1, y + 1, height);
+					int optn;
+					cout << "Staff or student";
+					cin >> optn;
+					cin.ignore();
+					if (optn == 1)
+					{
+						menuStaffRegister(40, 5, 50, 2, 7);
+						staffRegister(listS, "accountStaff.txt", x + 1, y + 1, height);
+					}
+					else
+					{
+						menuStudentRegister(40, 5, 50, 2, 8);
+						studentRegister(listST, "accountStudent.txt", x + 1, y + 1, height);
+					}
 				}
 				else if (oldY == y + height * 1)
 				{
@@ -1178,6 +1207,25 @@ void menuStudentRegister(int x, int y, int width, int height, int nBox)
 	option[5] = "6. Date of birth (dd mm yyyy): ";
 	option[6] = "7. Social ID: ";
 	option[7] = "8. Class: ";
+
+	drawNBox(x, y, width, height, nBox, option);
+
+	delete[] option;
+}
+
+void menuStaffRegister(int x, int y, int width, int height, int nBox)
+{
+	system("cls");
+	ShowCur(1);
+
+	std::string* option = new std::string[nBox];
+	option[0] = "1. Username: ";
+	option[1] = "2. Password: ";
+	option[2] = "3. Fullname: ";
+	option[3] = "4. Gender: ";
+	option[4] = "5. ID staff: ";
+	option[5] = "6. Date of birth (dd mm yyyy): ";
+	option[6] = "7. Social ID: ";
 
 	drawNBox(x, y, width, height, nBox, option);
 
@@ -1337,12 +1385,6 @@ void userLogIn(listUser& lst)
 //}
 
 
-
-
-
-
-
-
 /*Windows*/
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=*/
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -1367,3 +1409,65 @@ void gotoXY(int x, int y)
 	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
+//Nhóm hàm giải phóng bộ nhớ ---------------------------------------
+//Xóa sạch sinh viên
+void deleteAllStudent(listStudent& lst)
+{
+	if (lst.head == NULL)
+	{
+		std::cout << "List rong" << endl;
+		return;
+	}
+	while (lst.head != NULL)
+	{
+		nodeStudent* deletion = lst.head;
+		lst.head = lst.head->next;
+		delete deletion;
+	}
+}
+//Xóa sạch course
+void deleteAllCourse(listCourse& lst)
+{
+	if (lst.head == NULL)
+	{
+		std::cout << "List rong" << endl;
+		return;
+	}
+	while (lst.head != NULL)
+	{
+		nodeCourse* deletion = lst.head;
+		lst.head = lst.head->Next;
+		delete deletion;
+	}
+}
+//Xóa sạch schoolyear
+void deleteAllSchoolYear(listOfSchoolYear& lst)
+{
+	if (lst.head == NULL)
+	{
+		std::cout << "List rong" << endl;
+		return;
+	}
+	while (lst.head != NULL)
+	{
+		nodeSchoolYear* deletion = lst.head;
+		lst.head = lst.head->nextYear;
+		delete deletion;
+	}
+}
+//Xóa sạch staff
+void deleteAllStaff(listStaff& lst)
+{
+	if (lst.head == NULL)
+	{
+		std::cout << "List rong" << endl;
+		return;
+	}
+	while (lst.head != NULL)
+	{
+		nodeStaff* deletion = lst.head;
+		lst.head = lst.head->next;
+		delete deletion;
+	}
+}
+//----------------------------------------------------------------

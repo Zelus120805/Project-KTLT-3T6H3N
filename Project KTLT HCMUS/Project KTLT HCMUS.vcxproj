@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="account.txt" />
+    <Text Include="accountStaff.txt" />
     <Text Include="accountStudent.txt" />
     <Text Include="SchoolYear.txt" />
     <Text Include="temp.txt" />

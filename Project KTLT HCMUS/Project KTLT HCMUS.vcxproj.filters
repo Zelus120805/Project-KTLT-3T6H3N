@@ -30,6 +30,9 @@
     <Text Include="SchoolYear.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="accountStaff.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="path">

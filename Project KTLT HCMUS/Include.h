@@ -174,11 +174,18 @@ bool isStudentExisted(listStudent lst, string userName);
 
 void writeStudentToFile(listStudent lst, const char fileName[]);
 //Thao tác của nhân viên
+
 void addTailStaff(listStaff& lst, staffUser newStaff);
 
 void staffRegister(listStaff& lst, const char fileName[], int x, int y, int height);
 
 void readFileStaff(listStaff& lst, const char fileName[]);
+
+bool isStaffExisted(listStaff lst, string userName);
+
+void viewInfoStaff(nodeStaff* staff);
+
+void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse);
 
 //void staffLogin(list)
 
@@ -210,7 +217,9 @@ void deleteAllStudent(listStudent& lst);
 //Giải phóng bộ nhớ khóa học
 void deleteAllCourse(listCourse& lst);
 //Giải phóng bộ nhớ năm học
-//void deleteAllSchoolYear(listOfSchoolYear& lst);
+void deleteAllStaff(listStaff& lst);
+
+void deleteAllSchoolYear(listOfSchoolYear& lst);
 /*-------------------------------------------------------------*/
 void userRegister(listUser& lst, const char fileName[]);
 void userLogIn(listUser& lst);

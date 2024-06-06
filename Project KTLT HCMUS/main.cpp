@@ -7,6 +7,7 @@ listOfSchoolYear list;
 
 listCourse listOfCourse;
 
+listStaff lstStaff;
 int main()
 {
 	//readAccountFile(lst);
@@ -14,12 +15,14 @@ int main()
 	lst.head = nullptr;
 	list.head = nullptr;
 	listOfCourse.head = nullptr;
+	lstStaff.head = NULL;
 	readCourseFile(listOfCourse);
 	readFileStudent(lst, "accountStudent.txt");
-	chooseOptionMenuLogin(lst, list, listOfCourse);
+	chooseOptionMenuLogin(lstStaff,lst, list, listOfCourse);
 	deleteAllCourse(listOfCourse);
 	deleteAllSchoolYear(list);
 	deleteAllStudent(lst);
+	deleteAllStaff(lstStaff);
 	system("cls");
 	return 0;
 }
