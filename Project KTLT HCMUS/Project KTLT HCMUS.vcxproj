@@ -137,13 +137,12 @@
     <None Include="path" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Windows.h" />
+    <ClInclude Include="myLib.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include.cpp" />
+    <ClCompile Include="myLib.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

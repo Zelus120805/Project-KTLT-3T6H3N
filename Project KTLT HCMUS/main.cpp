@@ -1,6 +1,5 @@
-﻿#include "include.h"
-#include "Menu.h"
-#include "Windows.h"
+﻿#include "myLib.h"
+
 listStudent lst;
 
 listOfSchoolYear list;
@@ -8,6 +7,7 @@ listOfSchoolYear list;
 listCourse listOfCourse;
 
 listStaff lstStaff;
+
 int main()
 {
 	//readAccountFile(lst);
@@ -18,7 +18,9 @@ int main()
 	lstStaff.head = NULL;
 	readCourseFile(listOfCourse);
 	readFileStudent(lst, "accountStudent.txt");
-	chooseOptionMenuLogin(lstStaff, lst, list, listOfCourse);
+
+	menuMain();
+
 	deleteAllCourse(listOfCourse);
 	deleteAllSchoolYear(list);
 	deleteAllStudent(lst);
