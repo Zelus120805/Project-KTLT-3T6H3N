@@ -1,1 +1,2 @@
-CSC10001,nmlt,23CTT5,abc,4,Fri,0,0,0,0
+CSC10002,Nhap mon lap trinh,23CTT5,abc,4,Thu,0,0,0,0
+CSC10001,Ki thuat lap trinh,23CTT5,abcde,4,Fri,0,0,0,0

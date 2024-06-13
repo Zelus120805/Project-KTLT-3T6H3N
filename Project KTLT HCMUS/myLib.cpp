@@ -980,6 +980,60 @@ void writeStudentToFile(listStudent lst, const char fileName[])
 		temp = temp->next;
 	}
 }
+//Đổi mật khẩu cho sinh viên. 
+void changePasswordForStudent(nodeStudent*& student, const char fileName[])
+{
+	ifstream fileStudent(fileName);
+	if (!fileStudent.is_open())
+	{
+		cout << "Cannot open file\n";
+		return;
+	}
+	string line, pass;
+
+	cout << "Input old password: ";
+	std::getline(cin, pass);
+
+	while (pass != student->student.account.passWord)
+	{
+		cout << "Password is not correct\n";
+		cout << "Input old password: ";
+		std::getline(cin, pass);
+	}
+
+	string remember;
+
+	while (!fileStudent.eof())
+	{
+		std::getline(fileStudent, line);
+		if (line.find(student->student.account.userName.c_str()) != std::string::npos && line.find(student->student.account.passWord.c_str()) != std::string::npos && line.find(to_string(student->student.info.idStudent).c_str()) != std::string::npos)
+		{
+			continue;
+		}
+		else
+		{
+			remember = remember + "\n" + line;
+		}
+	}
+
+	cout << "Input new password: ";
+	std::getline(cin, student->student.account.passWord);
+	fileStudent.close();
+
+	ofstream newFileStudent;
+	newFileStudent.open(fileName);
+	newFileStudent << remember << "\n";
+	newFileStudent << student->student.account.userName << ",";
+	newFileStudent << student->student.account.passWord << ",";
+	newFileStudent << student->student.info.idStudent << ",";
+	newFileStudent << student->student.info.lastName << ",";
+	newFileStudent << student->student.info.firstName << ",";
+	newFileStudent << student->student.info.gender << ",";
+	newFileStudent << student->student.info.d.day << "/" << student->student.info.d.month << "/" << student->student.info.d.year << ",";
+	newFileStudent << student->student.info.socialId << ",";
+	newFileStudent << student->student.info.inClass << "\n";
+	newFileStudent.close();
+}
 //------------------------------------------------------------------------------------------------
 //Nhóm hàm thao tác của staff
 
@@ -1224,39 +1278,6 @@ void staffLogIn(listStaff& staff, listOfSchoolYear& lstSchoolYear, listCourse& l
 	}
 	std::cout << "Fail to log in\n";
 }
-//Phiên làm việc của staff
-void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
-{
-	system("cls");
-	int optn;
-	cout << "Hello " << staff->staff.firstName << "\n";
-	cout << "1. View Info\n";
-	cout << "2. Change Password\n";
-	cout << "3. Log out\n";
-	cout << "4. School year\n";
-	cout << "5. Semester\n";
-	cout << "6. Create Class\n";
-	cout << "7. Course\n";
-	while (true)
-	{
-		cin >> optn;
-		cin.ignore();
-		switch (optn)
-		{
-		case 2:
-		{
-			viewInfoStaff(staff);
-			break;
-		}
-		case 3:
-			return;
-		}
-	}
-		
-
-}
-//------------------------------------------------------------------------------------------------
-
 /*User*/
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=*/
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -1473,3 +1494,884 @@ void deleteAllStaff(listStaff& lst)
 	}
 }
 //----------------------------------------------------------------
+//------------------------DELETE A STUDENT ----------------------------
+bool isInCourse(nodeStudent* student, nodeCourse* course)
+{
+	string studentFile = "./raw/" + to_string(student->student.info.idStudent) + "_Course" + ".txt";
+	std::ifstream fileStudent(studentFile);
+
+	if (!fileStudent.is_open())
+	{
+		return false;
+	}
+	string line;
+	while (std::getline(fileStudent, line))
+	{
+		if (line.find(course->crs.info.courseName.c_str()) != string::npos)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+void deleteNodeStudent(listStudent& lst, nodeStudent* deletion)
+{
+	if (lst.head == NULL)
+	{
+		return;
+	}
+	//N?u node head th?a mãn thì xóa d?n khi nào node head không còn th?a n?a 
+	while (lst.head->student.info.idStudent == deletion->student.info.idStudent)
+	{
+		nodeStudent* temp = lst.head;
+		lst.head = lst.head->next;
+		delete temp;
+		//N?u xóa h?t danh sách, thì return;
+		if (lst.head == NULL)
+		{
+			return;
+		}
+
+	}
+	//N?u node head không còn th?a n?a, ta b?t d?u duy?t node k? head và xóa theo ki?u prev - curr d? xóa node gi?a.
+	nodeStudent* curr = lst.head->next;
+	nodeStudent* prev = lst.head;
+	//Ðã xu?ng du?c dây thì còn ít nh?t 1 node không th?a mãn. 
+	if (lst.head->next == NULL)
+	{
+		return;
+	}
+	//Duy?t d?n node áp chót thôi. 
+	while (curr->next != NULL)
+	{
+		if (curr->student.info.idStudent == deletion->student.info.idStudent)
+		{
+			nodeStudent* temp = curr;
+			curr = curr->next;
+			prev->next = curr;
+			delete temp;
+		}
+		else
+		{
+			prev = curr;
+			curr = curr->next;
+		}
+	}
+	if (curr->student.info.idStudent == deletion->student.info.idStudent)
+	{
+		prev->next = NULL;
+		delete curr;
+	}
+}
+void printStudent(listStudent lst)
+{
+	if (lst.head == NULL)
+	{
+		cout << "List is empty\n";
+		return;
+	}
+	nodeStudent* temp = lst.head;
+	int i = 1;
+	while (temp != NULL)
+	{
+		cout << i << ": " << temp->student.info.idStudent << " - " << temp->student.info.lastName << " " << temp->student.info.firstName << endl;
+		temp = temp->next;
+		i++;
+	}
+}
+nodeStudent* goToStudent(int No, listStudent lst)
+{
+	if (lst.head == NULL)
+	{
+		cout << "List is empty\n";
+		return NULL;
+	}
+	int i = 1;
+	nodeStudent* temp = lst.head;
+	while (No != i)
+	{
+		temp = temp->next;
+		i++;
+	}
+	return temp;
+
+}
+void readListStudentOfACourse(listStudent& lst, const string fileName)
+{
+	ifstream fileStudent(fileName);
+	if (!fileStudent.is_open())
+	{
+		return;
+	}
+	//Đọc dòng đầu
+	string temp;
+	std::getline(fileStudent, temp);
+	lst.head = NULL;
+
+	while (!fileStudent.eof())
+	{
+		nodeStudent* Student = new nodeStudent();
+		Student->next = NULL;
+		std::getline(fileStudent, temp, ',');
+		if (temp == "")
+		{
+			delete Student;
+			return;
+		}
+		std::getline(fileStudent, temp, ',');
+
+		Student->student.info.idStudent = std::stoi(temp);
+		std::getline(fileStudent, temp, ',');
+
+		Student->student.info.lastName = temp;
+		std::getline(fileStudent, temp, ',');
+
+		Student->student.info.firstName = temp;
+		std::getline(fileStudent, temp, ',');
+
+		Student->student.info.gender = temp;
+		std::getline(fileStudent, temp, '\n');
+
+		addTailStudent(lst, Student);
+
+	}
+
+	fileStudent.close();
+}
+void deleteAStudentFromCourse(nodeCourse*& course, nodeStudent* deletion)
+{
+	string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
+	ifstream fileCourse(courseName);
+	if (!fileCourse.is_open())
+	{
+		cout << "Cannot open file course\n";
+		return;
+	}
+	listStudent lst = {};
+	lst.head = NULL;
+	readListStudentOfACourse(lst, courseName);
+
+	nodeStudent* Head = lst.head;
+
+	//Xóa khóa học trong file tất cả các bạn học sinh
+	while (Head != NULL)
+	{
+		string Line, Temp;
+		string studentFile = "./raw/" + to_string(Head->student.info.idStudent) + "_Course" + ".txt";
+		std::ifstream fileStudent(studentFile);
+		if (!fileStudent.is_open())
+		{
+			return;
+		}
+		while (std::getline(fileStudent, Line))
+		{
+			if (Line.find(course->crs.info.idCourse) != string::npos)
+			{
+				continue;
+			}
+			else
+			{
+				if (Temp.empty())
+					Temp = Temp + Line;
+				else
+					Temp = Temp + "\n" + Line;
+			}
+		}
+		fileStudent.close();
+		ofstream fileStudent2(studentFile);
+		fileStudent2 << Temp << "\n";
+		fileStudent2.close();
+		Head = Head->next;
+	}
+
+
+	deleteNodeStudent(lst, deletion);
+	printStudent(lst);
+	fileCourse.close();
+
+	ofstream newFile;
+	newFile.open(courseName);
+	newFile << "No," << "Student ID," << "Student Last Name," << "Student First Name," << "Gender," << "Other Mark(Assignment)," << "Midterm Mark," << "Final Mark," << "Average Mark\n";
+	nodeStudent* temp = lst.head;
+	course->crs.info.numberOfCurrentStudent = 0;
+	newFile.close();
+	ifstream fileCourseToRead("./raw/Course.txt");
+
+	string line, remember;
+	while (std::getline(fileCourseToRead, line))
+	{
+
+		if (line.find(course->crs.info.idCourse.c_str()) != string::npos && line.find(course->crs.info.className.c_str()) != string::npos)
+		{
+			continue;
+		}
+		else
+		{
+			if (remember.empty())
+				remember = remember + line;
+			else
+				remember = remember + "\n" + line;
+		}
+	}
+	fileCourse.close();
+
+
+	course->crs.info.numberOfCurrentStudent = 0;
+
+
+
+
+	ofstream fileCourseToWrite("./raw/Course.txt");
+	fileCourseToWrite << remember << "\n";
+	fileCourseToWrite.close();
+	writeACourseToFile(course, "./raw/Course.txt");//fileCourseToWrite.close();
+	while (temp != NULL)
+	{
+		addAStudentToCourse(course, temp);
+		temp = temp->next;
+	}
+	system("cls");
+
+
+	printStudent(lst);
+	system("Pause");
+
+	deleteAllStudent(lst);
+
+}
+//---------------------------------------------------------------------
+
+//--------------------------DELETE A COURSE-----------------------------
+void deleteNodeCourse(listCourse& lst, nodeCourse* deletion)
+{
+	if (lst.head == NULL)
+	{
+		cout << "List is empty\n";
+		return;
+	}
+	while (lst.head->crs.info.idCourse == deletion->crs.info.idCourse && lst.head->crs.info.className == deletion->crs.info.className)
+	{
+		nodeCourse* temp = lst.head;
+		lst.head = lst.head->Next;
+		delete temp;
+		if (lst.head == NULL)
+		{
+			cout << "List is empty\n";
+			return;
+		}
+	}
+	nodeCourse* Prev = lst.head;
+	nodeCourse* Curr = Prev->Next;
+	while (Curr->Next != NULL)
+	{
+		if (Curr->crs.info.idCourse == deletion->crs.info.idCourse && deletion->crs.info.className == deletion->crs.info.className)
+		{
+			nodeCourse* temp = Curr;
+			Curr = Curr->Next;
+			Prev->Next = Curr;
+			delete temp;
+		}
+		else
+		{
+			Prev = Curr;
+			Curr = Curr->Next;
+		}
+	}
+	if (Curr->crs.info.idCourse == deletion->crs.info.idCourse && deletion->crs.info.className == deletion->crs.info.className)
+	{
+		Prev->Next = NULL;
+		delete Curr;
+	}
+
+}
+void deleteACourse(listCourse& lst, nodeCourse* deletion)
+{
+	//Kí hiệu R là file để đọc
+	//Kí hiệu W là file để ghi
+
+	//Xóa dòng chứa khóa học này trong file Course.txt;
+	ifstream fileCourseR("./raw/Course.txt");
+	if (!fileCourseR.is_open())
+	{
+		return;
+	}
+
+	string line, remember;
+	string idCourse = deletion->crs.info.idCourse;
+	string nameClass = deletion->crs.info.className;
+
+	while (std::getline(fileCourseR, line))
+	{
+		if (line.find(idCourse.c_str()) != string::npos && line.find(nameClass.c_str()) != string::npos)
+		{
+			continue;
+		}
+		else
+		{
+			if (remember.empty())
+				remember = remember + line;
+			else
+				remember = remember + "\n" + line;
+		}
+	}
+	fileCourseR.close();
+
+	ofstream fileCourseW("./raw/Course.txt");
+	if (!fileCourseW.is_open())
+	{
+		return;
+	}
+	fileCourseW << remember << "\n";
+	fileCourseW.close();
+	//Xóa toàn bộ học sinh 
+	const string courseName = "./raw/" + deletion->crs.info.courseName + "_" + deletion->crs.info.className + ".txt";
+	listStudent listS;
+	readListStudentOfACourse(listS, courseName);
+	nodeStudent* Temp = listS.head;
+	while (Temp != NULL)
+	{
+		deleteAStudentFromCourse(deletion, Temp);
+		Temp = Temp->next;
+	}
+	deleteNodeCourse(lst, deletion);
+	cout << "The course has been removed\n";
+	system("Pause");
+
+
+}
+
+//----------------------------------------------------------------------
+void changePasswordForStaff(nodeStaff*& staff, const char fileName[])
+{
+	ifstream fileStudent(fileName);
+	if (!fileStudent.is_open())
+	{
+		cout << "Cannot open file\n";
+		return;
+	}
+	string line, pass;
+
+	cout << "Input old password: ";
+	std::getline(cin, pass);
+
+	while (pass != staff->staff.account.passWord)
+	{
+		cout << "Password is not correct\n";
+		cout << "Input old password: ";
+		std::getline(cin, pass);
+	}
+
+	string remember;
+
+	while (!fileStudent.eof())
+	{
+		std::getline(fileStudent, line);
+		if (line.find(staff->staff.account.userName.c_str()) != std::string::npos && line.find(staff->staff.account.passWord.c_str()) != std::string::npos && line.find(to_string(staff->staff.IDofStaff).c_str()) != std::string::npos)
+		{
+			continue;
+		}
+		else
+		{
+			remember = remember + "\n" + line;
+		}
+	}
+
+	cout << "Input new password: ";
+	std::getline(cin, staff->staff.account.passWord);
+	fileStudent.close();
+
+	ofstream newFileStudent;
+	newFileStudent.open(fileName);
+	newFileStudent << remember << "\n";
+	newFileStudent << staff->staff.account.userName << ",";
+	newFileStudent << staff->staff.account.passWord << ",";
+	newFileStudent << staff->staff.IDofStaff << ",";
+	newFileStudent << staff->staff.lastName << ",";
+	newFileStudent << staff->staff.firstName << ",";
+	newFileStudent << staff->staff.gender << ",";
+	newFileStudent << staff->staff.d.day << "/" << staff->staff.d.month << "/" << staff->staff.d.year << ",";
+	newFileStudent << staff->staff.socialId << ",\n";
+	newFileStudent.close();
+}
+//------------------------------------------------------------------------------------------------
+
+//-----------------EXPORT .CSV FILE AND OPERATE WITH SCORE-------------------------
+void exportCSVFile(const string address, nodeCourse* course)
+{
+	string addressFile = address;
+	if (addressFile[0] == '"')
+	{
+		addressFile.erase(0, 1);
+	}
+	if (addressFile[addressFile.size() - 1] == '"')
+	{
+		addressFile.pop_back();
+	}
+
+	if (address.back() == '\\')
+	{
+		addressFile = addressFile + course->crs.info.courseName + "_" + course->crs.info.className + ".csv";
+	}
+	else
+		addressFile = addressFile + "\\" + course->crs.info.courseName + "_" + course->crs.info.className + ".csv";
+	cout << addressFile << endl;
+	system("Pause");
+	ofstream fileCSV(addressFile);
+	if (!fileCSV.is_open())
+	{
+		cout << "Cannot write to file\n";
+		return;
+	}
+	const string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
+	ifstream fileCourseR(courseName);
+	string line;
+	while (std::getline(fileCourseR, line))
+	{
+		fileCSV << line << "\n";
+	}
+	fileCSV.close();
+	fileCourseR.close();
+	cout << "Sucessfully exported!!. Press any key to continue\n";
+	system("Pause");
+}
+
+
+//---------------------------------------------------------------------------------
+void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
+{
+	system("cls");
+	int optn;
+
+	while (true)
+	{
+		system("cls");
+		int Optn;
+		cout << "Hello " << staff->staff.firstName << "\n";
+		cout << "1. View Info\n";
+		cout << "2. Change Password\n";
+		cout << "3. Log out\n";
+		cout << "4. School year\n";
+		cout << "5. Semester\n";
+		cout << "6. Create Class\n";
+		cout << "7. Add course by .CSV\n";
+		cout << "8. Adjust student in course\n";
+		cout << "9. Delete a course\n";
+		cout << "10. Export a course\n";
+		cin >> Optn;
+		cin.ignore();
+		switch (Optn)
+		{
+		case 1:
+		{
+			viewInfoStaff(staff);
+			break;
+		}
+		case 2:
+		{
+			changePasswordForStaff(staff, "accountStaff.txt");
+			cout << "Your password has been changed\n";
+			break;
+		}
+		case 3:
+			return;
+		case 7:
+		{
+			int i = 1;
+			nodeCourse* temp = lstCourse.head;
+			if (temp == NULL)
+			{
+				cout << "No course available\n";
+				return;
+			}
+			while (temp != NULL)
+			{
+				if (temp == NULL)
+				{
+					break;
+				}
+				cout << i << ": " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
+				temp = temp->Next;
+				i++;
+			}
+			temp = lstCourse.head;
+			int maxChoice = i;
+			i = 1;
+			int optn;
+			do {
+				cout << "Please select a course: ";
+				cin >> optn;
+			} while (optn > maxChoice || optn <= 0);
+			cin.ignore();
+			while (optn != i)
+			{
+				temp = temp->Next;
+				i++;
+			}
+			string fileName;
+			std::getline(cin, fileName);
+			addNStudentFromFile(temp, fileName);
+
+			break;
+		}
+		case 8:
+		{
+			int i = 1;
+			nodeCourse* temp = lstCourse.head;
+			if (temp == NULL)
+			{
+				cout << "No course available\n";
+				return;
+			}
+			while (temp != NULL)
+			{
+				cout << i << ": " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
+				temp = temp->Next;
+				i++;
+			}
+			temp = lstCourse.head;
+			int maxChoice = i;
+			i = 1;
+			int optn;
+			do {
+				cout << "Please select a course: ";
+				cin >> optn;
+			} while (optn > maxChoice || optn <= 0);
+			cin.ignore();
+			while (optn != i)
+			{
+				if (temp == NULL)
+				{
+					cout << "Invalid input\n";
+					break;
+				}
+				temp = temp->Next;
+				i++;
+			}
+			listStudent lst;
+			lst.head = NULL;
+			string fileName = "./raw/" + temp->crs.info.courseName + "_" + temp->crs.info.className + ".txt";
+			readListStudentOfACourse(lst, fileName);
+			printStudent(lst);
+			if (lst.head != NULL)
+			{
+				//Chọn hcoj sinh muốn xóa
+				int no;
+				cout << "Input No of student you want to delete: ";
+				cin >> no;
+				cin.ignore();
+
+				//Đi tới chỗ học sinh cần xóa.
+				nodeStudent* deletion = new nodeStudent();
+				deletion = goToStudent(no, lst);
+				deleteAStudentFromCourse(temp, deletion);
+			}
+			else
+			{
+				cout << "List is empty\n";
+			}
+
+			//	printStudent(lst);
+			break;
+		}
+		case 9:
+		{
+			int i = 1;
+			nodeCourse* temp = lstCourse.head;
+			if (temp == NULL)
+			{
+				cout << "No course available\n";
+				return;
+			}
+			while (temp != NULL)
+			{
+				cout << i << ": " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
+				temp = temp->Next;
+				i++;
+			}
+			temp = lstCourse.head;
+			int maxChoice = i;
+			i = 1;
+			int optn;
+			do {
+				cout << "Please select a course: ";
+				cin >> optn;
+			} while (optn > maxChoice || optn <= 0);
+			cin.ignore();
+			while (optn != i)
+			{
+				temp = temp->Next;
+				i++;
+			}
+			deleteACourse(lstCourse, temp);
+			break;
+		}
+		case 10:
+		{
+			int i = 1;
+			nodeCourse* temp = lstCourse.head;
+			if (temp == NULL)
+			{
+				cout << "No course available\n";
+				return;
+			}
+			while (temp != NULL)
+			{
+				cout << i << ": " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
+				temp = temp->Next;
+				i++;
+			}
+			temp = lstCourse.head;
+			int maxChoice = i;
+			i = 1;
+			int optn;
+			do {
+				cout << "Please select a course: ";
+				cin >> optn;
+			} while (optn > maxChoice || optn <= 0);
+			cin.ignore();
+			while (optn != i)
+			{
+				temp = temp->Next;
+				i++;
+			}
+			string address;
+			cout << "Input address of file: ";
+			std::getline(cin, address);
+			exportCSVFile(address, temp);
+		}
+		}
+	}
+}
+
+bool checkPassword(User p)
+{
+	int doDai = p.passWord.length();
+	if (doDai < 6)
+		return 0;
+	int coKiTuHoa = 0;
+	for (int i = 0; i < doDai; i++) {
+		if (p.passWord[i] >= 'A' && p.passWord[i] <= 'Z') {
+			coKiTuHoa = 1;
+		}
+	}
+	if (coKiTuHoa == 0)
+		return 0;
+	int coKiTu = 0;
+	for (int i = 0; i < doDai; i++) {
+		if (p.passWord[i] >= 'a' && p.passWord[i] <= 'z')
+			coKiTu = 1;
+		if (p.passWord[i] >= 'A' && p.passWord[i] <= 'Z')
+			coKiTu = 1;
+	}
+	if (coKiTu == 0)
+		return 0;
+
+	int coSo = 0;
+	for (int i = 0; i < doDai; i++) {
+		if (p.passWord[i] >= '0' && p.passWord[i] <= '9')
+			coSo = 1;
+	}
+	if (coSo == 0)
+		return 0;
+
+	int coDau = 0;
+	for (int i = 0; i < doDai; i++) {
+		if (p.passWord[i] == ',' || p.passWord[i] == '.' || p.passWord[i] == ':' || p.passWord[i] == '?' || p.passWord[i] == '~' || p.passWord[i] == '-' || p.passWord[i] == '_' || p.passWord[i] == ';' || p.passWord[i] == '@')
+			coDau = 1;
+	}
+	if (coDau == 0)
+		return 0;
+	return 1;
+}
+bool KiemTraHoTen(string hoTen)
+{
+	int coKhoangTrang = 0;
+	int doDai = hoTen.length();
+	for (int i = 0; i < doDai; i++) {
+		if (hoTen[i] == ' ') {
+			coKhoangTrang = 1;
+		}
+	}
+	if (coKhoangTrang == 0)
+		return 0;
+	return 1;
+}
+void XoaKhoangCach(string &name)
+{
+	string res="";
+	int dodai = name.length();
+	for (int i = 0; i < dodai; i++)
+	{
+		if (name[i] == ' ' && name[i + 1] == ' ')
+		{
+			continue;
+		}
+		else
+		{
+			res = res + name[i];
+		}
+	}
+	int i = 0;
+	if (res[0] == ' ');
+	while (i < res.length())
+	{
+		res[i] = res[i + 1];
+		i++;
+	}
+	if (res[res.length()-1] == ' ')
+	{
+		res[res.length()-1] = '\0';
+	}
+	name = res;
+}
+void ChuanHoaHoTen(string &name)
+{
+	XoaKhoangCach(name);
+	int dem = 0;
+	while (dem < name.length())
+	{
+		if (dem == 0) name[dem] = toupper(name[dem]);
+		else if (name[dem - 1] == ' ') name[dem] = toupper(name[dem]);
+		else
+		{
+			name[dem] = tolower(name[dem]);
+		}
+		dem++;
+	}
+}
+
+void importScoreBoard(nodeCourse*& course, const string fileName)
+{
+	string fileScoreBoard = fileName;
+	if (fileScoreBoard[0] == '"')
+	{
+		fileScoreBoard.erase(0, 1);
+	}
+	if (fileScoreBoard[fileScoreBoard.size() - 1] == '"')
+	{
+		fileScoreBoard.pop_back();
+	}
+	ifstream fileScoreR(fileScoreBoard);
+	const string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
+	ofstream fileCourseW(courseName);
+	if (!fileScoreR.is_open())
+	{
+		return;
+	}
+	if (!fileCourseW.is_open())
+	{
+		return;
+	}
+	string Line;
+	string idCourse = course->crs.info.idCourse;
+	string nameClass = course->crs.info.className;
+	while (std::getline(fileScoreR, Line))
+	{
+		fileCourseW << Line << "\n";
+	}
+	fileCourseW.close();
+	fileScoreR.close();
+	fileScoreR.open(fileScoreBoard);
+	std::getline(fileScoreR, Line);
+	while (!fileScoreR.eof())
+	{
+		std::getline(fileScoreR, Line, ',');
+		std::getline(fileScoreR, Line, ',');
+		const string studentFile = "./raw/" + Line + "_Course" + ".txt";
+		std::ifstream fileStudent(studentFile);
+		if (!fileStudent.is_open())
+		{
+			cout << "OK" << endl;
+			return;
+		}
+
+		std::getline(fileScoreR, Line, ',');
+		std::getline(fileScoreR, Line, ',');
+		std::getline(fileScoreR, Line, ',');
+		std::getline(fileScoreR, Line, '\n');
+		cout << Line << endl;
+		system("Pause");
+		string line, remember;
+		string linetemp;
+		//Xóa trạng thái khóa học hiện t
+		bool flag = false;
+		cout << idCourse << " - " << nameClass << endl;
+		while (!fileStudent.eof())
+		{
+			flag = false;
+			std::getline(fileStudent, line);
+			cout << "Line: " << line << endl;
+			if (line == "" || line == "\n")
+			{
+				flag = true;
+				break;
+			}
+			if (line.find(idCourse.c_str()) != string::npos && line.find(nameClass.c_str()) != string::npos && !flag)
+			{
+				linetemp = line;
+				cout << "Linetemp7777: " << linetemp << endl;
+				//cout << line << endl;
+				//cout << "OKOK" << endl;
+			}
+			else
+			{
+				if (remember.empty())
+					remember = remember + line;
+				else
+					remember = remember + "\n" + line;
+			}
+
+		}
+		{
+			cout << "Linetemp: " << linetemp << endl;
+			//cout << "OK3456" << endl;
+			int i = 0;
+			while (linetemp[i] != ',')
+			{
+				i++;
+			}
+			cout << "OK1" << endl;
+			i++;
+			while (linetemp[i] != ',')
+			{
+				i++;
+			}
+			cout << "OK2" << endl;
+			i++;
+			while (linetemp[i] != ',')
+			{
+				i++;
+			}
+			cout << "OK3" << endl;
+			i++;
+			while (linetemp[i] != ',')
+			{
+				i++;
+			}
+			cout << "OK4" << endl;
+			i++;
+			while (linetemp[i] != ',')
+			{
+				i++;
+			}
+			i++;
+			while (linetemp[i] != ',')
+			{
+				i++;
+			}
+			i++;
+			linetemp = linetemp.substr(0, i);
+			linetemp += Line;
+			linetemp += '\n';
+			fileStudent.close();
+			ofstream fileStudentW(studentFile);
+			fileStudentW << remember << "\n";
+			fileStudentW << linetemp;
+			fileStudentW.close();
+		}
+	}
+	fileScoreR.close();
+
+
+	std::system("Pause");
+}

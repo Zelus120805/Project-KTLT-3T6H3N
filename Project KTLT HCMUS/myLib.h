@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <cstdio>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -197,6 +198,8 @@ void viewInfo(nodeStudent* Student);
 bool isStudentExisted(listStudent lst, string userName);
 
 void writeStudentToFile(listStudent lst, const char fileName[]);
+
+void changePasswordForStudent(nodeStudent*& student, const char fileName[]);
 //Thao tác của nhân viên
 
 void addTailStaff(listStaff& lst, staffUser newStaff);
@@ -210,6 +213,8 @@ void staffLogIn(listStaff& staff, listOfSchoolYear& lstSchoolYear, listCourse& l
 bool isStaffExisted(listStaff lst, string userName);
 
 void viewInfoStaff(nodeStaff* staff);
+
+void changePasswordForStaff(nodeStaff*& staff, const char fileName[]);
 
 void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse);
 
@@ -256,7 +261,28 @@ void userLogIn(listUser& lst);
 
 
 
+// ---------------------- - DELETE A STUDENT-------------------------------------- - 
+bool isInCourse(nodeStudent * student, nodeCourse * course);
+void readListStudentOfACourse(listStudent& lst, const string fileName);
+void deleteNodeStudent(listStudent& lst, nodeStudent* deletion);
+nodeStudent* goToStudent(int No, listStudent lst);
+void printStudent(listStudent lst);
+void deleteAStudentFromCourse(nodeCourse*& course, nodeStudent* deletion);
+//--------------------------------------------------------------------------------
 
+//-----------------------DELETE A COURSE------------------------------------------
+void deleteNodeCourse(listCourse& lst, nodeCourse* deletion);
+void deleteACourse(listCourse& lst, nodeCourse* deletion);
+
+//---------------------------------------------------------------------------------
+
+//-----------------EXPORT .CSV FILE AND OPERATE WITH SCORE-------------------------
+void exportCSVFile(const string address, nodeCourse* course);
+
+
+
+
+//---------------------------------------------------------------------------------
 
 // Menu
 void ShowCur(bool showCursor);
@@ -281,6 +307,11 @@ void menuMain();
 
 
 
+bool checkPassword(User p);
+bool KiemTraHoTen(string hoTen);
+void XoaKhoangCach(string& name);
+void ChuanHoaHoTen(string& name);
 
+void importScoreBoard(nodeCourse& course, const string fileName);
 #endif
 

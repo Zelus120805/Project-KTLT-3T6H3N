@@ -1,2 +1,0 @@
-No,Student ID,Student Last Name,Student First Name,Gender,Other Mark(Assignment),Midterm Mark,Final Mark,Average Mark
-1,23120358,Nguyen,Van A,Male,0,0,0,0

@@ -1,3 +1,2 @@
-CSC10002,KTLT,23CTT5,nlhdung,4,1,4,Thu
-MTH00003,Calculus 1B,23CTT5,abc,4,1,50,Sun
-CSC10001,nmlt,23CTT5,abc,4,6,50,Fri
+CSC10002,Nhap mon lap trinh,23CTT5,abc,4,6,50,Thu
+CSC10001,Ki thuat lap trinh,23CTT5,abcde,4,6,50,Fri
