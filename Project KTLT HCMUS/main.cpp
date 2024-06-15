@@ -1,6 +1,6 @@
 ﻿#include "myLib.h"
 
-listStudent lst;
+listStudent lstStudent;
 
 listOfSchoolYear list;
 
@@ -12,18 +12,18 @@ int main()
 {
 	//readAccountFile(lst);
 	//readAccountFile(lst);
-	lst.head = nullptr;
+	lstStudent.head = nullptr;
 	list.head = nullptr;
 	listOfCourse.head = nullptr;
 	lstStaff.head = NULL;
 	readCourseFile(listOfCourse);
-	readFileStudent(lst, "accountStudent.txt");
+	readFileStudent(lstStudent, "accountStudent.txt");
 
 	menuMain();
 
 	deleteAllCourse(listOfCourse);
 	deleteAllSchoolYear(list);
-	deleteAllStudent(lst);
+	deleteAllStudent(lstStudent);
 	deleteAllStaff(lstStaff);
 	system("cls");
 	return 0;

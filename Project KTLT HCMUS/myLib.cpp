@@ -1,5 +1,53 @@
 ﻿#include "myLib.h"
 
+//Nhóm hàm của Date
+bool isLeapYear(int y)
+{
+	if ((y % 400 == 0) || ((y % 4 == 0) && (y % 100 != 0)))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int getNumDaysInMonth(int m, int y)
+{
+	int d;
+	if ((m == 1) || (m == 3) || (m == 5) || (m == 7) || (m == 8) || (m == 10) || (m == 12))
+	{
+		d = 31;
+	}
+	else if ((m == 4) || (m == 6) || (m == 9) || (m == 11))
+	{
+		d = 30;
+	}
+	else
+	{
+		if (isLeapYear(y))
+		{
+			d = 29;
+		}
+		else
+		{
+			d = 28;
+		}
+	}
+	return d;
+}
+
+bool isValidDate(int d, int m, int y)
+{
+	if (m < 1 || m > 12)
+		return false;
+	if (d < 1 || d > getNumDaysInMonth(m, y))
+		return false;
+
+	return true;
+}
+
 //Nhóm hàm thao tác của Staff-------------------------------------------------
 void createSchoolYear(listOfSchoolYear& lst)
 {
@@ -634,86 +682,195 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y)
 	Student->next = nullptr;
 
 	gotoXY(x + 2, y + 2); cout << "Username: "; drawBox(x + 2 + strlen("Username: "), y + 1, 65 - strlen("Username: "), 2);
-	bool check = false;
-	while (true)
-	{
-		string str = "Username has existed!";
-		gotoXY(x + 2 + strlen("Username: ") + 1, y + 2); getline(cin, Student->student.account.userName);
-		if (check == true)
-		{
-			for (int i = 0; i < str.length(); i++) {
-				gotoXY(WIDTH_CONSOLE / 2 - 8 + i, HEIGHT_CONSOLE / 2 + 7);
-				cout << " ";
-			}
-		}
-
-		if (isStudentExisted(lst, Student->student.account.userName))
-		{
-			setTextColor(red);
-			for (int i = 0; i < str.length(); i++) {
-				gotoXY(WIDTH_CONSOLE / 2 - 8 + i, HEIGHT_CONSOLE / 2 + 7);
-				cout << str[i];
-				Sleep(40);
-			}
-			Sleep(500);
-			setTextColor(black);
-
-			for (int i = 0; i < Student->student.account.userName.length(); i++)
-			{
-				gotoXY(x + 2 + strlen("Username: ") + 1 + i, y + 2);
-				cout << " ";
-			}
-
-			check = true;
-		}
-		else
-			break;
-	}
-
-	gotoXY(x + 2, y + 5); cout << "Password: "; drawBox(x + 2 + strlen("Password: "), y + 4, 65 - strlen("Password: "), 2);
-	gotoXY(x + 2 + strlen("Password: ") + 1, y + 5); getline(cin, Student->student.account.passWord);
-
-	std::string fullName;
-	gotoXY(x + 2, y + 8); cout << "Fullname: "; drawBox(x + 2 + strlen("Fullname: "), y + 7, 65 - strlen("Fullname: "), 2);
-	gotoXY(x + 2 + strlen("Fullname: ") + 1, y + 8); getline(cin, fullName);
-	size_t index = fullName.find(' ');
-	if (index != string::npos)
-	{
-		Student->student.info.lastName = fullName.substr(0, index);
-		Student->student.info.firstName = fullName.substr(index + 1);
-	}
-	else
-	{
-		Student->student.info.lastName = fullName;
-		Student->student.info.firstName = "";
-	}
-
-	gotoXY(x + 2, y + 11); cout << "Date Of Birth(dd mm yyyy): "; drawBox(x + 2 + strlen("Date of birth(dd mm yyyy): "), y + 10, 65 - strlen("Date of birth(dd mm yyyy): "), 2);
-	gotoXY(x + 2 + strlen("Date of birth(dd mm yyyy): ") + 1, y + 11); 
-	cin >> Student->student.info.d.day >> Student->student.info.d.month >> Student->student.info.d.year; cin.ignore();
-
+	gotoXY(x + 2, y + 5); cout << "Password: "; drawBox(x + 2 + strlen("Username: "), y + 4, 65 - strlen("Password: "), 2);
+	gotoXY(x + 2, y + 8); cout << "Fullname: "; drawBox(x + 2 + strlen("Username: "), y + 7, 65 - strlen("Fullname: "), 2);
+	gotoXY(x + 2, y + 11); cout << "Date of birth(dd mm yyyy): "; drawBox(x + 2 + strlen("Date of birth(dd mm yyyy): "), y + 10, 65 - strlen("Date of birth(dd mm yyyy): "), 2);
 	gotoXY(x + 2, y + 14); cout << "Gender(Male/Female): "; drawBox(x + 2 + strlen("Gender(Male/Female): "), y + 13, 8, 2);
-	gotoXY(x + 2 + strlen("Gender(Male/Female): ") + 1, y + 14); getline(cin, Student->student.info.gender);
-
-	gotoXY(x + 35, y + 14); cout << "ID Student: "; drawBox(x + 35 + strlen("ID student: "), y + 13, 20, 2);
-	gotoXY(x + 35 + strlen("ID student: ") + 1, y + 14); 
-	cin >> Student->student.info.idStudent; cin.ignore();
-
+	gotoXY(x + 35, y + 14); cout << "ID student: "; drawBox(x + 35 + strlen("ID student: "), y + 13, 20, 2);
 	gotoXY(x + 2, y + 17); cout << "Social ID: "; drawBox(x + 2 + strlen("Social ID: "), y + 16, 18, 2);
-	gotoXY(x + 2 + strlen("Social ID: ") + 1, y + 17); getline(cin, Student->student.info.socialId);
+	gotoXY(x + 35, y + 17); cout << "Class: "; drawBox(x + 35 + (int)strlen("Class: "), y + 16, 25, 2);
 
-	gotoXY(x + 35, y + 17); cout << "Class: "; drawBox(x + 35 + strlen("Class: "), y + 16, 25, 2);
-	gotoXY(x + 35 + strlen("Class: ") + 1, y + 17); getline(cin, Student->student.info.inClass);
+	char ch;
+	int i = 0, curPos[8] = { 0 };
+	std::string input[8];
 
-	setTextColor(yellow);
-	string str = "Register succesful!";
-	for (int i = 0; i < str.length(); i++) {
-		gotoXY(x - 30 + 7 + i, y + 17);
-		cout << str[i];
-		Sleep(40);
+	int newX[8] = { x + 2 + strlen("Username: ") + 1,
+					x + 2 + strlen("Password: ") + 1,
+					x + 2 + strlen("Fullname: ") + 1,
+					x + 2 + strlen("Date of birth(dd mm yyyy): ") + 1,
+					x + 2 + strlen("Gender(Male/Female): ") + 1,
+					x + 35 + strlen("ID student: ") + 1,
+					x + 2 + strlen("Social ID: ") + 1,
+					x + 35 + strlen("Class: ") + 1 };
+	int newY[8] = { y + 2, y + 5, y + 8, y + 11, y + 14, y + 14, y + 17, y + 17 };
+	int oldX = newX[0], oldY = newY[0];
+
+	gotoXY(oldX, oldY);
+	while (true) {
+		ch = _getch();
+
+		if (ch == 27)
+		{
+			printAtXY(x, y, "Cancel registration!");
+			return;
+		}
+		else if (ch == '\r')
+		{
+			if (input[0].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 0;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (isStudentExisted(lst, input[0]))
+			{
+				printAtXY(x, y, "Username is existed!");
+
+				i = 0;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (!checkPassword(input[1]))
+			{
+				printAtXY(x, y, "Invalid password entered!");
+
+				i = 1;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[2].length() == 0 || !KiemTraHoTen(input[2]))
+			{
+				printAtXY(x, y, "Invalid fullname entered!");
+
+				i = 2;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (!isValidRegisterDate(input[3]))
+			{
+				printAtXY(x, y, "Invalid date entered!");
+
+				i = 3;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[4].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 4;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[5].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 5;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[6].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 6;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[7].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 7;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else
+				break;
+
+			gotoXY(oldX, oldY);
+		}
+		else if (ch == -32) {
+			ch = _getch();
+			if (ch == 72 && i > 0) {
+				i--;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 80 && i < 7) {
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 75 && curPos[i] > 0) {
+				curPos[i]--;
+				gotoXY(--oldX, oldY);
+			}
+			else if (ch == 77 && curPos[i] < input[i].length()) {
+				curPos[i]++;
+				gotoXY(++oldX, oldY);
+			}
+		}
+		else if (ch == 9)
+		{
+			if (i < 7)
+			{
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+		}
+		else if (ch == '\b' && curPos[i] > 0)
+		{
+			curPos[i]--;
+			input[i].erase(curPos[i], 1);
+			gotoXY(newX[i], oldY);
+			std::cout << input[i] << " ";
+			gotoXY(--oldX, oldY);
+		}
+		else if (ch != '\b')
+		{
+			input[i].insert(curPos[i], 1, ch);
+			curPos[i]++;
+			std::cout << input[i].substr(curPos[i] - 1);
+			gotoXY(++oldX, oldY);
+		}
 	}
-	ShowCur(0);
-	Sleep(500);
+
+	Student->student.account.userName = input[0];
+	Student->student.account.passWord = input[1];
+	size_t index = input[2].find(' ');
+	Student->student.info.lastName = input[2].substr(0, index);
+	Student->student.info.firstName = input[2].substr(index + 1);
+	size_t index1 = input[3].find(' ');
+	size_t index2 = input[3].find(' ', index1 + 1);
+	Student->student.info.d.day = stoi(input[3].substr(0, index1));
+	Student->student.info.d.month = stoi(input[3].substr(index1 + 1, index2));
+	Student->student.info.d.year = stoi(input[3].substr(index2 + 1));
+	Student->student.info.gender = input[4];
+	Student->student.info.idStudent = stol(input[5]);
+	Student->student.info.socialId = input[6];
+	Student->student.info.inClass = input[7];
+
+	printAtXY(x, y, "Register succesful!");
 
 	//Ghi ra file
 	std::ofstream accountStudent;
@@ -1082,83 +1239,183 @@ void staffRegister(listStaff& lst, const char fileName[], int x, int y)
 	Staff->next = nullptr;
 
 	gotoXY(x + 2, y + 2); cout << "Username: "; drawBox(x + 2 + strlen("Username: "), y + 1, 65 - strlen("Username: "), 2);
-	bool check = false;
-	while (true)
-	{
-		string str = "Username has existed!";
-		gotoXY(x + 2 + strlen("Username: ") + 1, y + 2); getline(cin, Staff->staff.account.userName);
-		if (check == true)
-		{
-			for (int i = 0; i < str.length(); i++) {
-				gotoXY(WIDTH_CONSOLE / 2 - 8 + i, HEIGHT_CONSOLE / 2 + 7);
-				cout << " ";
-			}
-		}
-
-		if (isStaffExisted(lst, Staff->staff.account.userName))
-		{
-			setTextColor(red);
-			for (int i = 0; i < str.length(); i++) {
-				gotoXY(WIDTH_CONSOLE / 2 - 8 + i, HEIGHT_CONSOLE / 2 + 7);
-				cout << str[i];
-				Sleep(40);
-			}
-			Sleep(500);
-			setTextColor(black);
-
-			for (int i = 0; i < Staff->staff.account.userName.length(); i++)
-			{
-				gotoXY(x + 2 + strlen("Username: ") + 1 + i, y + 2);
-				cout << " ";
-			}
-
-			check = true;
-		}
-		else
-			break;
-	}
-
 	gotoXY(x + 2, y + 5); cout << "Password: "; drawBox(x + 2 + strlen("Password: "), y + 4, 65 - strlen("Password: "), 2);
-	gotoXY(x + 2 + strlen("Password: ") + 1, y + 5); getline(cin, Staff->staff.account.passWord);
-
-	std::string fullName;
 	gotoXY(x + 2, y + 8); cout << "Fullname: "; drawBox(x + 2 + strlen("Fullname: "), y + 7, 65 - strlen("Fullname: "), 2);
-	gotoXY(x + 2 + strlen("Fullname: ") + 1, y + 8); getline(cin, fullName);
-	size_t index = fullName.find(' ');
-	if (index != string::npos)
-	{
-		Staff->staff.lastName = fullName.substr(0, index);
-		Staff->staff.firstName = fullName.substr(index + 1);
-	}
-	else
-	{
-		Staff->staff.lastName = fullName;
-		Staff->staff.firstName = "";
-	}
-
 	gotoXY(x + 2, y + 11); cout << "Date Of Birth(dd mm yyyy): "; drawBox(x + 2 + strlen("Date of birth(dd mm yyyy): "), y + 10, 65 - strlen("Date of birth(dd mm yyyy): "), 2);
-	gotoXY(x + 2 + strlen("Date Of Birth(dd mm yyyy): ") + 1, y + 11);
-	cin >> Staff->staff.d.day >> Staff->staff.d.month >> Staff->staff.d.year; cin.ignore();
-
 	gotoXY(x + 2, y + 14); cout << "Gender(Male/Female): "; drawBox(x + 2 + strlen("Gender(Male/Female): "), y + 13, 8, 2);
-	gotoXY(x + 2 + strlen("Gender(Male/Female): ") + 1, y + 14); getline(cin, Staff->staff.gender);
-
 	gotoXY(x + 35, y + 14); cout << "ID Staff: "; drawBox(x + 35 + strlen("ID Staff: "), y + 13, 22, 2);
-	gotoXY(x + 35 + strlen("ID Staff: ") + 1, y + 14);
-	cin >> Staff->staff.IDofStaff; cin.ignore();
-
 	gotoXY(x + 2, y + 17); cout << "Social ID: "; drawBox(x + 2 + strlen("Social ID: "), y + 16, 18, 2);
-	gotoXY(x + 2 + strlen("Social ID: ") + 1, y + 17); getline(cin, Staff->staff.socialId);
 
-	setTextColor(yellow);
-	string str = "Register succesful!";
-	for (int i = 0; i < str.length(); i++) {
-		gotoXY(x - 30 + 7 + i, y + 17);
-		cout << str[i];
-		Sleep(40);
+	char ch;
+	int i = 0, curPos[7] = { 0 };
+	std::string input[7];
+
+	int newX[7] = { x + 2 + strlen("Username: ") + 1,
+					x + 2 + strlen("Password: ") + 1,
+					x + 2 + strlen("Fullname: ") + 1,
+					x + 2 + strlen("Date of birth(dd mm yyyy): ") + 1,
+					x + 2 + strlen("Gender(Male/Female): ") + 1,
+					x + 35 + strlen("ID Staff: ") + 1,
+					x + 2 + strlen("Social ID: ") + 1 };
+	int newY[7] = { y + 2, y + 5, y + 8, y + 11, y + 14, y + 14, y + 17 };
+	int oldX = newX[0], oldY = newY[0];
+
+	gotoXY(oldX, oldY);
+	while (true) {
+		ch = _getch();
+
+		if (ch == 27)
+		{
+			printAtXY(x, y, "Cancel registration!");
+			return;
+		}
+		else if (ch == '\r')
+		{
+			if (input[0].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 0;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (isStaffExisted(lst, input[0]))
+			{
+				printAtXY(x, y, "Username is existed!");
+
+				i = 0;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (!checkPassword(input[1]))
+			{
+				printAtXY(x, y, "Invalid password entered!");
+
+				i = 1;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[2].length() == 0 || !KiemTraHoTen(input[2]))
+			{
+				printAtXY(x, y, "Invalid fullname entered!");
+
+				i = 2;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (!isValidRegisterDate(input[3]))
+			{
+				printAtXY(x, y, "Invalid date entered!");
+
+				i = 3;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[4].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 4;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[5].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 5;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else if (input[6].length() == 0)
+			{
+				printAtXY(x, y, "Data isn't full!");
+
+				i = 6;
+				curPos[i] = input[i].length();
+				oldX = newX[i] + input[i].length();
+				oldY = newY[i];
+			}
+			else
+				break;
+
+			gotoXY(oldX, oldY);
+		}
+		else if (ch == -32) {
+			ch = _getch();
+			if (ch == 72 && i > 0) {
+				i--;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 80 && i < 6) {
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 75 && curPos[i] > 0) {
+				curPos[i]--;
+				gotoXY(--oldX, oldY);
+			}
+			else if (ch == 77 && curPos[i] < input[i].length()) {
+				curPos[i]++;
+				gotoXY(++oldX, oldY);
+			}
+		}
+		else if (ch == 9)
+		{
+			if (i < 6)
+			{
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+		}
+		else if (ch == '\b' && curPos[i] > 0)
+		{
+			curPos[i]--;
+			input[i].erase(curPos[i], 1);
+			gotoXY(newX[i], oldY);
+			std::cout << input[i] << " ";
+			gotoXY(--oldX, oldY);
+		}
+		else if (ch != '\b')
+		{
+			input[i].insert(curPos[i], 1, ch);
+			curPos[i]++;
+			std::cout << input[i].substr(curPos[i] - 1);
+			gotoXY(++oldX, oldY);
+		}
 	}
-	ShowCur(0);
-	Sleep(500);
+
+	Staff->staff.account.userName = input[0];
+	Staff->staff.account.passWord = input[1];
+	size_t index = input[2].find(' ');
+	Staff->staff.lastName = input[2].substr(0, index);
+	Staff->staff.firstName = input[2].substr(index + 1);
+	size_t index1 = input[3].find(' ');
+	size_t index2 = input[3].find(' ', index1 + 1);
+	Staff->staff.d.day = stoi(input[3].substr(0, index1));
+	Staff->staff.d.month = stoi(input[3].substr(index1 + 1, index2));
+	Staff->staff.d.year = stoi(input[3].substr(index2 + 1));
+	Staff->staff.gender = input[4];
+	Staff->staff.IDofStaff = stol(input[5]);
+	Staff->staff.socialId = input[6];
+
+	printAtXY(x, y, "Register succesful!");
 
 	//Ghi ra file
 	std::ofstream accountStaff;
@@ -1188,7 +1445,8 @@ void staffRegister(listStaff& lst, const char fileName[], int x, int y)
 	accountStaff << Staff->staff.firstName << ",";
 	accountStaff << Staff->staff.gender << ",";
 	accountStaff << Staff->staff.d.day << "/" << Staff->staff.d.month << "/" << Staff->staff.d.year << ",";
-	accountStaff << Staff->staff.socialId << "," << endl;
+	accountStaff << Staff->staff.IDofStaff << ",";
+	accountStaff << Staff->staff.socialId << endl;
 }
 
 //Đọc file staff
@@ -1227,8 +1485,9 @@ void readFileStaff(listStaff& lst, const char fileName[])
 		getline(fileStaff, temp, ',');
 		Staff.d.year = std::stoi(temp);
 		getline(fileStaff, temp, ',');
-		Staff.socialId = temp;
+		Staff.IDofStaff = stol(temp);
 		getline(fileStaff, temp, '\n');
+		Staff.socialId = temp;
 		addTailStaff(lst, Staff);
 	}
 	fileStaff.close();
@@ -2143,46 +2402,47 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 	}
 }
 
-bool checkPassword(User p)
+bool checkPassword(std::string pass)
 {
-	int doDai = p.passWord.length();
+	int doDai = pass.length();
 	if (doDai < 6)
-		return 0;
+		return false;
+
 	int coKiTuHoa = 0;
 	for (int i = 0; i < doDai; i++) {
-		if (p.passWord[i] >= 'A' && p.passWord[i] <= 'Z') {
+		if (pass[i] >= 'A' && pass[i] <= 'Z') {
 			coKiTuHoa = 1;
+			break;
 		}
 	}
-	if (coKiTuHoa == 0)
-		return 0;
+	
 	int coKiTu = 0;
 	for (int i = 0; i < doDai; i++) {
-		if (p.passWord[i] >= 'a' && p.passWord[i] <= 'z')
+		if (pass[i] >= 'a' && pass[i] <= 'z')
+		{
 			coKiTu = 1;
-		if (p.passWord[i] >= 'A' && p.passWord[i] <= 'Z')
-			coKiTu = 1;
+			break;
+		}
 	}
-	if (coKiTu == 0)
-		return 0;
 
 	int coSo = 0;
 	for (int i = 0; i < doDai; i++) {
-		if (p.passWord[i] >= '0' && p.passWord[i] <= '9')
+		if (pass[i] >= '0' && pass[i] <= '9')
+		{
 			coSo = 1;
+			break;
+		}
 	}
-	if (coSo == 0)
-		return 0;
 
 	int coDau = 0;
 	for (int i = 0; i < doDai; i++) {
-		if (p.passWord[i] == ',' || p.passWord[i] == '.' || p.passWord[i] == ':' || p.passWord[i] == '?' || p.passWord[i] == '~' || p.passWord[i] == '-' || p.passWord[i] == '_' || p.passWord[i] == ';' || p.passWord[i] == '@')
+		if (pass[i] == ',' || pass[i] == '.' || pass[i] == ':' || pass[i] == '?' || pass[i] == '~' || pass[i] == '-' || pass[i] == '_' || pass[i] == ';' || pass[i] == '@')
 			coDau = 1;
 	}
-	if (coDau == 0)
-		return 0;
-	return 1;
+
+	return (coKiTuHoa || coKiTu || coSo || coDau);
 }
+
 bool KiemTraHoTen(string hoTen)
 {
 	int coKhoangTrang = 0;
@@ -2190,15 +2450,17 @@ bool KiemTraHoTen(string hoTen)
 	for (int i = 0; i < doDai; i++) {
 		if (hoTen[i] == ' ') {
 			coKhoangTrang = 1;
+			break;
 		}
 	}
 	if (coKhoangTrang == 0)
 		return 0;
 	return 1;
 }
+
 void XoaKhoangCach(string &name)
 {
-	string res="";
+	string res = "";
 	int dodai = name.length();
 	for (int i = 0; i < dodai; i++)
 	{
@@ -2224,6 +2486,7 @@ void XoaKhoangCach(string &name)
 	}
 	name = res;
 }
+
 void ChuanHoaHoTen(string &name)
 {
 	XoaKhoangCach(name);

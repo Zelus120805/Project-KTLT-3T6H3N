@@ -136,7 +136,7 @@ struct listOfSchoolYear
 //Danh sach hoc sinh
 struct staffUser {
     User account;
-    int IDofStaff;
+    long IDofStaff;
     string firstName;
     string lastName;
     string gender;
@@ -168,10 +168,16 @@ struct Semester {
     Date end;
 };
 
-extern listStudent lst;
+extern listStudent lstStudent;
 extern listOfSchoolYear list;
 extern listCourse listOfCourse;
 extern listStaff lstStaff;
+
+//------------------------------------------------
+//Date
+bool isLeapYear(int y);
+int getNumDaysInMonth(int m, int y);
+bool isValidDate(int d, int m, int y);
 
 //------------------------------------------------
 void createSchoolYear(listOfSchoolYear& lst);
@@ -296,10 +302,12 @@ void drawBoxAndText(int x, int y, int width, int height, string option);
 void drawBox(int x, int y, int width, int height);
 void inputLogin(int x, int y);
 void printMovingInstructions();
+void printMovingInstructionsInRegister();
 void drawNBoxByX(int x, int y, int width, int height, int nBox, int dis, std::string* option);
 void drawNBoxByY(int x, int y, int width, int height, int nBox, int dis, std::string* option);
 void drawLineByY(int x, int y, int height);
-
+bool isValidRegisterDate(std::string date);
+void printAtXY(int x, int y, std::string str);
 
 void menuRegister();
 void menuLogIn();
@@ -307,7 +315,7 @@ void menuMain();
 
 
 
-bool checkPassword(User p);
+bool checkPassword(std::string pass);
 bool KiemTraHoTen(string hoTen);
 void XoaKhoangCach(string& name);
 void ChuanHoaHoTen(string& name);

@@ -117,8 +117,8 @@ void drawBox(int x, int y, int width, int height)
 
 void printMovingInstructions()
 {
-    gotoXY(WIDTH_CONSOLE / 2 - 28, HEIGHT_CONSOLE - 1);
-    cout << "     Use arrow keys to move, Press 'Enter' to select     ";
+    gotoXY(WIDTH_CONSOLE / 2 - 38, HEIGHT_CONSOLE - 1);
+    cout << "          Use arrow keys to move, Press 'Enter' to select          ";
 }
 
 void drawNBoxByX(int x, int y, int width, int height, int nBox, int dis, std::string* option)
@@ -132,7 +132,6 @@ void drawNBoxByY(int x, int y, int width, int height, int nBox, int dis, std::st
     for (int i = 0; i < nBox; i++)
         drawBoxAndText(x, y + i * (height + dis), width, height, option[i]);
 }
-
 
 void menuMain()
 {
@@ -214,7 +213,7 @@ void menuMain()
 void menuRegister()
 {
     system("cls");
-    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions(); printMovingInstructionsInRegister();
     setBackgroundColor(lwhite);
     setTextColor(blue); print("Picture\\Register.txt", WIDTH_CONSOLE / 2 - 23, 1);
     int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 9, height = 19, width = 100;
@@ -246,7 +245,12 @@ void menuRegister()
         if (_kbhit())
         {
             char choose = _getch();
-            if (choose == 13)
+            if (choose == 27)
+            {
+                printAtXY(x, y, "Cancel registration!");
+                return;
+            }
+            else if (choose == 13)
             {
                 if (newY == y + 3)
                 {
@@ -260,7 +264,7 @@ void menuRegister()
                 {
                     setTextColor(green); drawLineByY(x + 30, y, height);
                     setTextColor(black);
-                    studentRegister(lst, "accountStudent.txt", x + 30, y);
+                    studentRegister(lstStudent, "accountStudent.txt", x + 30, y);
                     setTextColor(black);
                     return;
                 }
@@ -385,4 +389,38 @@ void inputLogin(int x, int y)
     }
 
     Sleep(500);
+}
+
+bool isValidRegisterDate(std::string date)
+{
+    if (date.length() == 0)
+        return false;
+    size_t index1 = date.find(' ');
+    size_t index2 = date.find(' ', index1 + 1);
+    if (index1 == string::npos || index2 == string::npos || date.find(' ', index2 + 1) != string::npos)
+        return false;
+
+    return isValidDate(stoi(date.substr(0, index1)), stoi(date.substr(index1 + 1, index2)), stoi(date.substr(index2 + 1)));
+}
+
+void printAtXY(int x, int y, std::string str)
+{
+    setTextColor(yellow);
+    for (int i = 0; i < str.length(); i++) {
+        gotoXY(x - 15 - str.length() / 2 + i, y + 17);
+        cout << str[i];
+        Sleep(40);
+    }
+    Sleep(600);
+    for (int i = 0; i < str.length(); i++) {
+        gotoXY(x - 15 - str.length() / 2 + i, y + 17);
+        cout << " ";
+    }
+    setTextColor(black);
+}
+
+void printMovingInstructionsInRegister()
+{
+    gotoXY(WIDTH_CONSOLE / 2 - 38, HEIGHT_CONSOLE);
+    cout << "     Press 'tab' to move next box and 'esc' to cancel register     ";
 }
