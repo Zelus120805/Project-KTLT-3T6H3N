@@ -18,6 +18,7 @@ int main()
 	lstStaff.head = NULL;
 	readCourseFile(listOfCourse);
 	readFileStudent(lstStudent, "accountStudent.txt");
+	readFileStaff(lstStaff, "accountStaff.txt");
 
 	menuMain();
 

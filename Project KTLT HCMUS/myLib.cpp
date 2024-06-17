@@ -711,95 +711,62 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y)
 
 		if (ch == 27)
 		{
-			printAtXY(x, y, "Cancel registration!");
+			printAtXY(x - 15, y + 17, "Cancel registration!");
 			return;
 		}
 		else if (ch == '\r')
 		{
 			if (input[0].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 0;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
-			else if (isStudentExisted(lst, input[0]))
+			else if (isStudentExisted(lstStudent, input[0]))
 			{
-				printAtXY(x, y, "Username is existed!");
-
+				printAtXY(x - 15, y + 17, "Username is existed!");
 				i = 0;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (!checkPassword(input[1]))
 			{
-				printAtXY(x, y, "Invalid password entered!");
-
+				printAtXY(x - 15, y + 17, "Invalid password entered!");
 				i = 1;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[2].length() == 0 || !KiemTraHoTen(input[2]))
 			{
-				printAtXY(x, y, "Invalid fullname entered!");
-
+				printAtXY(x - 15, y + 17, "Invalid fullname entered!");
 				i = 2;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (!isValidRegisterDate(input[3]))
 			{
-				printAtXY(x, y, "Invalid date entered!");
-
+				printAtXY(x - 15, y + 17, "Invalid date entered!");
 				i = 3;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[4].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 4;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[5].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 5;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[6].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 6;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[7].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 7;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else
 				break;
 
+			curPos[i] = input[i].length();
+			oldX = newX[i] + input[i].length();
+			oldY = newY[i];
 			gotoXY(oldX, oldY);
 		}
 		else if (ch == -32) {
@@ -870,7 +837,7 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y)
 	Student->student.info.socialId = input[6];
 	Student->student.info.inClass = input[7];
 
-	printAtXY(x, y, "Register succesful!");
+	printAtXY(x - 15, y + 17, "Register succesful!");
 
 	//Ghi ra file
 	std::ofstream accountStudent;
@@ -990,42 +957,221 @@ void readFileStudent(listStudent& lst, const char fileName[])
 	}
 }
 
-void studentLogIn(listStudent& lst, const char fileName[], listCourse list)
+void studentLogIn(listStudent& lst, listCourse list, int x, int y)
 {
-	std::ifstream accountStudent(fileName);
-	if (!accountStudent.is_open())
-	{
-		return;
-	}
-	string Username, Password, name, pass;
-	std::cout << "Username: ";
-	std::cin >> Username;
-	std::cout << "Password: ";
-	std::cin >> Password;
-	nodeStudent* temp = new nodeStudent();
-	temp = lst.head;
-	while (temp != NULL)
-	{
-		if (temp->student.account.userName == Username && temp->student.account.passWord == Password)
+	ShowCur(1);
+	gotoXY(x + strlen("Username: ") + 1, y);
+	gotoXY(x + strlen("Password: ") + 1, y + 3);
+
+	char ch;
+	int i = 0, curPos[2] = { 0 };
+	std::string input[2];
+
+	int newX[2] = { x + strlen("Username: ") + 1,
+					x + strlen("Password: ") + 1 };
+	int newY[2] = { y, y + 3 };
+	int oldX = newX[0], oldY = newY[0];
+
+	gotoXY(oldX, oldY);
+	while (true) {
+		ch = _getch();
+
+		if (ch == 27)
 		{
-			workSessionOfStudent(temp, list);
+			printAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE / 2 + 7, "Cancel login!");
 			return;
 		}
-		temp = temp->next;
+		else if (ch == '\r')
+		{
+			if (input[0].length() != 0 && input[2].length() != 0)
+			{
+				nodeStudent* temp = new nodeStudent();
+				temp = lst.head;
+				while (temp != NULL)
+				{
+					if (temp->student.account.userName == input[0] && temp->student.account.passWord == input[1])
+					{
+						printAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE / 2 + 7, "login succesful!");
+						ShowCur(0);
+						workSessionOfStudent(temp, list);
+						return;
+					}
+					temp = temp->next;
+				}
+			}
+			if (input[0].length() == 0)
+				i = 0;
+			else
+				i = 1;
+			printAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE / 2 + 7, "Username or password is not correct!");
+
+			curPos[i] = input[i].length();
+			oldX = newX[i] + input[i].length();
+			oldY = newY[i];
+			gotoXY(oldX, oldY);
+		}
+		else if (ch == -32) {
+			ch = _getch();
+			if (ch == 72 && i > 0) {
+				i--;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 80 && i < 1) {
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 75 && curPos[i] > 0) {
+				curPos[i]--;
+				gotoXY(--oldX, oldY);
+			}
+			else if (ch == 77 && curPos[i] < input[i].length()) {
+				curPos[i]++;
+				gotoXY(++oldX, oldY);
+			}
+		}
+		else if (ch == 9)
+		{
+			if (i < 1)
+			{
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+		}
+		else if (ch == '\b' && curPos[i] > 0)
+		{
+			curPos[i]--;
+			input[i].erase(curPos[i], 1);
+			gotoXY(newX[i], oldY);
+			std::cout << input[i] << " ";
+			gotoXY(--oldX, oldY);
+		}
+		else if (ch != '\b')
+		{
+			input[i].insert(curPos[i], 1, ch);
+			curPos[i]++;
+			std::cout << input[i].substr(curPos[i] - 1);
+			gotoXY(++oldX, oldY);
+		}
 	}
-	std::cout << "Fail to log in\n";
 }
 
 void workSessionOfStudent(nodeStudent*& node, listCourse list)
 {
-	system("cls");
-	int section;
-	std::cout << "Hello " << node->student.info.firstName << "\n";
-	std::cout << "1. Changepass\n";
-	std::cout << "2. View info\n";
-	std::cout << "3. LogOut\n";
-	std::cout << "4. Register Course\n";
+	int x = WIDTH_CONSOLE / 2 - 30, y = HEIGHT_CONSOLE / 2 - 7;
+	int newX = x + 15, newY = y + 2;
+	int oldX = newX, oldY = newY;
+	int newWidth = 30, newHeight = 2;
+	int nBox = 4, dis = 2;
+
+	int count = 0;
+	bool check = true;
 	while (true)
+	{
+		if (count == 0)
+		{
+			system("cls");
+			setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+			std::string str = node->student.info.lastName + " " + node->student.info.firstName;
+			setTextColor(blue); gotoXY(1, 0); cout << "Username: " << node->student.account.userName;
+			gotoXY(1, 1); cout << "Fullname: " << str;
+			setBackgroundColor(lwhite); setTextColor(black);
+			setTextColor(lpurple); print("Picture\\Hello Student.txt", WIDTH_CONSOLE / 2 - 29, 1);
+			setTextColor(green); printTwoLine(x, y, 18, 60);
+			setTextColor(black);
+
+			string* option = new string[nBox];
+			option[0] = "Change password";
+			option[1] = "View info";
+			option[2] = "Register Course";
+			option[3] = "Log out";
+			drawNBoxByY(x + 15, y + 2, newWidth, newHeight, nBox, dis, option);
+			delete[] option;
+
+			count++;
+		}
+
+		if (check == true)
+		{
+			gotoXY(oldX, oldY);
+			focus(oldX, oldY, newWidth, ' ');
+			oldX = newX, oldY = newY;
+
+			focus(newX, newY, newWidth, (char)174);
+			check = false;
+		}
+		if (_kbhit())
+		{
+			char choose = _getch();
+			if (choose == 13)
+			{
+				if (newY == y + 2)
+				{
+					
+				}
+				else if (newY == y + 2 + newHeight + dis)
+				{
+					viewInfoStudent(node);
+					count = 0;
+				}
+				else if (newY == y + 2 + 2 * (newHeight + dis))
+				{
+					nodeCourse* temp = list.head;
+					if (temp == NULL)
+					{
+						cout << "Khong co khoa hoc" << endl;
+					}
+					else
+					{
+						int i = 1, sub;
+						while (temp != NULL)
+						{
+							cout << i << ". " << temp->crs.info.courseName << " - " << temp->crs.info.className;
+							temp = temp->Next;
+							i++;
+						}
+						i = 1;
+						temp = list.head;
+						cout << "Select course: ";
+						cin >> sub;
+						while (temp != NULL)
+						{
+							if (i == sub)
+							{
+								addAStudentToCourse(temp, node);
+								break;
+							}
+							i++;
+							temp = temp->Next;
+						}
+
+					}
+				}
+				else if (newY == y + 2 + 3 * (newHeight + dis))
+					return;
+			}
+			else if (choose == -32)
+			{
+				choose = _getch();
+				if (choose == 72 && newY > y + 2)
+					newY = newY - newHeight - dis;
+				else if (choose == 80 && newY < y + (nBox - 1) * (newHeight + dis))
+					newY = newY + newHeight + dis;
+			}
+
+			check = true;
+		}
+	}
+
+	/*while (true)
 	{
 		std::cin >> section;
 		std::cin.ignore();
@@ -1071,26 +1217,39 @@ void workSessionOfStudent(nodeStudent*& node, listCourse list)
 
 			}
 		}
-
-	}
+	}*/
 }
 
-void viewInfo(nodeStudent* Student)
+void viewInfoStudent(nodeStudent* Student)
 {
-	if (Student == NULL)
+	system("cls");
+	setBackgroundColor(lyellow); setTextColor(red);
+	std::string str = "       Press 'esc' to return       "; gotoXY(WIDTH_CONSOLE / 2 - str.length() / 2, HEIGHT_CONSOLE - 4); cout << str;
+	setBackgroundColor(lwhite); setTextColor(purple); print("Picture\\Info Student.txt", WIDTH_CONSOLE / 2 - 50, 2);
+	int x = WIDTH_CONSOLE / 2 - 30, y = HEIGHT_CONSOLE / 2 - 7, height = 14, width = 60;
+	setTextColor(green); printTwoLine(x, y, height, width);
+	
+	setBackgroundColor(lyellow); setTextColor(aqua); gotoXY(WIDTH_CONSOLE / 2 - 10, y + 2); cout << "Infomation of student";
+	setBackgroundColor(lwhite);
+	setTextColor(black); gotoXY(x + 3, y + 4); std::cout << "- Username: "; setTextColor(blue); cout << Student->student.account.userName;
+	setTextColor(black); gotoXY(x + 3, y + 5); std::cout << "- Password: "; setTextColor(blue); cout << Student->student.account.passWord;
+	setTextColor(black); gotoXY(x + 3, y + 6); std::cout << "- ID student: "; setTextColor(blue); cout << Student->student.info.idStudent;
+	setTextColor(black); gotoXY(x + 3, y + 7); std::cout << "- Last name: "; setTextColor(blue); cout << Student->student.info.lastName;
+	setTextColor(black); gotoXY(x + 3, y + 8); std::cout << "- First name: "; setTextColor(blue); cout << Student->student.info.firstName;
+	setTextColor(black); gotoXY(x + 3, y + 9); std::cout << "- Gender: "; setTextColor(blue); cout << Student->student.info.gender;
+	setTextColor(black); gotoXY(x + 3, y + 10); std::cout << "- Date of birth "; setTextColor(blue); cout << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year;
+	setTextColor(black); gotoXY(x + 3, y + 11); std::cout << "- Social ID: "; setTextColor(blue); cout << Student->student.info.socialId ;
+	setTextColor(black); gotoXY(x + 3, y + 12); std::cout << "- Class: "; setTextColor(blue); cout << Student->student.info.inClass;
+
+	while (true)
 	{
-		return;
+		if (_kbhit)
+		{
+			char ch = _getch();
+			if (ch == 27)
+				return;
+		}
 	}
-	std::cout << "YOUR INFO\n";
-	std::cout << "Username: " << Student->student.account.userName << "\n";
-	std::cout << "Password: " << Student->student.account.passWord << "\n";
-	std::cout << "ID student: " << Student->student.info.idStudent << "\n";
-	std::cout << "Last name: " << Student->student.info.lastName << "\n";
-	std::cout << "First name: " << Student->student.info.firstName << "\n";
-	std::cout << "Gender: " << Student->student.info.gender << "\n";
-	std::cout << "Date of birth " << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year << "\n";
-	std::cout << "Social ID: " << Student->student.info.socialId << "\n";
-	std::cout << "Class: " << Student->student.info.inClass << "\n";
 }
 
 bool isStudentExisted(listStudent lst, string userName)
@@ -1266,86 +1425,57 @@ void staffRegister(listStaff& lst, const char fileName[], int x, int y)
 
 		if (ch == 27)
 		{
-			printAtXY(x, y, "Cancel registration!");
+			printAtXY(x - 15, y + 17, "Cancel registration!");
 			return;
 		}
 		else if (ch == '\r')
 		{
 			if (input[0].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 0;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
-			else if (isStaffExisted(lst, input[0]))
+			else if (isStaffExisted(lstStaff, input[0]))
 			{
-				printAtXY(x, y, "Username is existed!");
-
+				printAtXY(x - 15, y + 17, "Username is existed!");
 				i = 0;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (!checkPassword(input[1]))
 			{
-				printAtXY(x, y, "Invalid password entered!");
-
+				printAtXY(x - 15, y + 17, "Invalid password entered!");
 				i = 1;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[2].length() == 0 || !KiemTraHoTen(input[2]))
 			{
-				printAtXY(x, y, "Invalid fullname entered!");
-
+				printAtXY(x - 15, y + 17, "Invalid fullname entered!");
 				i = 2;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (!isValidRegisterDate(input[3]))
 			{
-				printAtXY(x, y, "Invalid date entered!");
-
+				printAtXY(x - 15, y + 17, "Invalid date entered!");
 				i = 3;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[4].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 4;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[5].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 5;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else if (input[6].length() == 0)
 			{
-				printAtXY(x, y, "Data isn't full!");
-
+				printAtXY(x - 15, y + 17, "Data isn't full!");
 				i = 6;
-				curPos[i] = input[i].length();
-				oldX = newX[i] + input[i].length();
-				oldY = newY[i];
 			}
 			else
 				break;
 
+			curPos[i] = input[i].length();
+			oldX = newX[i] + input[i].length();
+			oldY = newY[i];
 			gotoXY(oldX, oldY);
 		}
 		else if (ch == -32) {
@@ -1415,7 +1545,7 @@ void staffRegister(listStaff& lst, const char fileName[], int x, int y)
 	Staff->staff.IDofStaff = stol(input[5]);
 	Staff->staff.socialId = input[6];
 
-	printAtXY(x, y, "Register succesful!");
+	printAtXY(x - 15, y + 17, "Register succesful!");
 
 	//Ghi ra file
 	std::ofstream accountStaff;
@@ -1511,31 +1641,111 @@ void viewInfoStaff(nodeStaff* staff)
 }
 
 //Đăng nhập staff
-void staffLogIn(listStaff& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
+void staffLogIn(listStaff& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse, int x, int y)
 {
-	ifstream fileStaff("accountStaff.txt");
-	if (!fileStaff.is_open())
-	{
-		cout << "Cannot open file\n";
-		return;
-	}
-	string Username, Password, name, pass;
-	std::cout << "Username: ";
-	std::cin >> Username;
-	std::cout << "Password: ";
-	std::cin >> Password;
-	nodeStaff* temp = new nodeStaff();
-	temp = staff.head;
-	while (temp != NULL)
-	{
-		if (temp->staff.account.userName == Username && temp->staff.account.passWord == Password)
+	ShowCur(1);
+	gotoXY(x + strlen("Username: ") + 1, y);
+	gotoXY(x + strlen("Password: ") + 1, y + 3);
+
+	char ch;
+	int i = 0, curPos[2] = { 0 };
+	std::string input[2];
+
+	int newX[2] = { x + strlen("Username: ") + 1,
+					x + strlen("Password: ") + 1 };
+	int newY[2] = { y, y + 3 };
+	int oldX = newX[0], oldY = newY[0];
+
+	gotoXY(oldX, oldY);
+	while (true) {
+		ch = _getch();
+
+		if (ch == 27)
 		{
-			workSessionOfStaff(temp,lstSchoolYear,lstCourse);
+			printAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE / 2 + 7, "Cancel login!");
 			return;
 		}
-		temp = temp->next;
+		else if (ch == '\r')
+		{
+			if (input[0].length() != 0 && input[2].length() != 0)
+			{
+				nodeStaff* temp = new nodeStaff();
+				temp = staff.head;
+				while (temp != NULL)
+				{
+					if (temp->staff.account.userName == input[0] && temp->staff.account.passWord == input[1])
+					{
+						printAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE / 2 + 7, "login succesful!");
+						ShowCur(0);
+						workSessionOfStaff(temp, lstSchoolYear, lstCourse);
+						return;
+					}
+					temp = temp->next;
+				}
+			}
+			if (input[0].length() == 0)
+				i = 0;
+			else
+				i = 1;
+			printAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE / 2 + 7, "Username or password is not correct!");
+
+			curPos[i] = input[i].length();
+			oldX = newX[i] + input[i].length();
+			oldY = newY[i];
+			gotoXY(oldX, oldY);
+		}
+		else if (ch == -32) {
+			ch = _getch();
+			if (ch == 72 && i > 0) {
+				i--;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 80 && i < 1) {
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 75 && curPos[i] > 0) {
+				curPos[i]--;
+				gotoXY(--oldX, oldY);
+			}
+			else if (ch == 77 && curPos[i] < input[i].length()) {
+				curPos[i]++;
+				gotoXY(++oldX, oldY);
+			}
+		}
+		else if (ch == 9)
+		{
+			if (i < 1)
+			{
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+		}
+		else if (ch == '\b' && curPos[i] > 0)
+		{
+			curPos[i]--;
+			input[i].erase(curPos[i], 1);
+			gotoXY(newX[i], oldY);
+			std::cout << input[i] << " ";
+			gotoXY(--oldX, oldY);
+		}
+		else if (ch != '\b')
+		{
+			input[i].insert(curPos[i], 1, ch);
+			curPos[i]++;
+			std::cout << input[i].substr(curPos[i] - 1);
+			gotoXY(++oldX, oldY);
+		}
 	}
-	std::cout << "Fail to log in\n";
 }
 /*User*/
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=*/

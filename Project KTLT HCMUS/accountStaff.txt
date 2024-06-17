@@ -1,2 +1,1 @@
-Admin,Admin,123445,Nguyen,Van A,Male,1/1/1994,20202,abc,abc,2,abc,,abc,2/2/2,2,
 Admin1,Admin@123,159753,Nguyen,Van A,Female,1/1/2000,159753,2023

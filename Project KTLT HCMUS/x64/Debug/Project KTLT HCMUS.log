@@ -26,68 +26,56 @@ D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\
 D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(703,36): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(704,33): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
 D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(704,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(724,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(725,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(733,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(734,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(742,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(743,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(751,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(752,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(760,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(761,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(769,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(770,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(778,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(779,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(787,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(788,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(796,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(797,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1241,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1241,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1242,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1242,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1243,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1243,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1244,130): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1244,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1245,72): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1246,63): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1247,62): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1253,47): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1253,47): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1254,35): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1254,35): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1255,35): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1255,35): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1256,52): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1256,52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1257,46): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1257,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1258,36): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1258,36): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1259,36): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1259,36): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1279,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1280,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1288,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1289,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1297,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1298,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1306,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1307,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1315,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1316,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1324,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1325,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1333,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1334,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1342,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1343,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2202,6): warning C4101: 'optn': unreferenced local variable
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2407,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2449,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2464,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2477,20): warning C4390: ';': empty controlled statement found; is this the intent?
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(767,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(768,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(963,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(964,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(970,43): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(970,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(971,31): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(971,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1008,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1009,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1227,84): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1246,7): warning C4551: function call missing argument list
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1400,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1400,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1401,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1401,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1402,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1402,60): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1403,130): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1403,78): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1404,72): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1405,63): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1406,62): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1412,47): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1412,47): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1413,35): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1413,35): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1414,35): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1414,35): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1415,52): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1415,52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1416,46): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1416,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1417,36): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1417,36): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1418,36): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1418,36): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1476,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1477,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1647,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1648,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1654,43): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1654,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1655,31): warning C4838: conversion from 'size_t' to 'int' requires a narrowing conversion
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1655,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1692,31): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(1693,19): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2412,6): warning C4101: 'optn': unreferenced local variable
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2617,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2659,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2674,12): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\myLib.cpp(2687,20): warning C4390: ';': empty controlled statement found; is this the intent?
   Project KTLT HCMUS.vcxproj -> D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\x64\Debug\Project KTLT HCMUS.exe

@@ -195,11 +195,11 @@ void studentRegister(listStudent& lst, const char fileName[], int x, int y);
 
 void readFileStudent(listStudent& lst, const char fileName[]);
 
-void studentLogIn(listStudent& lst, const char fileName[], listCourse list);
+void studentLogIn(listStudent& lst, listCourse list, int x, int y);
 
 void workSessionOfStudent(nodeStudent*& node, listCourse list);
 
-void viewInfo(nodeStudent* Student);
+void viewInfoStudent(nodeStudent* Student);
 
 bool isStudentExisted(listStudent lst, string userName);
 
@@ -214,7 +214,7 @@ void staffRegister(listStaff& lst, const char fileName[], int x, int y);
 
 void readFileStaff(listStaff& lst, const char fileName[]);
 
-void staffLogIn(listStaff& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse);
+void staffLogIn(listStaff& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse,int x, int y);
 
 bool isStaffExisted(listStaff lst, string userName);
 
@@ -300,12 +300,13 @@ void printTwoLine(int x, int y, int height, int width);
 void focus(int x, int y, int width, char c);
 void drawBoxAndText(int x, int y, int width, int height, string option);
 void drawBox(int x, int y, int width, int height);
-void inputLogin(int x, int y);
+void drawInputLogin(int x, int y);
 void printMovingInstructions();
-void printMovingInstructionsInRegister();
+void printMovingInstructionsAddTab();
 void drawNBoxByX(int x, int y, int width, int height, int nBox, int dis, std::string* option);
 void drawNBoxByY(int x, int y, int width, int height, int nBox, int dis, std::string* option);
 void drawLineByY(int x, int y, int height);
+void paintColor(int x, int y, int width, int height, int color);
 bool isValidRegisterDate(std::string date);
 void printAtXY(int x, int y, std::string str);
 

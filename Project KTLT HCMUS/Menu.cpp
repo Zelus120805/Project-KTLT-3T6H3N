@@ -117,7 +117,7 @@ void drawBox(int x, int y, int width, int height)
 
 void printMovingInstructions()
 {
-    gotoXY(WIDTH_CONSOLE / 2 - 38, HEIGHT_CONSOLE - 1);
+    gotoXY(WIDTH_CONSOLE / 2 - 32, HEIGHT_CONSOLE - 1);
     cout << "          Use arrow keys to move, Press 'Enter' to select          ";
 }
 
@@ -131,6 +131,17 @@ void drawNBoxByY(int x, int y, int width, int height, int nBox, int dis, std::st
 {
     for (int i = 0; i < nBox; i++)
         drawBoxAndText(x, y + i * (height + dis), width, height, option[i]);
+}
+
+void paintColor(int x, int y, int width, int height, int color) {
+    setBackgroundColor(color);
+    for (int i = x; i <= x + width; i++)
+    {
+        for (int j = y; j <= y + height; j++)
+        {
+            gotoXY(i, j); cout << " ";
+        }
+    }
 }
 
 void menuMain()
@@ -213,7 +224,7 @@ void menuMain()
 void menuRegister()
 {
     system("cls");
-    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions(); printMovingInstructionsInRegister();
+    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions(); printMovingInstructionsAddTab();
     setBackgroundColor(lwhite);
     setTextColor(blue); print("Picture\\Register.txt", WIDTH_CONSOLE / 2 - 23, 1);
     int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 9, height = 19, width = 100;
@@ -286,7 +297,7 @@ void menuRegister()
 void menuLogIn()
 {
     system("cls");
-    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions(); printMovingInstructionsAddTab();
     setBackgroundColor(lwhite);
     int x = WIDTH_CONSOLE / 2 - 40, y = HEIGHT_CONSOLE / 2 - 6, height = 15, width = 80;
     setTextColor(purple); print("Picture\\LogIn.txt", WIDTH_CONSOLE / 2 - 23, 1);
@@ -319,10 +330,24 @@ void menuLogIn()
         if (_kbhit())
         {
             char choose = _getch();
-            if (choose == 13)
+            if (choose == 27)
             {
-                inputLogin(x, y);
+                printAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE / 2 + 7, "Cancel login!");
                 return;
+            }
+            else if (choose == 13)
+            {
+                drawInputLogin(x, y);
+                if (newX == x)
+                {
+                    staffLogIn(lstStaff, list, listOfCourse, x + 5, y + 5);
+                    return;
+                }
+                else if (newX == x + newWidth + dis)
+                {
+                    studentLogIn(lstStudent, listOfCourse, x + 5, y + 5);
+                    return;
+                }
             }
             else if (choose == -32)
             {
@@ -350,45 +375,10 @@ void drawLineByY(int x, int y, int height)
     gotoXY(x, y + height); cout << (char)207;
 }
 
-void inputLogin(int x, int y)
+void drawInputLogin(int x, int y)
 {
-    string user, pass;
-    ShowCur(1);
     gotoXY(x + 5, y + 5); cout << "Username: "; drawBox(x + 5 + strlen("Username: "), y + 4, 50 - strlen("Username: "), 2);
     gotoXY(x + 5, y + 8); cout << "Password: "; drawBox(x + 5 + strlen("Password: "), y + 7, 50 - strlen("Username: "), 2);
-    gotoXY(x + 5 + strlen("Username: ") + 1, y + 5); cin >> user;
-    if (user[0] == 'd')
-    {
-        string str = "Nhap sai!";
-        for (int i = 0; i < str.length(); i++) {
-            gotoXY(WIDTH_CONSOLE / 2 - 8 + i, HEIGHT_CONSOLE / 2 + 7);
-            cout << str[i];
-            Sleep(40);
-        }
-        Sleep(500);
-        for (int i = 0; i < user.length(); i++)
-        {
-            gotoXY(x + 5 + strlen("Username: ") + 1 + i, y + 5);
-            cout << " ";
-        }
-
-        gotoXY(x + 5 + strlen("Username: ") + 1, y + 5); cin >> user;
-        for (int i = 0; i < str.length(); i++) {
-            gotoXY(WIDTH_CONSOLE / 2 - 8 + i, HEIGHT_CONSOLE / 2 + 7);
-            cout << " ";
-        }
-    }
-    gotoXY(x + 5 + strlen("Password: ") + 1, y + 8); cin >> pass;
-    ShowCur(0);
-
-    string str = "Login succesful!";
-    for (int i = 0; i < str.length(); i++) {
-        gotoXY(WIDTH_CONSOLE / 2 - 8 + i, HEIGHT_CONSOLE / 2 + 7);
-        cout << str[i];
-        Sleep(40);
-    }
-
-    Sleep(500);
 }
 
 bool isValidRegisterDate(std::string date)
@@ -407,20 +397,20 @@ void printAtXY(int x, int y, std::string str)
 {
     setTextColor(yellow);
     for (int i = 0; i < str.length(); i++) {
-        gotoXY(x - 15 - str.length() / 2 + i, y + 17);
+        gotoXY(x - str.length() / 2 + i, y);
         cout << str[i];
         Sleep(40);
     }
-    Sleep(600);
+    Sleep(1000);
     for (int i = 0; i < str.length(); i++) {
-        gotoXY(x - 15 - str.length() / 2 + i, y + 17);
+        gotoXY(x - str.length() / 2 + i, y);
         cout << " ";
     }
     setTextColor(black);
 }
 
-void printMovingInstructionsInRegister()
+void printMovingInstructionsAddTab()
 {
-    gotoXY(WIDTH_CONSOLE / 2 - 38, HEIGHT_CONSOLE);
+    gotoXY(WIDTH_CONSOLE / 2 - 32, HEIGHT_CONSOLE);
     cout << "     Press 'tab' to move next box and 'esc' to cancel register     ";
 }
