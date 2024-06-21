@@ -1,31 +1,27 @@
 ﻿#include "myLib.h"
 
 listStudent lstStudent;
-
-listOfSchoolYear list;
-
+listOfSchoolYear listOfSY;
 listCourse listOfCourse;
-
 listStaff lstStaff;
 
 int main()
 {
-	//readAccountFile(lst);
-	//readAccountFile(lst);
 	lstStudent.head = nullptr;
-	list.head = nullptr;
+	listOfSY.head = nullptr;
 	listOfCourse.head = nullptr;
 	lstStaff.head = NULL;
-	readCourseFile(listOfCourse);
+
 	readFileStudent(lstStudent, "accountStudent.txt");
 	readFileStaff(lstStaff, "accountStaff.txt");
 
 	menuMain();
 
-	deleteAllCourse(listOfCourse);
-	deleteAllSchoolYear(list);
+	//readCourseFileOfStudent(listOfCourse, "dataStudent\\23120360_Course_2021-2022_1.txt");
+
 	deleteAllStudent(lstStudent);
 	deleteAllStaff(lstStaff);
-	system("cls");
+	//system("cls");
+
 	return 0;
 }

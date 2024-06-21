@@ -140,9 +140,11 @@
     <ClInclude Include="myLib.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Courses.cpp" />
     <ClCompile Include="myLib.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="SchoolYears.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

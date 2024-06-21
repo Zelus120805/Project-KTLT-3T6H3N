@@ -30,6 +30,13 @@ const int lyellow = 14;
 const int lwhite = 15;
 
 //----------------------------
+struct Score {
+    float otherMark;
+    float midtermMark;
+    float finalMark;
+    float totalMark;
+};
+
 struct courseInfo {
     string idCourse;
     string courseName;
@@ -40,6 +47,7 @@ struct courseInfo {
     int maxStudent = 50;
     string dayOfWeek;
     string session;
+    Score score;
     // studentInformation* listOfStudent;
     // Score* listOfScore;
 };
@@ -117,10 +125,18 @@ struct listClass {
     nodeClass* head;
 };
 
+struct Semester {
+    int NO;
+    listCourse listCourse;
+    Date startDate;
+    Date endDate;
+};
+
 struct schoolYear
 {
     int startYear, endYear;
     listClass listOfClass;
+    Semester liSemester[3];
 };
 struct nodeSchoolYear
 {
@@ -154,22 +170,10 @@ struct listStaff
     nodeStaff* head;
 };
 //-----------------------------------
-struct Score {
-    float otherMark;
-    float midtermMark;
-    float finalMark;
-    float totalMark;
-};
 //-------------------------------------
-struct Semester {
-    int noSemester;
-    schoolYear SchoolYear;
-    Date start;
-    Date end;
-};
 
 extern listStudent lstStudent;
-extern listOfSchoolYear list;
+extern listOfSchoolYear listOfSY;
 extern listCourse listOfCourse;
 extern listStaff lstStaff;
 
@@ -200,6 +204,8 @@ void studentLogIn(listStudent& lst, listCourse list, int x, int y);
 void workSessionOfStudent(nodeStudent*& node, listCourse list);
 
 void viewInfoStudent(nodeStudent* Student);
+
+void viewCoursesOfStudent(nodeStudent* Student, int x, int y);
 
 bool isStudentExisted(listStudent lst, string userName);
 
@@ -243,7 +249,8 @@ void addAStudentToCourse(nodeCourse*& course, nodeStudent* student);
 void addTailCourse(listCourse& lst, Course newCourse);
 
 //Đọc file khóa học mỗi khi khởi chạy chương trình
-void readCourseFile(listCourse& lst);
+void readCourseFile(listCourse& lst, const string fileName);
+void readCourseFileOfStudent(listCourse& lst, const string fileName);
 
 void addTailStudent(listStudent& lst, nodeStudent* newNode);
 //Đọc sinh viên từ .CSV
@@ -285,12 +292,14 @@ void deleteACourse(listCourse& lst, nodeCourse* deletion);
 //-----------------EXPORT .CSV FILE AND OPERATE WITH SCORE-------------------------
 void exportCSVFile(const string address, nodeCourse* course);
 
-
+//---------------------------------------------------------------------------------
+nodeSchoolYear* goToSchoolYear(listOfSchoolYear listSchoolYear, int& x, int& y);
 
 
 //---------------------------------------------------------------------------------
 
 // Menu
+string getConsoleLine(int x, int y, int width);
 void ShowCur(bool showCursor);
 void setBackgroundColor(int bg);
 void setTextColor(int text);
@@ -305,14 +314,26 @@ void printMovingInstructions();
 void printMovingInstructionsAddTab();
 void drawNBoxByX(int x, int y, int width, int height, int nBox, int dis, std::string* option);
 void drawNBoxByY(int x, int y, int width, int height, int nBox, int dis, std::string* option);
+void drawLineByX(int x, int y, int width);
 void drawLineByY(int x, int y, int height);
 void paintColor(int x, int y, int width, int height, int color);
 bool isValidRegisterDate(std::string date);
-void printAtXY(int x, int y, std::string str);
+void printTextAtXY(int x, int y, std::string str);
+void deleteTextAtXY(int x, int y, std::string str);
+void deleteMenu(int x, int y, int height, int width);
+void viewStudent(int start, int end, int x, int y);
+void viewClassOfStudent();
+void viewCourses(listCourse l1, int start, int end, int x, int y);
 
 void menuRegister();
 void menuLogIn();
 void menuMain();
+void menuStaff();
+void menuChangePassword(int& x, int& y);
+void menuClassOfStudent(int x, int y, int height, int width);
+void menuDrawBoxForView(int x, int y, int height, int width);
+void menuViewOfStudent(nodeStudent* Student);
+
 
 
 
@@ -322,5 +343,8 @@ void XoaKhoangCach(string& name);
 void ChuanHoaHoTen(string& name);
 
 void importScoreBoard(nodeCourse& course, const string fileName);
+
+int countLine(const string fileName);
+
 #endif
 
