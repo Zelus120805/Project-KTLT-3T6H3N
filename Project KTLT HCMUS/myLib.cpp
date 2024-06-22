@@ -1187,8 +1187,7 @@ void workSessionOfStudent(nodeStudent*& node, listCourse list)
 			std::string str = node->student.info.lastName + " " + node->student.info.firstName;
 			setTextColor(blue); gotoXY(1, 0); cout << "Username: " << node->student.account.userName;
 			gotoXY(1, 1); cout << "Fullname: " << str;
-			setTextColor(black);
-			setTextColor(lpurple); print("Picture\\Hello Student.txt", WIDTH_CONSOLE / 2 - 29, 1);
+			setTextColor(lgreen); print("Picture\\Hello Student.txt", WIDTH_CONSOLE / 2 - 29, 1);
 			setTextColor(green); printTwoLine(x, y, 18, 60);
 			setTextColor(black);
 
@@ -1250,54 +1249,6 @@ void workSessionOfStudent(nodeStudent*& node, listCourse list)
 			check = true;
 		}
 	}
-
-	/*while (true)
-	{
-		std::cin >> section;
-		std::cin.ignore();
-		if (section == 2)
-		{
-			viewInfo(node);
-		}
-		if (section == 3)
-		{
-			system("cls");
-			return;
-		}
-		if (section == 4)
-		{
-			nodeCourse* temp = list.head;
-			if (temp == NULL)
-			{
-				cout << "Khong co khoa hoc" << endl;
-			}
-			else
-			{
-				int i = 1, sub;
-				while (temp != NULL)
-				{
-					cout << i << ". " << temp->crs.info.courseName << " - " << temp->crs.info.className << "\n";
-					temp = temp->Next;
-					i++;
-				}
-				i = 1;
-				temp = list.head;
-				cout << "Select course: ";
-				cin >> sub;
-				while (temp != NULL)
-				{
-					if (i == sub)
-					{
-						addAStudentToCourse(temp, node);
-						break;
-					}
-					i++;
-					temp = temp->Next;
-				}
-
-			}
-		}
-	}*/
 }
 
 void viewInfoStudent(nodeStudent* Student)
@@ -1305,7 +1256,7 @@ void viewInfoStudent(nodeStudent* Student)
 	system("cls");
 	setBackgroundColor(lyellow); setTextColor(red);
 	std::string str = "       Press any key to return       "; gotoXY(WIDTH_CONSOLE / 2 - str.length() / 2, HEIGHT_CONSOLE - 4); cout << str;
-	setBackgroundColor(lwhite); setTextColor(purple); print("Picture\\Info Student.txt", WIDTH_CONSOLE / 2 - 50, 2);
+	setBackgroundColor(lwhite); setTextColor(purple); print("Picture\\Your Information.txt", WIDTH_CONSOLE / 2 - 50, 2);
 	int x = WIDTH_CONSOLE / 2 - 30, y = HEIGHT_CONSOLE / 2 - 7, height = 14, width = 60;
 	setTextColor(green); printTwoLine(x, y, height, width);
 	
@@ -1317,7 +1268,7 @@ void viewInfoStudent(nodeStudent* Student)
 	setTextColor(black); gotoXY(x + 3, y + 7); std::cout << "- Last name: "; setTextColor(blue); cout << Student->student.info.lastName;
 	setTextColor(black); gotoXY(x + 3, y + 8); std::cout << "- First name: "; setTextColor(blue); cout << Student->student.info.firstName;
 	setTextColor(black); gotoXY(x + 3, y + 9); std::cout << "- Gender: "; setTextColor(blue); cout << Student->student.info.gender;
-	setTextColor(black); gotoXY(x + 3, y + 10); std::cout << "- Date of birth "; setTextColor(blue); cout << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year;
+	setTextColor(black); gotoXY(x + 3, y + 10); std::cout << "- Date of birth: "; setTextColor(blue); cout << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year;
 	setTextColor(black); gotoXY(x + 3, y + 11); std::cout << "- Social ID: "; setTextColor(blue); cout << Student->student.info.socialId ;
 	setTextColor(black); gotoXY(x + 3, y + 12); std::cout << "- Class: "; setTextColor(blue); cout << Student->student.info.inClass;
 
@@ -1414,6 +1365,9 @@ void changePasswordForStudent(nodeStudent*& student, const char fileName[])
 				while (!fileStudent.eof())
 				{
 					std::getline(fileStudent, line);
+					if (line == "" || line == "\n")
+						break;
+
 					if (line.find(student->student.account.userName.c_str()) != std::string::npos && line.find(student->student.account.passWord.c_str()) != std::string::npos)
 					{
 						continue;
@@ -1520,7 +1474,7 @@ void changePasswordForStudent(nodeStudent*& student, const char fileName[])
 
 	ofstream newFileStudent;
 	newFileStudent.open(fileName);
-	newFileStudent << remember;
+	newFileStudent << remember << "\n";
 	newFileStudent << student->student.account.userName << ",";
 	newFileStudent << student->student.account.passWord << ",";
 	newFileStudent << student->student.info.idStudent << ",";
@@ -1831,9 +1785,7 @@ void readFileStaff(listStaff& lst, const char fileName[])
 		Staff.d.month = std::stoi(temp);
 		getline(fileStaff, temp, ',');
 		Staff.d.year = std::stoi(temp);
-		getline(fileStaff, temp, ',');
-		Staff.IDofStaff = stol(temp);
-		getline(fileStaff, temp, '\n');
+		getline(fileStaff, temp);
 		Staff.socialId = temp;
 		addTailStaff(lst, Staff);
 	}
@@ -1842,19 +1794,32 @@ void readFileStaff(listStaff& lst, const char fileName[])
 //Xem thông tin staff
 void viewInfoStaff(nodeStaff* staff)
 {
-	if (staff == NULL)
+	system("cls");
+	setBackgroundColor(lyellow); setTextColor(red);
+	std::string str = "       Press any key to return       "; gotoXY(WIDTH_CONSOLE / 2 - str.length() / 2, HEIGHT_CONSOLE - 4); cout << str;
+	setBackgroundColor(lwhite); setTextColor(purple); print("Picture\\Your Information.txt", WIDTH_CONSOLE / 2 - 50, 2);
+	int x = WIDTH_CONSOLE / 2 - 30, y = HEIGHT_CONSOLE / 2 - 6, height = 13, width = 60;
+	setTextColor(green); printTwoLine(x, y, height, width);
+
+	setBackgroundColor(lyellow); setTextColor(aqua); printTextAtXY(WIDTH_CONSOLE / 2, y + 2, "Infomation of staff");
+	setBackgroundColor(lwhite);
+	setTextColor(black); gotoXY(x + 3, y + 4); std::cout << "- Username: "; setTextColor(blue); cout << staff->staff.account.userName;
+	setTextColor(black); gotoXY(x + 3, y + 5); std::cout << "- Password: "; setTextColor(blue); cout << staff->staff.account.passWord;
+	setTextColor(black); gotoXY(x + 3, y + 6); std::cout << "- ID student: "; setTextColor(blue); cout << staff->staff.IDofStaff;
+	setTextColor(black); gotoXY(x + 3, y + 7); std::cout << "- Last name: "; setTextColor(blue); cout << staff->staff.lastName;
+	setTextColor(black); gotoXY(x + 3, y + 8); std::cout << "- First name: "; setTextColor(blue); cout << staff->staff.firstName;
+	setTextColor(black); gotoXY(x + 3, y + 9); std::cout << "- Gender: "; setTextColor(blue); cout << staff->staff.gender;
+	setTextColor(black); gotoXY(x + 3, y + 10); std::cout << "- Date of birth: "; setTextColor(blue); cout << staff->staff.d.day << "/" << staff->staff.d.month << "/" << staff->staff.d.year;
+	setTextColor(black); gotoXY(x + 3, y + 11); std::cout << "- Social ID: "; setTextColor(blue); cout << staff->staff.socialId;
+
+	while (true)
 	{
-		return;
+		if (_kbhit)
+		{
+			char ch = _getch();
+			return;
+		}
 	}
-	std::cout << "YOUR INFO\n";
-	std::cout << "Username: " << staff->staff.account.userName << "\n";
-	std::cout << "Password: " << staff->staff.account.passWord << "\n";
-	std::cout << "ID Staff: " << staff->staff.IDofStaff << "\n";
-	std::cout << "Last name: " << staff->staff.lastName << "\n";
-	std::cout << "First name: " << staff->staff.firstName << "\n";
-	std::cout << "Gender: " << staff->staff.gender << "\n";
-	std::cout << "Date of birth " << staff->staff.d.day << "/" << staff->staff.d.month << "/" << staff->staff.d.year << "\n";
-	std::cout << "Social ID: " << staff->staff.socialId << "\n";
 }
 
 //Đăng nhập staff
@@ -2053,87 +2018,6 @@ void userLogIn(listUser& lst)
 	system("cls");//Them ham xoa man hinh cho dep
 	account.close();
 }
-
-//void changePassword(listStudent *lst, const char fileName[],const string userName, const string newPass)
-//{
-//	std::ifstream oldFile(fileName);
-//	std::ofstream newFile("temp.txt");
-//
-//	if (!oldFile.is_open() || !newFile.is_open()) {
-//		std::cout << "Can't open file" << std::endl;
-//		return;
-//	}
-//
-//	std::string name, pass;
-//	int count = 0;
-//
-//	while (getline(oldFile, name, ',')) {
-//		getline(oldFile, pass);
-//		if (name.empty() || pass.empty()) break;
-//
-//		if (count == 0)
-//		{
-//			if (name == userName)
-//			{
-//				newFile << name << "," << newPass << "\n";
-//				count++;
-//			}
-//			else
-//				newFile << name << "," << pass << "\n";
-//		}
-//		else
-//			newFile << name << "," << pass << "\n";
-//
-//		name.clear();
-//		pass.clear();
-//	}
-//	oldFile.close();
-//	newFile.close();
-//	if (count == 0) std::cout << "Can't find entered username";
-//	string line;
-//	std::ifstream new_File("temp.txt");
-//	std::ofstream old_File(fileName);
-//
-//	if (!new_File.is_open() || !old_File.is_open()) {
-//		std::cout << "Can't change the password" << std::endl;
-//		return;
-//	}
-//	while (getline(new_File, line))
-//	{
-//		old_File << line << "\n";
-//	}
-//	cout << "Your pass has been changed" << std::endl;
-//}
-//
-//
-//void workSession( User& user)
-//{
-//	system("cls");
-//	if (user.userName.length() == 0)
-//	{
-//		return;
-//	}
-//
-//	int section;
-//	while (true)
-//	{
-//		std::cout << "Hello " << user.userName << "\n";
-//		std::cout << "1. Change password" << "\n";
-//		std::cout << "2. Log out" << "\n";
-//		cin >> section;
-//		if (section == 1)
-//		{
-//			string newPass;
-//			std::cin >> newPass;
-//			//changePassword(user.userName,newPass);
-//		}
-//		if (section == 2)
-//		{
-//			system("cls");
-//			break;
-//		}
-//	}
-//}
 
 //Nhóm hàm giải phóng bộ nhớ ---------------------------------------
 //Xóa sạch sinh viên
@@ -2534,55 +2418,161 @@ void deleteACourse(listCourse& lst, nodeCourse* deletion)
 //----------------------------------------------------------------------
 void changePasswordForStaff(nodeStaff*& staff, const char fileName[])
 {
-	ifstream fileStudent(fileName);
-	if (!fileStudent.is_open())
-	{
-		cout << "Cannot open file\n";
-		return;
-	}
-	string line, pass;
+	int x = 0, y = 0;
+	menuChangePassword(x, y);
 
-	cout << "Input old password: ";
-	std::getline(cin, pass);
+	int i = 0, curPos[3] = { 0 };
+	int newX[3] = { x + strlen("Input old password: ") + 1,
+					x + strlen("Input new password: ") + 1,
+					x + strlen("Confirm new password: ") + 1 };
+	int newY[3] = { y, y + 3, y + 6 };
+	int oldX = newX[0], oldY = newY[0];
 
-	while (pass != staff->staff.account.passWord)
-	{
-		cout << "Password is not correct\n";
-		cout << "Input old password: ";
-		std::getline(cin, pass);
-	}
+	std::string input[3], remember, prev = " ";
 
-	string remember;
+	gotoXY(oldX, oldY);
+	while (true) {
+		ShowCur(1);
+		char ch = _getch();
 
-	while (!fileStudent.eof())
-	{
-		std::getline(fileStudent, line);
-		if (line.find(staff->staff.account.userName.c_str()) != std::string::npos && line.find(staff->staff.account.passWord.c_str()) != std::string::npos && line.find(to_string(staff->staff.IDofStaff).c_str()) != std::string::npos)
+		if (ch == 27)
 		{
-			continue;
+			ShowCur(0);
+			deleteTextAtXY(WIDTH_CONSOLE / 2, y + 9, prev);
+			printTextAtXY(WIDTH_CONSOLE / 2, y + 9, "Exit change password !!!");
+			return;
 		}
-		else
+		else if (ch == '\r')
 		{
-			remember = remember + "\n" + line;
+			if (staff->staff.account.passWord == input[0] && input[1] == input[2] && checkPassword(input[1]))
+			{
+				ifstream fileStudent(fileName);
+				if (!fileStudent.is_open())
+					return;
+
+				string line;
+				while (!fileStudent.eof())
+				{
+					std::getline(fileStudent, line); 
+					if (line == "" || line == "\n")
+						break;
+
+					if (line.find(staff->staff.account.userName.c_str()) != std::string::npos && line.find(staff->staff.account.passWord.c_str()) != std::string::npos)
+					{
+						continue;
+					}
+					else
+					{
+						if (remember.length() == 0)
+							remember = line;
+						else
+							remember = remember + "\n" + line;
+					}
+				}
+				staff->staff.account.passWord = input[1];
+				fileStudent.close();
+
+				ShowCur(0);
+				deleteTextAtXY(WIDTH_CONSOLE / 2, y + 9, prev);
+				printTextAtXY(WIDTH_CONSOLE / 2, y + 9, "Change password succesfull !!!");
+
+				break;
+			}
+			else if (staff->staff.account.passWord != input[0])
+			{
+				i = 0;
+				ShowCur(0);
+				deleteTextAtXY(WIDTH_CONSOLE / 2, y + 9, prev);
+				printTextAtXY(WIDTH_CONSOLE / 2, y + 9, "Old password is invalid !!!");
+				prev = "Old password is invalid !!!";
+			}
+			else if (!checkPassword(input[1]))
+			{
+				i = 1;
+				ShowCur(0);
+				deleteTextAtXY(WIDTH_CONSOLE / 2, y + 9, prev);
+				printTextAtXY(WIDTH_CONSOLE / 2, y + 9, "Invalid new password entered !!!");
+				prev = "Invalid new password entered !!!";
+			}
+			else if (input[1] != input[2])
+			{
+				i = 2;
+				ShowCur(0);
+				deleteTextAtXY(WIDTH_CONSOLE / 2, y + 9, prev);
+				printTextAtXY(WIDTH_CONSOLE / 2, y + 9, "Confirm new password is invalid !!!");
+				prev = "Confirm new password is invalid !!!";
+			}
+
+			curPos[i] = input[i].length();
+			oldX = newX[i] + input[i].length();
+			oldY = newY[i];
+			gotoXY(oldX, oldY);
+		}
+		else if (ch == -32) {
+			ch = _getch();
+			if (ch == 72 && i > 0) {
+				i--;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 80 && i < 7) {
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+			else if (ch == 75 && curPos[i] > 0) {
+				curPos[i]--;
+				gotoXY(--oldX, oldY);
+			}
+			else if (ch == 77 && curPos[i] < input[i].length()) {
+				curPos[i]++;
+				gotoXY(++oldX, oldY);
+			}
+		}
+		else if (ch == 9)
+		{
+			if (i < 2)
+			{
+				i++;
+				oldX = newX[i] + curPos[i];
+				oldY = newY[i];
+
+				gotoXY(oldX, oldY);
+			}
+		}
+		else if (ch == '\b' && curPos[i] > 0)
+		{
+			curPos[i]--;
+			input[i].erase(curPos[i], 1);
+			gotoXY(newX[i], oldY);
+			std::cout << input[i] << " ";
+			gotoXY(--oldX, oldY);
+		}
+		else if (ch != '\b')
+		{
+			input[i].insert(curPos[i], 1, ch);
+			curPos[i]++;
+			std::cout << input[i].substr(curPos[i] - 1);
+			gotoXY(++oldX, oldY);
 		}
 	}
 
-	cout << "Input new password: ";
-	std::getline(cin, staff->staff.account.passWord);
-	fileStudent.close();
-
-	ofstream newFileStudent;
-	newFileStudent.open(fileName);
-	newFileStudent << remember << "\n";
-	newFileStudent << staff->staff.account.userName << ",";
-	newFileStudent << staff->staff.account.passWord << ",";
-	newFileStudent << staff->staff.IDofStaff << ",";
-	newFileStudent << staff->staff.lastName << ",";
-	newFileStudent << staff->staff.firstName << ",";
-	newFileStudent << staff->staff.gender << ",";
-	newFileStudent << staff->staff.d.day << "/" << staff->staff.d.month << "/" << staff->staff.d.year << ",";
-	newFileStudent << staff->staff.socialId << ",\n";
-	newFileStudent.close();
+	ofstream newFileStaff;
+	newFileStaff.open(fileName);
+	newFileStaff << remember << "\n";
+	newFileStaff << staff->staff.account.userName << ",";
+	newFileStaff << staff->staff.account.passWord << ",";
+	newFileStaff << staff->staff.IDofStaff << ",";
+	newFileStaff << staff->staff.lastName << ",";
+	newFileStaff << staff->staff.firstName << ",";
+	newFileStaff << staff->staff.gender << ",";
+	newFileStaff << staff->staff.d.day << "/" << staff->staff.d.month << "/" << staff->staff.d.year << ",";
+	newFileStaff << staff->staff.socialId << "\n";
+	newFileStaff.close();
 }
 //------------------------------------------------------------------------------------------------
 
@@ -2630,11 +2620,11 @@ void exportCSVFile(const string address, nodeCourse* course)
 //---------------------------------------------------------------------------------
 void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
 {
-	int x = WIDTH_CONSOLE / 2 - 30, y = HEIGHT_CONSOLE / 2 - 9;
+	int x = WIDTH_CONSOLE / 2 - 30, y = HEIGHT_CONSOLE / 2 - 10;
 	int newX = x + 15, newY = y + 2;
 	int oldX = newX, oldY = newY;
 	int newWidth = 30, newHeight = 2;
-	int nBox = 4, dis = 2;
+	int nBox = 6, dis = 1;
 
 	int count = 0;
 	bool check = true;
@@ -2650,14 +2640,16 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 			gotoXY(1, 1); cout << "Fullname: " << str;
 			setBackgroundColor(lwhite); setTextColor(black);
 			setTextColor(lpurple); print("Picture\\Hello Staff.txt", WIDTH_CONSOLE / 2 - 20, 1);
-			setTextColor(green); printTwoLine(x, y, 18, 60);
+			setTextColor(green); printTwoLine(x, y, 21, 60);
 			setTextColor(black);
 
 			string* option = new string[nBox];
 			option[0] = "Change password";
 			option[1] = "View info";
-			option[2] = "Register Course";
-			option[3] = "Log out";
+			option[2] = "School Year";
+			option[3] = "Course";
+			option[4] = "Class";
+			option[5] = "Log out";
 			drawNBoxByY(x + 15, y + 2, newWidth, newHeight, nBox, dis, option);
 			delete[] option;
 
@@ -2677,7 +2669,22 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 			char choose = _getch();
 			if (choose == 13)
 			{
-
+				if (newY == y + 2)
+				{
+					changePasswordForStaff(staff, "accountStaff.txt");
+					count = 0;
+				}
+				else if (newY == y + 2 + newHeight + dis)
+				{
+					viewInfoStaff(staff);
+					count = 0;
+				}
+				else if (newY == y + 2 + 5 * (newHeight + dis))
+				{
+					setTextColor(yellow);
+					printTextAtXY(WIDTH_CONSOLE / 2, newY + 3, "Goodbye staff !!!");
+					return;
+				}
 			}
 			else if (choose == -32)
 			{
@@ -2690,202 +2697,7 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 
 			check = true;
 		}
-	}
-		/*cout << "1. View Info\n";
-		cout << "2. Change Password\n";
-		cout << "3. Log out\n";
-		cout << "4. School year\n";
-		cout << "5. Semester\n";
-		cout << "6. Create Class\n";
-		cout << "7. Add course by .CSV\n";
-		cout << "8. Adjust student in course\n";
-		cout << "9. Delete a course\n";
-		cout << "10. Export a course\n";*/
-
-
-
-	//	switch (Optn)
-	//	{
-	//	case 1:
-	//	{
-	//		viewInfoStaff(staff);
-	//		break;
-	//	}
-	//	case 2:
-	//	{
-	//		changePasswordForStaff(staff, "accountStaff.txt");
-	//		cout << "Your password has been changed\n";
-	//		break;
-	//	}
-	//	case 3:
-	//		return;
-	//	case 7:
-	//	{
-	//		int i = 1;
-	//		nodeCourse* temp = lstCourse.head;
-	//		if (temp == NULL)
-	//		{
-	//			cout << "No course available\n";
-	//			return;
-	//		}
-	//		while (temp != NULL)
-	//		{
-	//			if (temp == NULL)
-	//			{
-	//				break;
-	//			}
-	//			cout << i << ": " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
-	//			temp = temp->Next;
-	//			i++;
-	//		}
-	//		temp = lstCourse.head;
-	//		int maxChoice = i;
-	//		i = 1;
-	//		int optn;
-	//		do {
-	//			cout << "Please select a course: ";
-	//			cin >> optn;
-	//		} while (optn > maxChoice || optn <= 0);
-	//		cin.ignore();
-	//		while (optn != i)
-	//		{
-	//			temp = temp->Next;
-	//			i++;
-	//		}
-	//		string fileName;
-	//		std::getline(cin, fileName);
-	//		addNStudentFromFile(temp, fileName);
-
-	//		break;
-	//	}
-	//	case 8:
-	//	{
-	//		int i = 1;
-	//		nodeCourse* temp = lstCourse.head;
-	//		if (temp == NULL)
-	//		{
-	//			cout << "No course available\n";
-	//			return;
-	//		}
-	//		while (temp != NULL)
-	//		{
-	//			cout << i << ": " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
-	//			temp = temp->Next;
-	//			i++;
-	//		}
-	//		temp = lstCourse.head;
-	//		int maxChoice = i;
-	//		i = 1;
-	//		int optn;
-	//		do {
-	//			cout << "Please select a course: ";
-	//			cin >> optn;
-	//		} while (optn > maxChoice || optn <= 0);
-	//		cin.ignore();
-	//		while (optn != i)
-	//		{
-	//			if (temp == NULL)
-	//			{
-	//				cout << "Invalid input\n";
-	//				break;
-	//			}
-	//			temp = temp->Next;
-	//			i++;
-	//		}
-	//		listStudent lst;
-	//		lst.head = NULL;
-	//		string fileName = "./raw/" + temp->crs.info.courseName + "_" + temp->crs.info.className + ".txt";
-	//		readListStudentOfACourse(lst, fileName);
-	//		printStudent(lst);
-	//		if (lst.head != NULL)
-	//		{
-	//			//Chọn hcoj sinh muốn xóa
-	//			int no;
-	//			cout << "Input No of student you want to delete: ";
-	//			cin >> no;
-	//			cin.ignore();
-
-	//			//Đi tới chỗ học sinh cần xóa.
-	//			nodeStudent* deletion = new nodeStudent();
-	//			deletion = goToStudent(no, lst);
-	//			deleteAStudentFromCourse(temp, deletion);
-	//		}
-	//		else
-	//		{
-	//			cout << "List is empty\n";
-	//		}
-
-	//		//	printStudent(lst);
-	//		break;
-	//	}
-	//	case 9:
-	//	{
-	//		int i = 1;
-	//		nodeCourse* temp = lstCourse.head;
-	//		if (temp == NULL)
-	//		{
-	//			cout << "No course available\n";
-	//			return;
-	//		}
-	//		while (temp != NULL)
-	//		{
-	//			cout << i << ": " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
-	//			temp = temp->Next;
-	//			i++;
-	//		}
-	//		temp = lstCourse.head;
-	//		int maxChoice = i;
-	//		i = 1;
-	//		int optn;
-	//		do {
-	//			cout << "Please select a course: ";
-	//			cin >> optn;
-	//		} while (optn > maxChoice || optn <= 0);
-	//		cin.ignore();
-	//		while (optn != i)
-	//		{
-	//			temp = temp->Next;
-	//			i++;
-	//		}
-	//		deleteACourse(lstCourse, temp);
-	//		break;
-	//	}
-	//	case 10:
-	//	{
-	//		int i = 1;
-	//		nodeCourse* temp = lstCourse.head;
-	//		if (temp == NULL)
-	//		{
-	//			cout << "No course available\n";
-	//			return;
-	//		}
-	//		while (temp != NULL)
-	//		{
-	//			cout << i << ": " << temp->crs.info.courseName << " - " << temp->crs.info.className << endl;
-	//			temp = temp->Next;
-	//			i++;
-	//		}
-	//		temp = lstCourse.head;
-	//		int maxChoice = i;
-	//		i = 1;
-	//		int optn;
-	//		do {
-	//			cout << "Please select a course: ";
-	//			cin >> optn;
-	//		} while (optn > maxChoice || optn <= 0);
-	//		cin.ignore();
-	//		while (optn != i)
-	//		{
-	//			temp = temp->Next;
-	//			i++;
-	//		}
-	//		string address;
-	//		cout << "Input address of file: ";
-	//		std::getline(cin, address);
-	//		exportCSVFile(address, temp);
-	//	}
-	//	}
-	//}
+	}	
 }
 
 bool checkPassword(std::string pass)

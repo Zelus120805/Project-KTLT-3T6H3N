@@ -494,89 +494,73 @@ void menuClassOfStudent(int x, int y, int height, int width)
     gotoXY(x + 81, y + 1); cout << "ID Social";
 }
 
-void viewStudent(int start, int end, int x, int y)
-{
-    setTextColor(black);
-    int index = 0;
-    for (start; start <= end; start++)
-    {
-        gotoXY(x + 1, y + 3 + index); cout << start;
-        gotoXY(x + 6, y + 3 + index); cout << "23120360";
-        gotoXY(x + 21, y + 3 + index); cout << "Dang Le Duc Thinh";
-        gotoXY(x + 51, y + 3 + index); cout << "Male";
-        gotoXY(x + 61, y + 3 + index); cout << "12/8/2005";
-        gotoXY(x + 81, y + 3 + index); cout << "083205011010";
-        index++;
-    }
-}
+//void viewClassOfStudent()
+//{
+//    setTextColor(green); print("List.txt", WIDTH_CONSOLE / 2 - 12, 1);
+//    int x = WIDTH_CONSOLE / 2 - 50, y = 8, height = 17, width = 100;
+//    int Sum = 20;
+//    int total, page = 1;
+//    if (Sum % 12 == 0)
+//        total = Sum / 12;
+//    else
+//        total = Sum / 12 + 1;
+//    int New = 0, Old = 0;
+//    string str = "     Use left and right keys to change pages !!!    ";
+//    setBackgroundColor(lyellow); setTextColor(red); gotoXY((WIDTH_CONSOLE - str.length()) / 2, HEIGHT_CONSOLE - 1);
+//    cout << str;
+//    setBackgroundColor(lwhite);
+//
+//    menuClassOfStudent(x, y, height, width);
+//    viewStudent((page - 1) * 12 + 1, page * 12, x, y);
+//    str = "Page: " + to_string(page) + "/" + to_string(total);
+//    setBackgroundColor(lwhite); setTextColor(red); gotoXY(x + 1, y + 3 + New); cout << getConsoleLine(x + 1, y + 3 + New, 99);
+//    setBackgroundColor(laqua);
+//    setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
+//    while (true)
+//    {
+//        char ch = _getch();
+//        if (ch == -32) {
+//            ch = _getch();
+//            if (ch == 72 && New > 0) {
+//                New--;
+//            }
+//            else if (ch == 80) {
+//                if (page < total && New < 11)
+//                    New++;
+//                else if (page == total && New < Sum - (total - 1) * 12 - 1)
+//                    New++;
+//            }
+//            else if (ch == 75 && page > 1) {
+//                New = 0;
+//                page--;
+//                menuClassOfStudent(x, y, height, width);
+//                viewStudent((page - 1) * 12 + 1, page * 12, x, y);
+//                str = "Page: " + to_string(page) + "/" + to_string(total);
+//                setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
+//            }
+//            else if (ch == 77 && page < total) {
+//                New = 0;
+//                page++;
+//                menuClassOfStudent(x, y, height, width);
+//                if (page != total)
+//                    viewStudent((page - 1) * 12 + 1, page * 12, x, y);
+//                else
+//                    viewStudent((page - 1) * 12 + 1, Sum, x, y);
+//                str = "Page: " + to_string(page) + "/" + to_string(total);
+//                setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
+//            }
+//            else
+//                continue;
+//
+//            gotoXY(x + 1, y + 3 + Old); setTextColor(black); cout << getConsoleLine(x + 1, y + 3 + Old, 99);
+//            setBackgroundColor(lwhite); setTextColor(red); gotoXY(x + 1, y + 3 + New); cout << getConsoleLine(x + 1, y + 3 + New, 99);
+//            setBackgroundColor(laqua);
+//            Old = New;
+//        }
+//    }
+//}
 
-void viewClassOfStudent()
-{
-    setTextColor(green); print("List.txt", WIDTH_CONSOLE / 2 - 12, 1);
-    int x = WIDTH_CONSOLE / 2 - 50, y = 8, height = 17, width = 100;
-    int Sum = 20;
-    int total, page = 1;
-    if (Sum % 12 == 0)
-        total = Sum / 12;
-    else
-        total = Sum / 12 + 1;
-    int New = 0, Old = 0;
-    string str = "     Use left and right keys to change pages !!!    ";
-    setBackgroundColor(lyellow); setTextColor(red); gotoXY((WIDTH_CONSOLE - str.length()) / 2, HEIGHT_CONSOLE - 1);
-    cout << str;
-    setBackgroundColor(lwhite);
-
-    menuClassOfStudent(x, y, height, width);
-    viewStudent((page - 1) * 12 + 1, page * 12, x, y);
-    str = "Page: " + to_string(page) + "/" + to_string(total);
-    setBackgroundColor(lwhite); setTextColor(red); gotoXY(x + 1, y + 3 + New); cout << getConsoleLine(x + 1, y + 3 + New, 99);
-    setBackgroundColor(laqua);
-    setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
-    while (true)
-    {
-        char ch = _getch();
-        if (ch == -32) {
-            ch = _getch();
-            if (ch == 72 && New > 0) {
-                New--;
-            }
-            else if (ch == 80) {
-                if (page < total && New < 11)
-                    New++;
-                else if (page == total && New < Sum - (total - 1) * 12 - 1)
-                    New++;
-            }
-            else if (ch == 75 && page > 1) {
-                New = 0;
-                page--;
-                menuClassOfStudent(x, y, height, width);
-                viewStudent((page - 1) * 12 + 1, page * 12, x, y);
-                str = "Page: " + to_string(page) + "/" + to_string(total);
-                setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
-            }
-            else if (ch == 77 && page < total) {
-                New = 0;
-                page++;
-                menuClassOfStudent(x, y, height, width);
-                if (page != total)
-                    viewStudent((page - 1) * 12 + 1, page * 12, x, y);
-                else
-                    viewStudent((page - 1) * 12 + 1, Sum, x, y);
-                str = "Page: " + to_string(page) + "/" + to_string(total);
-                setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
-            }
-            else
-                continue;
-
-            gotoXY(x + 1, y + 3 + Old); setTextColor(black); cout << getConsoleLine(x + 1, y + 3 + Old, 99);
-            setBackgroundColor(lwhite); setTextColor(red); gotoXY(x + 1, y + 3 + New); cout << getConsoleLine(x + 1, y + 3 + New, 99);
-            setBackgroundColor(laqua);
-            Old = New;
-        }
-    }
-}
-
-void menuDrawBoxForView(int x, int y, int height, int width)
+void menuBoxViewCoursesForStudent(int x, int y, int height, int width)
 {
     setBackgroundColor(laqua);
     deleteMenu(x, y, height, width);
@@ -613,11 +597,14 @@ void menuViewOfStudent(nodeStudent* Student)
         {
             setBackgroundColor(lwhite);
             system("cls");
+            std::string str = Student->student.info.lastName + " " + Student->student.info.firstName;
+            setTextColor(blue); gotoXY(1, 0); cout << "Username: " << Student->student.account.userName;
+            gotoXY(1, 1); cout << "Fullname: " << str;
             setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
-            string str = "     Press 'esc' to return    ";
+            str = "     Press 'esc' to return    ";
             gotoXY((WIDTH_CONSOLE - str.length()) / 2, HEIGHT_CONSOLE); cout << str;
             setBackgroundColor(lwhite); setTextColor(green); printTwoLine(x, y, 13 + n / 3 + 2, 60);
-            setTextColor(blue); print("Picture\\View Student.txt", WIDTH_CONSOLE / 2 - 28, 1);
+            setTextColor(lpurple); print("Picture\\View Student.txt", WIDTH_CONSOLE / 2 - 28, 1);
 
             string* option = new string[nBox];
             option[0] = "View courses";
@@ -649,12 +636,14 @@ void menuViewOfStudent(nodeStudent* Student)
                 if (newY == y + 2)
                 {
                     Sleep(100);
-                    viewCoursesOfStudent(Student, x + 5, y + 10);
+                    viewOfStudent(Student, x + 5, y + 10, 1);
                     count = 0;
                 }
                 else if (newY == y + 2 + height + dis)
                 {
-                    
+                    Sleep(100);
+                    viewOfStudent(Student, x + 5, y + 10, 2);
+                    count = 0;
                 }
             }
             else if (choose == -32)
@@ -669,4 +658,23 @@ void menuViewOfStudent(nodeStudent* Student)
             check = true;
         }
     }
+}
+
+void menuBoxViewScoresForStudent(int x, int y, int height, int width)
+{
+    setBackgroundColor(laqua);
+    deleteMenu(x, y, height, width);
+    setTextColor(blue); printTwoLine(x, y, height, width);
+    drawLineByX(x, y + 2, width);
+
+    drawLineByX(x, y + height - 2, width);
+
+    setTextColor(purple);
+    gotoXY(x + 1, y + 1); cout << "No";
+    gotoXY(x + 10, y + 1); cout << "Coursename";
+    gotoXY(x + 45, y + 1); cout << "Classname";
+    gotoXY(x + 60, y + 1); cout << "Other";
+    gotoXY(x + 70, y + 1); cout << "Midterm";
+    gotoXY(x + 80, y + 1); cout << "Final";
+    gotoXY(x + 90, y + 1); cout << "Total";
 }

@@ -172,6 +172,9 @@ struct listStaff
 //-----------------------------------
 //-------------------------------------
 
+typedef void (*pMenuForStudent)(int, int, int, int);
+typedef void (*pViewForStudent)(listCourse, int, int, int, int);
+
 extern listStudent lstStudent;
 extern listOfSchoolYear listOfSY;
 extern listCourse listOfCourse;
@@ -205,7 +208,7 @@ void workSessionOfStudent(nodeStudent*& node, listCourse list);
 
 void viewInfoStudent(nodeStudent* Student);
 
-void viewCoursesOfStudent(nodeStudent* Student, int x, int y);
+void viewOfStudent(nodeStudent* Student, int x, int y, int choice);
 
 bool isStudentExisted(listStudent lst, string userName);
 
@@ -321,17 +324,17 @@ bool isValidRegisterDate(std::string date);
 void printTextAtXY(int x, int y, std::string str);
 void deleteTextAtXY(int x, int y, std::string str);
 void deleteMenu(int x, int y, int height, int width);
-void viewStudent(int start, int end, int x, int y);
-void viewClassOfStudent();
-void viewCourses(listCourse l1, int start, int end, int x, int y);
+void viewCoursesForStudent(listCourse l1, int start, int end, int x, int y);
+void viewScoresForStudent(listCourse l1, int start, int end, int x, int y);
+
 
 void menuRegister();
 void menuLogIn();
 void menuMain();
-void menuStaff();
 void menuChangePassword(int& x, int& y);
 void menuClassOfStudent(int x, int y, int height, int width);
-void menuDrawBoxForView(int x, int y, int height, int width);
+void menuBoxViewCoursesForStudent(int x, int y, int height, int width);
+void menuBoxViewScoresForStudent(int x, int y, int height, int width);
 void menuViewOfStudent(nodeStudent* Student);
 
 
