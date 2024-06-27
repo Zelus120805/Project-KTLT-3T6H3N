@@ -1,4 +1,4 @@
-#include "myLib.h"
+﻿#include "myLib.h"
 
 void viewOfStudent(nodeStudent* Student, int x, int y, int choice)
 {
@@ -196,4 +196,58 @@ void viewScoresForStudent(listCourse l1, int start, int end, int x, int y)
 		temp = temp->Next;
 		index++; i++;
 	}
+}
+
+void createNewCourse(listCourse& lst, nodeSchoolYear*& schoolYear, Semester semester)
+{
+	nodeCourse* newCourse = new nodeCourse();
+	//Nhập thông tin cơ bản một khóa học
+	std::cout << "Input ID course: ";
+	std::getline(std::cin, newCourse->crs.info.idCourse);
+	std::cout << "Input courseName: ";
+	std::getline(std::cin, newCourse->crs.info.courseName);
+	std::cout << "Input Class name: ";
+	std::getline(std::cin, newCourse->crs.info.className);
+	std::cout << "Input teacher's Name: ";
+	std::getline(std::cin, newCourse->crs.info.teacherName);
+	std::cout << "Input day of week: ";
+	std::cin >> newCourse->crs.info.dayOfWeek;
+	std::cout << "Input number of credits: ";
+	std::cin >> newCourse->crs.info.numberOfCredits;
+	std::cin.ignore();
+	std::cout << "Input max students: ";
+	std::cin >> newCourse->crs.info.maxStudent;
+	newCourse->Next = NULL;
+
+	//Tạo file danh sách lớp 
+	string fileListStudent = "./dataCourse/" + newCourse->crs.info.courseName + "_" + newCourse->crs.info.className + "_" + to_string(schoolYear->y.startYear) + "-" + to_string(schoolYear->y.endYear) + "_" + to_string(semester.NO) + ".txt";
+	string fileSemester = "./dataSemester/Course_" + to_string(schoolYear->y.startYear) + "-" + to_string(schoolYear->y.endYear) + "_" + to_string(semester.NO) + ".txt";
+	std::ofstream listStudentInCourse(fileListStudent, std::ios_base::app);
+	if (listStudentInCourse.is_open() == false)
+	{
+		cout << "Khong the tao danh sach lop\n";
+		return;
+	}
+	//Danh sách liên kết bình thường
+	if (lst.head == NULL)
+	{
+		lst.head = newCourse;
+
+		//Ghi ra file Lưu trữ các khóa học
+		//writeACourseToFile(newCourse, "./raw/Course.txt");
+		writeACourseToFile(newCourse, fileSemester);
+		//Ghi các trường cơ bản của file danh sách lớp ra 
+		listStudentInCourse << "No," << "Student ID," << "Student Last Name," << "Student First Name," << "Gender," << "Other Mark(Assignment)," << "Midterm Mark," << "Final Mark," << "Average Mark\n";
+		return;
+	}
+	//writeACourseToFile(newCourse, "./raw/Course.txt");
+	writeACourseToFile(newCourse, fileSemester);
+	listStudentInCourse << "No," << "Student ID," << "Student Last Name," << "Student First Name," << "Gender," << "Other Mark(Assignment)," << "Midterm Mark," << "Final Mark," << "Average Mark\n";
+	//Thao tác AddTail thôi.
+	nodeCourse* temp = lst.head;
+	while (temp->Next != NULL)
+	{
+		temp = temp->Next;
+	}
+	temp->Next = newCourse;
 }

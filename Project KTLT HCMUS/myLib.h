@@ -136,7 +136,7 @@ struct schoolYear
 {
     int startYear, endYear;
     listClass listOfClass;
-    Semester liSemester[3];
+    Semester listSemester[3];
 };
 struct nodeSchoolYear
 {
@@ -188,11 +188,12 @@ bool isValidDate(int d, int m, int y);
 void createSchoolYear(listOfSchoolYear& lst);
 void addTailSchoolYear(listOfSchoolYear& lst, schoolYear addition);
 void readSchoolYear(listOfSchoolYear& lst);
-void operateWithSchoolYear(listOfSchoolYear& lst);
+//void operateWithSchoolYear(listOfSchoolYear& lst);
 void writeStudentToFileClass(Class a, const char fileName[]);
-void createClass(listClass& lst);
-void add1StudentToClass(Class& myClass, const char fileName[]);
-void standardizeFile(const char fileName[]);
+void createClass(nodeSchoolYear* schoolYear, listClass& lst, int x, int y);
+//void add1StudentToClass(Class& myClass, const char fileName[]);
+void addAStudentToClass(nodeSchoolYear* schoolYear, Class& myClass, nodeStudent* student);
+//void standardizeFile(const char fileName[]);
 void deleteAllSchoolYear(listOfSchoolYear& lst);
 //------------------------------------------------
 //Thao tác của sinh viên
@@ -230,6 +231,8 @@ void viewInfoStaff(nodeStaff* staff);
 void changePasswordForStaff(nodeStaff*& staff, const char fileName[]);
 
 void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse);
+
+void viewSchoolYearForStaff(int x, int y);
 
 //void staffLogin(list)
 
@@ -270,7 +273,7 @@ void deleteAllSchoolYear(listOfSchoolYear& lst);
 void userRegister(listUser& lst, const char fileName[]);
 void userLogIn(listUser& lst);
 //void readAccountFile(listUser& lst);
-
+void readFileCSVClass(listStudent& lst, const string fileName);
 
 
 
@@ -324,6 +327,10 @@ void deleteTextAtXY(int x, int y, std::string str);
 void deleteMenu(int x, int y, int height, int width);
 void viewCoursesForStudent(listCourse l1, int start, int end, int x, int y);
 void viewScoresForStudent(listCourse l1, int start, int end, int x, int y);
+void viewClassesForStaff(nodeStaff* staff, int x, int y);
+
+void createSchoolYear(listOfSchoolYear& lst, int x, int y);
+void createSemester(int x, int y);
 
 
 void menuRegister();
@@ -334,10 +341,11 @@ void menuClassOfStudent(int x, int y, int height, int width);
 void menuBoxViewCoursesForStudent(int x, int y, int height, int width);
 void menuBoxViewScoresForStudent(int x, int y, int height, int width);
 void menuViewOfStudent(nodeStudent* Student);
-void menuSchoolYearForStaff(nodeStaff* staff, int x, int y);
-void menuClassForStaff(nodeStaff* staff, int x, int y);
-void menuCourseForStaff(nodeStaff* staff, int x, int y);
+void menuSchoolYearForStaff(nodeStaff* staff);
+void menuClassForStaff(nodeStaff* staff);
+void menuCourseForStaff(nodeStaff* staff);
 void menuViewCoursesForStaff(nodeStaff* staff, int x, int y);
+void menuViewSchoolYearForStaff(int x, int y, int height, int width);
 
 
 

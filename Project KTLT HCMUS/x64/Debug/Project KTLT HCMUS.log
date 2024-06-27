@@ -1,9 +1,17 @@
-﻿  Courses.cpp
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Courses.cpp(22,12): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Courses.cpp(23,12): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Courses.cpp(49,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Courses.cpp(51,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Courses.cpp(74,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  main.cpp
-  Generating Code...
+﻿  Menu.cpp
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(110,46): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(409,97): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(409,63): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(410,97): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(410,63): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(429,37): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(440,37): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(462,117): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(462,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(463,117): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(463,73): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(464,121): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(464,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(908,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\Menu.cpp(909,18): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Project KTLT HCMUS.vcxproj -> D:\deadline KHTN\Kỹ thuật LT\Final Project KTLT\Product\Project-KTLT-3T6H3N\Project KTLT HCMUS\x64\Debug\Project KTLT HCMUS.exe

@@ -407,7 +407,7 @@ void drawLineByX(int x, int y, int width)
 void drawInputLogin(int x, int y)
 {
     gotoXY(x + 5, y + 5); cout << "Username: "; drawBox(x + 5 + strlen("Username: "), y + 4, 50 - strlen("Username: "), 2);
-    gotoXY(x + 5, y + 8); cout << "Password: "; drawBox(x + 5 + strlen("Password: "), y + 7, 50 - strlen("Username: "), 2);
+    gotoXY(x + 5, y + 8); cout << "Password: "; drawBox(x + 5 + strlen("Password: "), y + 7, 50 - strlen("Password: "), 2);
 }
 
 bool isValidRegisterDate(std::string date)
@@ -677,40 +677,31 @@ void menuBoxViewScoresForStudent(int x, int y, int height, int width)
     gotoXY(x + 90, y + 1); cout << "Total";
 }
 
-void menuSchoolYearForStaff(nodeStaff* staff, int x, int y)
+void menuSchoolYearForStaff(nodeStaff* staff)
 {
+    system("cls");
+    setTextColor(purple); print("Picture\\School Year.txt", WIDTH_CONSOLE / 2 - 25, 3);
+    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+    setBackgroundColor(lwhite);
+    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 6;
     int width = 30, height = 2;
-    int nBox = 3, dis = 2;
+    int nBox = 3, dis = 1;
 
-    int newX = x + 5, newY = y + 2;
+    int newX = x + 5, newY = y + 1;
     int oldX = newX, oldY = newY;
+
+    setTextColor(green); printTwoLine(x, y, 10, 40);
+
+    string* option = new string[nBox];
+    option[0] = "Create School Year";
+    option[1] = "View School Year";
+    option[2] = "Create Semester";
+    setTextColor(black); drawNBoxByY(x + 5, y + 1, width, height, nBox, dis, option);
+    delete[] option;
+
     bool check = true;
-    int count = 0;
     while (true)
     {
-        if (count == 0)
-        {
-            /*setBackgroundColor(lwhite);
-            system("cls");
-            std::string str = staff->staff.lastName + " " + staff->staff.firstName;
-            setTextColor(blue); gotoXY(1, 0); cout << "Username: " << staff->staff.account.userName;
-            gotoXY(1, 1); cout << "Fullname: " << str;
-            setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
-            str = "     Press 'esc' to return    ";
-            gotoXY((WIDTH_CONSOLE - str.length()) / 2, HEIGHT_CONSOLE); cout << str;*/
-            //setTextColor(lpurple); print("Picture\\View Student.txt", WIDTH_CONSOLE / 2 - 28, 1);
-
-            setTextColor(green); printTwoLine(x, y, 14, 40); drawLineByX(x - 10, y + 7, 10);
-
-            string* option = new string[nBox];
-            option[0] = "Create School Year";
-            option[1] = "View School Year";
-            option[2] = "Create Semester";
-            setTextColor(black); drawNBoxByY(x + 5, y + 2, width, height, nBox, dis, option);
-            delete[] option;
-
-            count++;
-        }
         if (check == true)
         {
             gotoXY(oldX, oldY);
@@ -725,30 +716,29 @@ void menuSchoolYearForStaff(nodeStaff* staff, int x, int y)
             char choose = _getch();
             if (choose == 27)
             {
-                //printTextAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE / 2 + 6, "Thanks you !!!");
                 return;
             }
             else if (choose == 13)
             {
-                if (newY == y + 2)
+                if (newY == y + 1)
                 {
-                   
+                    createSchoolYear(listOfSY, x + 55, y);
                 }
-                else if (newY == y + 2 + height + dis)
+                else if (newY == y + 1 + height + dis)
                 {
-                    
+                    viewSchoolYearForStaff(x + 55, y);
                 }
-                else if (newY == y + 2 + 2 * (height + dis))
+                else if (newY == y + 1 + 2 * (height + dis))
                 {
-
+                    createSemester(x + 55, y);
                 }
             }
             else if (choose == -32)
             {
                 choose = _getch();
-                if (choose == 72 && newY > y + 2)
+                if (choose == 72 && newY > y + 1)
                     newY = newY - height - dis;
-                else if (choose == 80 && newY < y + 2 + (nBox - 1) * (height + dis))
+                else if (choose == 80 && newY < y + 1 + (nBox - 1) * (height + dis))
                     newY = newY + height + dis;
             }
 
@@ -757,29 +747,30 @@ void menuSchoolYearForStaff(nodeStaff* staff, int x, int y)
     }
 }
 
-void menuClassForStaff(nodeStaff* staff, int x, int y)
+void menuClassForStaff(nodeStaff* staff)
 {
-    int width = 30, height = 2;
-    int nBox = 2, dis = 2;
+    system("cls");
+    setTextColor(purple); print("Picture\\Class.txt", WIDTH_CONSOLE / 2 - 5, 3);
+    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+    setBackgroundColor(lwhite);
+    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 6;
+    int width = 20, height = 2;
+    int nBox = 2, dis = 1;
 
-    int newX = x + 5, newY = y + 2;
+    int newX = x + 10, newY = y + 1;
     int oldX = newX, oldY = newY;
+
+    setTextColor(green); printTwoLine(x, y, 7, 40);
+
+    string* option = new string[nBox];
+    option[0] = "Create Class";
+    option[1] = "View Classes";
+    setTextColor(black); drawNBoxByY(x + 10, y + 1, width, height, nBox, dis, option);
+    delete[] option;
+
     bool check = true;
-    int count = 0;
     while (true)
     {
-        if (count == 0)
-        {
-            setTextColor(green); printTwoLine(x, y, 10, 40); drawLineByX(x - 10, y + 5, 10);
-
-            string* option = new string[nBox];
-            option[0] = "Create Class";
-            option[1] = "View Classes";
-            setTextColor(black); drawNBoxByY(x + 5, y + 2, width, height, nBox, dis, option);
-            delete[] option;
-
-            count++;
-        }
         if (check == true)
         {
             gotoXY(oldX, oldY);
@@ -796,21 +787,24 @@ void menuClassForStaff(nodeStaff* staff, int x, int y)
                 return;
             else if (choose == 13)
             {
-                if (newY == y + 2)
+                if (newY == y + 1)
                 {
-
+                    int tempx = x + 50, tempy = y;
+                    nodeSchoolYear* schoolYearNow = goToSchoolYear(listOfSY, tempx, tempy);
+                    deleteMenu(x + 50, y, 15, 50);
+                    createClass(schoolYearNow, schoolYearNow->y.listOfClass, x + 45, y);
                 }
-                else if (newY == y + 2 + height + dis)
+                else if (newY == y + 1 + height + dis)
                 {
-
+                    // tu lam
                 }
             }
             else if (choose == -32)
             {
                 choose = _getch();
-                if (choose == 72 && newY > y + 2)
+                if (choose == 72 && newY > y + 1)
                     newY = newY - height - dis;
-                else if (choose == 80 && newY < y + 2 + (nBox - 1) * (height + dis))
+                else if (choose == 80 && newY < y + 1 + (nBox - 1) * (height + dis))
                     newY = newY + height + dis;
             }
 
@@ -819,8 +813,13 @@ void menuClassForStaff(nodeStaff* staff, int x, int y)
     }
 }
 
-void menuCourseForStaff(nodeStaff* staff, int x, int y)
+void menuCourseForStaff(nodeStaff* staff)
 {
+    system("cls");
+    setTextColor(purple); print("Picture\\Course.txt", WIDTH_CONSOLE / 2 - 10, 3);
+    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+    setBackgroundColor(lwhite);
+    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 6;
     setTextColor(green); printTwoLine(x, y, 7, 40);
     setTextColor(black);
     int nBox = 2, height = 2, width = 20, dis = 1;
@@ -857,12 +856,27 @@ void menuCourseForStaff(nodeStaff* staff, int x, int y)
             {
                 if (newY == y + 1)
                 {
-
+                    /*cout << "Chon nam hoc\n";
+                    nodeSchoolYear* schoolYearNow = goToSchoolYear(listOfSY,);
+                    int NOSemester, optn;
+                    do
+                    {
+                        cout << "Chon hoc ki muon thao tac (1,2 or 3): ";
+                        cin >> NOSemester;
+                    } while (NOSemester > 3 || NOSemester < 1);
+                    if (schoolYearNow->y.listSemester[NOSemester - 1].NO == 0)
+                    {
+                        cout << "Hoc ki chua duoc khoi tao truoc do\n";
+                        system("Pause");
+                        break;
+                    }
+                    Semester semesterNow = schoolYearNow->y.listSemester[NOSemester - 1];
+                    createNewCourse()*/
                 }
                 else if (newY == y + 1 + height + dis)
                 {
-                    menuViewCoursesForStaff(staff, x, y + 8);
-                    return;
+                    /*menuViewCoursesForStaff(staff, x, y + 8);
+                    return;*/
                 }
             }
             else if (ch == -32)

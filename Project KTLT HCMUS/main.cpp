@@ -13,6 +13,7 @@ int main()
 	listOfCourse.head = nullptr;
 	lstStaff.head = NULL;
 
+	readSchoolYear(listOfSY);
 	readFileStudent(lstStudent, "accountStudent.txt");
 	readFileStaff(lstStaff, "accountStaff.txt");
 
@@ -20,6 +21,7 @@ int main()
 
 	deleteAllStudent(lstStudent);
 	deleteAllStaff(lstStaff);
+	deleteAllSchoolYear(listOfSY);
 
 	return 0;
 }

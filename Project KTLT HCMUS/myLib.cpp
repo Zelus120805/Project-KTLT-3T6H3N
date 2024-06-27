@@ -76,69 +76,6 @@ void createSchoolYear(listOfSchoolYear& lst)
 	fileSchoolYear << newNode->y.startYear << "-" << newNode->y.endYear << std::endl;
 }
 
-void add1StudentToClass(Class& myClass, const char fileName[])
-{
-	readFileStudent(myClass.lst, fileName);
-	nodeStudent* Student = myClass.lst.head;
-
-
-
-
-	while (Student != nullptr)
-	{
-		//Thêm lớp
-		Student->student.info.inClass = myClass.nameClass;
-		std::cout << Student->student.account.userName << ",";
-		std::cout << Student->student.account.passWord << ",";
-		std::cout << Student->student.info.idStudent << ",";
-		std::cout << Student->student.info.lastName << ",";
-		std::cout << Student->student.info.firstName << ",";
-		std::cout << Student->student.info.gender << ",";
-		std::cout << Student->student.info.d.day << "/" << Student->student.info.d.month << "/" << Student->student.info.d.year << ",";
-		std::cout << Student->student.info.socialId << ",";
-		std::cout << Student->student.info.inClass << "\n";
-		Student = Student->next;
-	}
-}
-
-void createClass(listClass& lst)
-{
-	nodeClass* newNode = new nodeClass();
-	newNode->next = nullptr;
-	newNode->myClass.lst.head = nullptr;
-	char fileName[100];
-	std::cout << "Nhap ten lop: ";
-	std::cin >> newNode->myClass.nameClass;
-
-	//Kiểm tra tên lớp có tồn tại hay chưa?
-	//nodeClass* check = lst.head;
-	std::cout << "File input: ";
-	cin >> fileName;
-	/*while (check != NULL)
-	{
-		if (check->myClass.nameClass == newNode->myClass.nameClass)
-		{
-			add1StudentToClass(check->myClass, fileName);
-			return;
-		}
-		check = check->next;
-	}*/
-
-	add1StudentToClass(newNode->myClass, fileName);
-
-	if (lst.head == nullptr)
-	{
-		lst.head = newNode;
-		return;
-	}
-	nodeClass* temp = lst.head;
-	while (temp->next != nullptr)
-	{
-		temp = temp->next;
-	}
-	temp->next = newNode;
-}
-
 void writeStudentToFileClass(Class a, const char fileName[])
 {
 	std::ofstream fileClass(fileName, std::ios_base::app);
@@ -235,83 +172,83 @@ void readSchoolYear(listOfSchoolYear& lst)
 	}
 }
 
-void operateWithSchoolYear(listOfSchoolYear& lst)
-{
-	system("cls");
-	readSchoolYear(lst);
-	int section;
-	std::cout << "1. Create school year\n";
-	std::cout << "2. View and operate with school year\n";
-	std::cout << "3. Exit\n";
-	while (std::cin >> section)
-	{
-
-		if (section == 1)
-		{
-			createSchoolYear(lst);
-			system("cls");
-			std::cout << "1. Create school year\n";
-			std::cout << "2. View and operate with school year\n";
-			std::cout << "3. Exit\n";
-		}
-		if (section == 2)
-		{
-			//Thực thi năm học 
-			int i = 1;
-			nodeSchoolYear* temp = lst.head;
-			if (temp == NULL)
-			{
-				std::cout << "Please create at least 1 school year" << std::endl;
-				return;
-			}
-			while (temp != nullptr)
-			{
-				std::cout << i << ". " << temp->y.startYear << "-" << temp->y.endYear << "\n";
-				temp = temp->nextYear;
-				i++;
-			}
-			std::cout << "Select a school year\n";
-			std::cin >> i;
-			temp = lst.head;
-			nodeSchoolYear* selected = nullptr;
-			for (int j = 1; j < i; j++)
-			{
-				temp = temp->nextYear;
-			}
-			std::cout << "Create class for " << temp->y.startYear << "-" << temp->y.endYear << "\n";
-			createClass(temp->y.listOfClass);//Tạo một lớp của năm học đó
-
-			string fileName = to_string(temp->y.startYear) + "-" + to_string(temp->y.endYear) + ".txt";
-			char* tmp = new char[fileName.length() + 1];
-			fileName.copy(tmp, fileName.length());
-			tmp[fileName.length()] = '\0';
-			std::ofstream classOfSchoolYear(tmp, std::ios::app);
-
-			if (classOfSchoolYear.is_open() == false)
-			{
-				std::cout << "Cannot open file" << std::endl;
-				break;
-			}
-
-			nodeClass* Tmp = temp->y.listOfClass.head;
-			while (Tmp->next != nullptr)
-			{
-				Tmp = Tmp->next;
-			}
-			//Ghi lớp cuối cùng vừa thêm vào file năm học tương ứng
-			writeStudentToFileClass(Tmp->myClass, tmp);
-			system("cls");
-			std::cout << "1. Create school year\n";
-			std::cout << "2. View and operate with school year\n";
-			std::cout << "3. Exit\n";
-		}
-		if (section == 3)
-		{
-			system("cls");
-			return;
-		}
-	}
-}
+//void operateWithSchoolYear(listOfSchoolYear& lst)
+//{
+//	system("cls");
+//	readSchoolYear(lst);
+//	int section;
+//	std::cout << "1. Create school year\n";
+//	std::cout << "2. View and operate with school year\n";
+//	std::cout << "3. Exit\n";
+//	while (std::cin >> section)
+//	{
+//
+//		if (section == 1)
+//		{
+//			createSchoolYear(lst);
+//			system("cls");
+//			std::cout << "1. Create school year\n";
+//			std::cout << "2. View and operate with school year\n";
+//			std::cout << "3. Exit\n";
+//		}
+//		if (section == 2)
+//		{
+//			//Thực thi năm học 
+//			int i = 1;
+//			nodeSchoolYear* temp = lst.head;
+//			if (temp == NULL)
+//			{
+//				std::cout << "Please create at least 1 school year" << std::endl;
+//				return;
+//			}
+//			while (temp != nullptr)
+//			{
+//				std::cout << i << ". " << temp->y.startYear << "-" << temp->y.endYear << "\n";
+//				temp = temp->nextYear;
+//				i++;
+//			}
+//			std::cout << "Select a school year\n";
+//			std::cin >> i;
+//			temp = lst.head;
+//			nodeSchoolYear* selected = nullptr;
+//			for (int j = 1; j < i; j++)
+//			{
+//				temp = temp->nextYear;
+//			}
+//			std::cout << "Create class for " << temp->y.startYear << "-" << temp->y.endYear << "\n";
+//			createClass(temp->y.listOfClass);//Tạo một lớp của năm học đó
+//
+//			string fileName = to_string(temp->y.startYear) + "-" + to_string(temp->y.endYear) + ".txt";
+//			char* tmp = new char[fileName.length() + 1];
+//			fileName.copy(tmp, fileName.length());
+//			tmp[fileName.length()] = '\0';
+//			std::ofstream classOfSchoolYear(tmp, std::ios::app);
+//
+//			if (classOfSchoolYear.is_open() == false)
+//			{
+//				std::cout << "Cannot open file" << std::endl;
+//				break;
+//			}
+//
+//			nodeClass* Tmp = temp->y.listOfClass.head;
+//			while (Tmp->next != nullptr)
+//			{
+//				Tmp = Tmp->next;
+//			}
+//			//Ghi lớp cuối cùng vừa thêm vào file năm học tương ứng
+//			writeStudentToFileClass(Tmp->myClass, tmp);
+//			system("cls");
+//			std::cout << "1. Create school year\n";
+//			std::cout << "2. View and operate with school year\n";
+//			std::cout << "3. Exit\n";
+//		}
+//		if (section == 3)
+//		{
+//			system("cls");
+//			return;
+//		}
+//	}
+//}
 
 void viewListCourse(listCourse lst)
 {
@@ -418,6 +355,8 @@ void writeACourseToFile(nodeCourse* course, const string fileName)
 	fileCourse << course->crs.info.idCourse << "," << course->crs.info.courseName << "," << course->crs.info.className << "," << course->crs.info.teacherName << "," << course->crs.info.numberOfCredits << "," << course->crs.info.numberOfCurrentStudent << "," << course->crs.info.maxStudent << "," << course->crs.info.dayOfWeek << "\n";
 	fileCourse.close();
 }
+
+
 //Hàm tạo node mới 
 void createNewCourse(listCourse& lst)
 {
@@ -1072,7 +1011,7 @@ void studentLogIn(listStudent& lst, listCourse list, int x, int y)
 		}
 		else if (ch == '\r')
 		{
-			if (input[0].length() != 0 && input[2].length() != 0)
+			if (input[0].length() != 0 && input[1].length() != 0)
 			{
 				nodeStudent* temp = new nodeStudent();
 				temp = lst.head;
@@ -2620,8 +2559,8 @@ void exportCSVFile(const string address, nodeCourse* course)
 //---------------------------------------------------------------------------------
 void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
 {
-	int x = WIDTH_CONSOLE / 2 - 40, y = HEIGHT_CONSOLE / 2 - 10;
-	int newX = x + 5, newY = y + 2;
+	int x = WIDTH_CONSOLE / 2 - 30, y = HEIGHT_CONSOLE / 2 - 9;
+	int newX = x + 15, newY = y + 1;
 	int oldX = newX, oldY = newY;
 	int newWidth = 30, newHeight = 2;
 	int nBox = 6, dis = 1;
@@ -2640,7 +2579,7 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 			gotoXY(1, 1); cout << "Fullname: " << str;
 			setBackgroundColor(lwhite); setTextColor(black);
 			setTextColor(lpurple); print("Picture\\Hello Staff.txt", WIDTH_CONSOLE / 2 - 20, 1);
-			setTextColor(green); printTwoLine(x, y, 21, 40);
+			setTextColor(green); printTwoLine(x, y, 20, 60);
 			setTextColor(black);
 
 			string* option = new string[nBox];
@@ -2650,7 +2589,7 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 			option[3] = "Class";
 			option[4] = "Course";
 			option[5] = "Log out";
-			drawNBoxByY(x + 5, y + 2, newWidth, newHeight, nBox, dis, option);
+			drawNBoxByY(x + 15, y + 1, newWidth, newHeight, nBox, dis, option);
 			delete[] option;
 
 			count++;
@@ -2669,44 +2608,44 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 			char choose = _getch();
 			if (choose == 13)
 			{
-				if (newY == y + 2)
+				if (newY == y + 1)
 				{
 					changePasswordForStaff(staff, "accountStaff.txt");
 					count = 0;
 				}
-				else if (newY == y + 2 + newHeight + dis)
+				else if (newY == y + 1 + newHeight + dis)
 				{
 					viewInfoStaff(staff);
 					count = 0;
 				}
-				else if (newY == y + 2 + 2 * (newHeight + dis))
+				else if (newY == y + 1 + 2 * (newHeight + dis))
 				{
-					menuSchoolYearForStaff(staff, x + 50, newY - 6);
+					menuSchoolYearForStaff(staff);
 					count = 0;
 				}
-				else if (newY == y + 2 + 3 * (newHeight + dis))
+				else if (newY == y + 1 + 3 * (newHeight + dis))
 				{
-					menuClassForStaff(staff, x + 50, newY - 4);
+					menuClassForStaff(staff);
 					count = 0;
 				}
-				else if (newY == y + 2 + 4 * (newHeight + dis))
+				else if (newY == y + 1 + 4 * (newHeight + dis))
 				{
-					menuCourseForStaff(staff, x + 50, y);
+					menuCourseForStaff(staff);
 					count = 0;
 				}
-				else if (newY == y + 2 + 5 * (newHeight + dis))
+				else if (newY == y + 1 + 5 * (newHeight + dis))
 				{
 					setTextColor(yellow);
-					printTextAtXY(x + 20, newY + 3, "Goodbye staff !!!");
+					printTextAtXY(WIDTH_CONSOLE / 2, newY + 3, "Goodbye staff !!!");
 					return;
 				}
 			}
 			else if (choose == -32)
 			{
 				choose = _getch();
-				if (choose == 72 && newY > y + 2)
+				if (choose == 72 && newY > y + 1)
 					newY = newY - newHeight - dis;
-				else if (choose == 80 && newY < y + (nBox - 1) * (newHeight + dis))
+				else if (choose == 80 && newY < y + 1 + (nBox - 1) * (newHeight + dis))
 					newY = newY + newHeight + dis;
 			}
 

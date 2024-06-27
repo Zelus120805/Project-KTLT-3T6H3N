@@ -140,6 +140,7 @@
     <ClInclude Include="myLib.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Class.cpp" />
     <ClCompile Include="Courses.cpp" />
     <ClCompile Include="myLib.cpp" />
     <ClCompile Include="main.cpp" />
