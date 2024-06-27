@@ -2620,8 +2620,8 @@ void exportCSVFile(const string address, nodeCourse* course)
 //---------------------------------------------------------------------------------
 void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, listCourse& lstCourse)
 {
-	int x = WIDTH_CONSOLE / 2 - 30, y = HEIGHT_CONSOLE / 2 - 10;
-	int newX = x + 15, newY = y + 2;
+	int x = WIDTH_CONSOLE / 2 - 40, y = HEIGHT_CONSOLE / 2 - 10;
+	int newX = x + 5, newY = y + 2;
 	int oldX = newX, oldY = newY;
 	int newWidth = 30, newHeight = 2;
 	int nBox = 6, dis = 1;
@@ -2640,17 +2640,17 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 			gotoXY(1, 1); cout << "Fullname: " << str;
 			setBackgroundColor(lwhite); setTextColor(black);
 			setTextColor(lpurple); print("Picture\\Hello Staff.txt", WIDTH_CONSOLE / 2 - 20, 1);
-			setTextColor(green); printTwoLine(x, y, 21, 60);
+			setTextColor(green); printTwoLine(x, y, 21, 40);
 			setTextColor(black);
 
 			string* option = new string[nBox];
 			option[0] = "Change password";
 			option[1] = "View info";
 			option[2] = "School Year";
-			option[3] = "Course";
-			option[4] = "Class";
+			option[3] = "Class";
+			option[4] = "Course";
 			option[5] = "Log out";
-			drawNBoxByY(x + 15, y + 2, newWidth, newHeight, nBox, dis, option);
+			drawNBoxByY(x + 5, y + 2, newWidth, newHeight, nBox, dis, option);
 			delete[] option;
 
 			count++;
@@ -2679,10 +2679,25 @@ void workSessionOfStaff(nodeStaff*& staff, listOfSchoolYear& lstSchoolYear, list
 					viewInfoStaff(staff);
 					count = 0;
 				}
+				else if (newY == y + 2 + 2 * (newHeight + dis))
+				{
+					menuSchoolYearForStaff(staff, x + 50, newY - 6);
+					count = 0;
+				}
+				else if (newY == y + 2 + 3 * (newHeight + dis))
+				{
+					menuClassForStaff(staff, x + 50, newY - 4);
+					count = 0;
+				}
+				else if (newY == y + 2 + 4 * (newHeight + dis))
+				{
+					menuCourseForStaff(staff, x + 50, y);
+					count = 0;
+				}
 				else if (newY == y + 2 + 5 * (newHeight + dis))
 				{
 					setTextColor(yellow);
-					printTextAtXY(WIDTH_CONSOLE / 2, newY + 3, "Goodbye staff !!!");
+					printTextAtXY(x + 20, newY + 3, "Goodbye staff !!!");
 					return;
 				}
 			}

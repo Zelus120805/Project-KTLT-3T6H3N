@@ -4,6 +4,7 @@ listStudent lstStudent;
 listOfSchoolYear listOfSY;
 listCourse listOfCourse;
 listStaff lstStaff;
+bool checkScore = true;
 
 int main()
 {
@@ -17,11 +18,8 @@ int main()
 
 	menuMain();
 
-	//readCourseFileOfStudent(listOfCourse, "dataStudent\\23120360_Course_2021-2022_1.txt");
-
 	deleteAllStudent(lstStudent);
 	deleteAllStaff(lstStaff);
-	//system("cls");
 
 	return 0;
 }

@@ -6,8 +6,9 @@ void viewOfStudent(nodeStudent* Student, int x, int y, int choice)
 	setTextColor(blue); gotoXY(1, 0); cout << "Username: " << Student->student.account.userName;
 	gotoXY(1, 1); cout << "Fullname: " << str;
 
-	pMenuForStudent pMenu = NULL;
-	pViewForStudent pView = NULL;
+	void (*pMenu)(int, int, int, int) = NULL;
+	void (*pView)(listCourse, int, int, int, int) = NULL;
+
 	listOfSchoolYear lst;
 	lst.head = NULL;
 	readSchoolYear(lst);
@@ -33,11 +34,16 @@ void viewOfStudent(nodeStudent* Student, int x, int y, int choice)
 	x = WIDTH_CONSOLE / 2 - 50, y = 7;
 	int height = 17, width = 100;
 	int Sum = countLine(fileName);
-	int total, page = 1;
+	int total, page;
 	if (Sum % 12 == 0)
 		total = Sum / 12;
 	else
 		total = Sum / 12 + 1;
+	if (total == 0)
+		page = 0;
+	else
+		page = 1;
+
 	int New = 0, Old = 0;
 	str = "     Use left and right keys to change pages !!!    ";
 	setBackgroundColor(lyellow); setTextColor(red); gotoXY((WIDTH_CONSOLE - str.length()) / 2, HEIGHT_CONSOLE - 1); cout << str;
@@ -47,13 +53,13 @@ void viewOfStudent(nodeStudent* Student, int x, int y, int choice)
 
 	if (choice == 1)
 	{
-		pMenu = menuBoxViewCoursesForStudent;
-		pView = viewCoursesForStudent;
+		pMenu = &menuBoxViewCoursesForStudent;
+		pView = &viewCoursesForStudent;
 	}
 	else if (choice == 2)
 	{
-		pMenu = menuBoxViewScoresForStudent;
-		pView = viewScoresForStudent;
+		pMenu = &menuBoxViewScoresForStudent;
+		pView = &viewScoresForStudent;
 	}
 
 	bool check = true;
@@ -152,10 +158,15 @@ void viewCoursesForStudent(listCourse l1, int start, int end, int x, int y)
 
 void viewScoresForStudent(listCourse l1, int start, int end, int x, int y)
 {
+	setTextColor(red);
+	if (checkScore == false)
+	{
+		gotoXY(HEIGHT_CONSOLE / 2, y + 3); cout << "Student can't see scoreboard in this time !!!";
+		return;
+	}
 	if (end == 0)
 	{
-		setTextColor(red);
-		gotoXY(HEIGHT_CONSOLE / 2, y + 3); cout << "Student can't see scoreboard in this time !!!";
+		gotoXY(HEIGHT_CONSOLE / 2, y + 3); cout << "Student doesn't have data in semester !!!";
 		return;
 	}
 

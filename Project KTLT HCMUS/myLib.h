@@ -172,13 +172,11 @@ struct listStaff
 //-----------------------------------
 //-------------------------------------
 
-typedef void (*pMenuForStudent)(int, int, int, int);
-typedef void (*pViewForStudent)(listCourse, int, int, int, int);
-
 extern listStudent lstStudent;
 extern listOfSchoolYear listOfSY;
 extern listCourse listOfCourse;
 extern listStaff lstStaff;
+extern bool checkScore;
 
 //------------------------------------------------
 //Date
@@ -336,6 +334,10 @@ void menuClassOfStudent(int x, int y, int height, int width);
 void menuBoxViewCoursesForStudent(int x, int y, int height, int width);
 void menuBoxViewScoresForStudent(int x, int y, int height, int width);
 void menuViewOfStudent(nodeStudent* Student);
+void menuSchoolYearForStaff(nodeStaff* staff, int x, int y);
+void menuClassForStaff(nodeStaff* staff, int x, int y);
+void menuCourseForStaff(nodeStaff* staff, int x, int y);
+void menuViewCoursesForStaff(nodeStaff* staff, int x, int y);
 
 
 
