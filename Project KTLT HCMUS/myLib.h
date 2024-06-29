@@ -365,6 +365,8 @@ void menuViewStudentForStaff(int x, int y, int height, int width);
 void menuViewSchoolYearForStaff(int x, int y, int height, int width);
 void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semester& semesterNow, nodeCourse* courseNow); 
 void menuViewChooseCourses(int x, int y, int height, int width);
+void menuAboutUs();
+void printText(int x, int y, string str);
 
 
 

@@ -2082,7 +2082,7 @@ void printStudent(listStudent lst, int start, int end, int x, int y)
 	if (end == 0)
 	{
 		setTextColor(red);
-		gotoXY(HEIGHT_CONSOLE / 2, y + 3); cout << "No data of student in this course !!!";
+		gotoXY(x + 5, y + 3); cout << "No data of student in this course !!!";
 		return;
 	}
 

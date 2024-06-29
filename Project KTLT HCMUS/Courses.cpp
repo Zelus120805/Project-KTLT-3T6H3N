@@ -383,7 +383,7 @@ void loadCourse(nodeSchoolYear*& schoolYear, Semester& semester)
 nodeCourse* goToCourse(listCourse lstCourse)
 {
 	system("cls");
-	//setTextColor(green); print("Picture\\List.txt", WIDTH_CONSOLE / 2 - 12, 1);
+	setTextColor(laqua); print("Picture\\List Class.txt", WIDTH_CONSOLE / 2 - 12, 1);
 	int x = WIDTH_CONSOLE / 2 - 40, y = 7;
 	int height = 17, width = 80;
 	int Sum = 0;

@@ -221,6 +221,11 @@ void menuMain()
                     menuLogIn();
                     count = 0;
                 }
+                else if (newY == y + 2 * (height + dis))
+                {
+                    menuAboutUs();
+                    count = 0;
+                }
                 else if (newY == y + 3 * (height + dis))
                 {
                     Sleep(100);
@@ -983,7 +988,7 @@ void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semes
         if (cnt == 0)
         {
             system("cls");
-            //setTextColor(purple); print("Picture\\School Year.txt", WIDTH_CONSOLE / 2 - 25, 1);
+            setTextColor(purple); print("Picture\\View Course.txt", WIDTH_CONSOLE / 2 - 25, 1);
             setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
             setBackgroundColor(lwhite);
             setTextColor(green); printTwoLine(x, y, 18, 80);
@@ -1146,4 +1151,66 @@ void ViewChooseCourses(listCourse lst, int start, int end, int x, int y)
         temp = temp->Next;
         index++; i++;
     }
+}
+
+void printText(int x, int y, string str)
+{
+    gotoXY(x, y);
+    for (int i = 0; i < str.length(); i++)
+    {
+        gotoXY(x + i, y); cout << str[i];
+        Sleep(30);
+    }
+}
+
+void menuAboutUs()
+{
+    system("cls");
+    Sleep(200);
+    setTextColor(aqua); printText(WIDTH_CONSOLE / 2 - strlen("Meet Our Awesome Team - 3T6H3N") / 2, 2, "Meet Our Awesome Team - 3T6H3N");
+    Sleep(400);
+    setTextColor(blue); printText(WIDTH_CONSOLE / 2 - strlen("We are a tight-knit trio, working together to create magic !!!") / 2, 4, "We are a tight-knit trio, working together to create magic !!!");
+    Sleep(400);
+    setTextColor(red);
+    string str = "Project: Course management.";
+    printText(10, 6, str);
+    str = "Teacher: Nguyen Le Hoang Dung.";
+    printText(10, 7, str);
+    Sleep(400);
+
+    setTextColor(green);
+    str = "Member:";
+    Sleep(400);
+    printText(10, 10, str);
+    setTextColor(black);
+    str = "- Le Nhat Thanh (ID Student: 23120357): He's our creative genius. He's good at debugging and bring";
+    printText(15, 11, str);
+    str = "fresh ideas to our projects.";
+    printText(17, 12, str);
+    Sleep(400);
+    str = "- Nguyen Tien Thanh (ID: 23120358): He is our coding virtuoso. Almost every function in our project owes";
+    printText(15, 13, str);
+    str = "its excellence to his skillful coding.";
+    printText(17, 14, str);
+    Sleep(400);
+    str = "- Dang Le Duc Thinh (ID: 23120360): He is our console maestro. They've crafted the frontend, ensuring a";
+    printText(15, 15, str);
+    str = "seamless user experience.";
+    printText(17, 16, str);
+    Sleep(400);
+
+    str = "During the time we worked together, our project didn't always go the way we wanted. However, thanks to our";
+    printText(10, 19, str);
+    str = "patience and determination, we managed to fix it, and we never gave up. On behalf of my team, I want to";
+    printText(10, 20, str);
+    str = "express my gratitude to HCMUS for giving us the chance to work on this project.";
+    printText(10, 21, str);
+    Sleep(800);
+
+    setTextColor(red);
+    str = "Thank you, 3T6H3N team, for your outstanding work! We appreciate your support !!!";
+    printTextAtXY(WIDTH_CONSOLE / 2, 24, str);
+    str = "Thank you for using our app!";
+    printTextAtXY(WIDTH_CONSOLE / 2, 25, str);
+    char ch = _getch();
 }
