@@ -3,13 +3,19 @@
 void viewStudentForStaff(listStudent lst) 
 {
 	system("cls");
+	setTextColor(blue); print("Picture\\View List Student.txt", WIDTH_CONSOLE / 2 - 40, 1);
 	int Sum = 0;
 	nodeStudent* temp = lst.head;
-	while (temp != NULL)
+	if (temp == NULL)
 	{
-		;
-		temp = temp->next;
-		Sum++;
+		Sum = 0;
+	}
+	else {
+		while (temp != NULL)
+		{
+			temp = temp->next;
+			Sum++;
+		}
 	}
 	int total, page;
 	if (Sum % 12 == 0)
@@ -108,6 +114,7 @@ bool isInCourse(nodeSchoolYear* schoolYear, Semester semester, nodeStudent* stud
 int deleteAStudentForStaffInCourse(listStudent lst)
 {
 	system("cls");
+	setTextColor(blue); print("Picture\\Delete A Student.txt", WIDTH_CONSOLE / 2 - 30, 1);
 	int Sum = 0;
 	nodeStudent* temp = lst.head;
 	while (temp != NULL)

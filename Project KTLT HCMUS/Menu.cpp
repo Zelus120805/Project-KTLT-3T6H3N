@@ -501,72 +501,6 @@ void menuClassOfStudent(int x, int y, int height, int width)
     gotoXY(x + 81, y + 1); cout << "ID Social";
 }
 
-//void viewClassOfStudent()
-//{
-//    setTextColor(green); print("List.txt", WIDTH_CONSOLE / 2 - 12, 1);
-//    int x = WIDTH_CONSOLE / 2 - 50, y = 8, height = 17, width = 100;
-//    int Sum = 20;
-//    int total, page = 1;
-//    if (Sum % 12 == 0)
-//        total = Sum / 12;
-//    else
-//        total = Sum / 12 + 1;
-//    int New = 0, Old = 0;
-//    string str = "     Use left and right keys to change pages !!!    ";
-//    setBackgroundColor(lyellow); setTextColor(red); gotoXY((WIDTH_CONSOLE - str.length()) / 2, HEIGHT_CONSOLE - 1);
-//    cout << str;
-//    setBackgroundColor(lwhite);
-//
-//    menuClassOfStudent(x, y, height, width);
-//    viewStudent((page - 1) * 12 + 1, page * 12, x, y);
-//    str = "Page: " + to_string(page) + "/" + to_string(total);
-//    setBackgroundColor(lwhite); setTextColor(red); gotoXY(x + 1, y + 3 + New); cout << getConsoleLine(x + 1, y + 3 + New, 99);
-//    setBackgroundColor(laqua);
-//    setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
-//    while (true)
-//    {
-//        char ch = _getch();
-//        if (ch == -32) {
-//            ch = _getch();
-//            if (ch == 72 && New > 0) {
-//                New--;
-//            }
-//            else if (ch == 80) {
-//                if (page < total && New < 11)
-//                    New++;
-//                else if (page == total && New < Sum - (total - 1) * 12 - 1)
-//                    New++;
-//            }
-//            else if (ch == 75 && page > 1) {
-//                New = 0;
-//                page--;
-//                menuClassOfStudent(x, y, height, width);
-//                viewStudent((page - 1) * 12 + 1, page * 12, x, y);
-//                str = "Page: " + to_string(page) + "/" + to_string(total);
-//                setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
-//            }
-//            else if (ch == 77 && page < total) {
-//                New = 0;
-//                page++;
-//                menuClassOfStudent(x, y, height, width);
-//                if (page != total)
-//                    viewStudent((page - 1) * 12 + 1, page * 12, x, y);
-//                else
-//                    viewStudent((page - 1) * 12 + 1, Sum, x, y);
-//                str = "Page: " + to_string(page) + "/" + to_string(total);
-//                setTextColor(purple); gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
-//            }
-//            else
-//                continue;
-//
-//            gotoXY(x + 1, y + 3 + Old); setTextColor(black); cout << getConsoleLine(x + 1, y + 3 + Old, 99);
-//            setBackgroundColor(lwhite); setTextColor(red); gotoXY(x + 1, y + 3 + New); cout << getConsoleLine(x + 1, y + 3 + New, 99);
-//            setBackgroundColor(laqua);
-//            Old = New;
-//        }
-//    }
-//}
-
 void menuBoxViewCoursesForStudent(int x, int y, int height, int width)
 {
     setBackgroundColor(laqua);
@@ -816,12 +750,7 @@ void menuClassForStaff(nodeStaff* staff)
                 }
                 else if (newY == y + 1 + height + dis)
                 {
-                    /*listClass listClass;
-                    listClass.head = NULL;
-                    string fileName = "./dataSchoolYear/Class_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + ".txt";
-                    readFileListClass(listClass, fileName);*/
-
-                   
+                    viewClassesForStaff(schoolYearNow, x + 60, y);
                 }
 
                 cnt = 0;
@@ -838,6 +767,20 @@ void menuClassForStaff(nodeStaff* staff)
             check = true;
         }
     }
+}
+
+void menuViewClasses(int x, int y, int height, int width)
+{
+    setBackgroundColor(laqua);
+    deleteMenu(x, y, height, width);
+    setTextColor(blue); printTwoLine(x, y, height, width);
+
+    drawLineByX(x, y + 2, width);
+    drawLineByX(x, y + height - 2, width);
+
+    setTextColor(purple);
+    gotoXY(x + 1, y + 1); cout << "No";
+    gotoXY(x + 10, y + 1); cout << "Class name";
 }
 
 void menuCourseForStaff(nodeStaff* staff)
@@ -914,16 +857,18 @@ void menuCourseForStaff(nodeStaff* staff)
                         setTextColor(black);
                         continue;
                     }
-                    listOfCourse.head = NULL;
+                    //  listOfCourse.head = NULL;
+                    semesterNow.listCourse.head = NULL;
                     string fileName = "dataSemester\\Course_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(optn);
-                    readCourseFile(listOfCourse, fileName);
-                    createNewCourseForStaff(listOfCourse,schoolYearNow, semesterNow);
-                    deleteAllCourse(listOfCourse);
-                    listOfCourse.head = NULL;
+                    readCourseFile(semesterNow.listCourse, fileName);
+                    createNewCourseForStaff(schoolYearNow->y.listSemester[optn - 1].listCourse, schoolYearNow, schoolYearNow->y.listSemester[optn - 1]);
+
+                    //deleteAllCourse(listOfCourse);
+                    //listOfCourse.head = NULL;
                 }
                 else if (newY == y + 1 + height + dis)
                 {
-                    nodeCourse* courseNow = goToCourse(semesterNow.listCourse);
+                    nodeCourse* courseNow = goToCourse(schoolYearNow->y.listSemester[optn - 1].listCourse);
                     if (courseNow == NULL)
                     {
                         cnt = 0;
@@ -935,9 +880,11 @@ void menuCourseForStaff(nodeStaff* staff)
                         break;
                     }
                     listStudent listStudentOfCourseNow;
-                    string fileListStudent = "./dataCourse/" + courseNow->crs.info.courseName + "_" + courseNow->crs.info.className + "_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(semesterNow.NO) + ".txt";
+                    listStudentOfCourseNow.head = NULL;
+                    string fileListStudent = "./dataCourse/" + courseNow->crs.info.courseName + "" + courseNow->crs.info.className + "" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(semesterNow.NO) + ".txt";
                     readListStudentOfACourse(listStudentOfCourseNow, fileListStudent);
                     menuViewListCourses(listStudentOfCourseNow, schoolYearNow, semesterNow, courseNow);
+
                 }
 
                 cnt = 0;
@@ -1035,6 +982,7 @@ void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semes
                 else if (newY == y + 2 + height + dis)
                 {
                     system("cls");
+                    setTextColor(blue); print("Picture\\Add Student.txt", WIDTH_CONSOLE / 2 - 25, 1);
                     string fileName;
                     setTextColor(blue); gotoXY(WIDTH_CONSOLE / 2 - 40, 9); cout << "Input file name: ";
                     setTextColor(green); drawBox(WIDTH_CONSOLE / 2 - 40 + strlen("Input file name: "), 8, 60, 2);
@@ -1058,10 +1006,15 @@ void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semes
                 else if (newY == y + 2 + 4 * (height + dis))
                 {
                     deleteAStudentFromCourse(schoolYearNow, semesterNow, courseNow, NULL);
+                    string courseName = "./dataCourse/" + courseNow->crs.info.courseName + "_" + courseNow->crs.info.className + "_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(semesterNow.NO) + ".txt";
+                    deleteAllStudent(lst);
+                    lst.head = NULL;
+                    readListStudentOfACourse(lst, courseName);
                 }
                 else if (newY == y + 2 + 5 * (height + dis))
                 {
                     system("cls");
+                    setTextColor(blue); print("Picture\\Export File CSV.txt", WIDTH_CONSOLE / 2 - 35, 1);
                     string address;
                     setTextColor(blue); gotoXY(WIDTH_CONSOLE / 2 - 40, 9); cout << "Input address: ";
                     setTextColor(green); drawBox(WIDTH_CONSOLE / 2 - 40 + strlen("Input address: "), 8, 65, 2);
@@ -1075,6 +1028,7 @@ void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semes
                 else if (newY == y + 2 + 6 * (height + dis))
                 {
                     system("cls");
+                    setTextColor(blue); print("Picture\\Import ScoreBoard.txt", WIDTH_CONSOLE / 2 - 35, 1);
                     string fileName;
                     setTextColor(blue); gotoXY(WIDTH_CONSOLE / 2 - 40, 9); cout << "Input file name: ";
                     setTextColor(green); drawBox(WIDTH_CONSOLE / 2 - 40 + strlen("Input file name: "), 8, 60, 2);

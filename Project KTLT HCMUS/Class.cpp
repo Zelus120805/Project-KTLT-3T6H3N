@@ -1,11 +1,108 @@
 ﻿#include "myLib.h"
 
-void viewClassesForStaff(nodeStaff* staff, int x, int y)
+void viewClassesForStaff(nodeSchoolYear* node, int x, int y)
 {
-	listOfSchoolYear lst;
-	lst.head = NULL;
-	readSchoolYear(lst);
-	nodeSchoolYear* schoolYearNow = goToSchoolYear(lst, x, y);
+    string fileName = "dataSchoolYear\\Class_" + to_string(node->y.startYear) + "-" + to_string(node->y.endYear) + ".txt";
+    int Sum = countLine(fileName);
+    string* className = new string[Sum];
+    string temp;
+    int i = 0;
+    ifstream file(fileName);
+    if (Sum != 0)
+    {
+        while (getline(file, temp))
+        {
+            if (temp == "")
+                break;
+            className[i] = temp;
+            i++;
+        }
+    }
+    file.close();
+
+    int total, page;
+    if (Sum % 10 == 0)
+        total = Sum / 10;
+    else
+        total = Sum / 10 + 1;
+    if (total == 0)
+        page = 0;
+    else
+        page = 1;
+
+    int width = 40, height = 15;
+    int New = 0, Old = 0;
+    string str;
+
+    bool check = true;
+    while (true)
+    {
+        if (check == true)
+        {
+            str = "Page: " + to_string(page) + "/" + to_string(total);
+            setBackgroundColor(lwhite); setTextColor(red); gotoXY(x + 1, y + 3 + New); cout << getConsoleLine(x + 1, y + 3 + New, 39);
+            setBackgroundColor(laqua);
+            setTextColor(purple);
+            menuViewClasses(x, y, height, width);
+            gotoXY(x + width - str.length() - 2, y + height - 1); cout << str;
+
+            if (page != total)
+                viewClasses(className, (page - 1) * 10 + 1, page * 10, x, y);
+            else
+                viewClasses(className, (page - 1) * 10 + 1, Sum, x, y);
+
+                check = false;
+        }
+        gotoXY(x + 1, y + 3 + Old); setTextColor(black); cout << getConsoleLine(x + 1, y + 3 + Old, 39);
+        setBackgroundColor(lwhite); setTextColor(red); gotoXY(x + 1, y + 3 + New); cout << getConsoleLine(x + 1, y + 3 + New, 39);
+        setBackgroundColor(laqua);
+        Old = New;
+
+        char ch = _getch();
+        if (ch == 27)
+            break;
+        else if (ch == -32) {
+            ch = _getch();
+            if (ch == 72 && New > 0) {
+                New--;
+            }
+            else if (ch == 80) {
+                if (page < total && New < 9)
+                    New++;
+                else if (page == total && New < Sum - (total - 1) * 10 - 1)
+                    New++;
+            }
+            else if (ch == 75 && page > 1) {
+                New = 0;
+                page--;
+                check = true;
+            }
+            else if (ch == 77 && page < total) {
+                New = 0;
+                page++;
+                check = true;
+            }
+            else
+                continue;
+        }
+    }
+
+    deleteMenu(x, y, height, width);
+    setBackgroundColor(lwhite);
+}
+
+void viewClasses(string* className, int start, int end, int x, int y)
+{
+    setTextColor(black);
+    int index = 0;
+
+    for (int i = start; i <= end; i++)
+    {
+        gotoXY(x + 1, y + 3 + index); cout << i;
+        gotoXY(x + 10, y + 3 + index); cout << className[i - 1];
+
+        index++;
+    }
 }
 
 void createClass(nodeSchoolYear* schoolYear, listClass& lst, int x ,int y)
@@ -111,10 +208,6 @@ void addAStudentToClass(nodeSchoolYear* schoolYear, Class& myClass, nodeStudent*
 
 void readFileCSVClass(listStudent& lst, const string fileName)
 {
-    //Kí hiệu Rn là file để đọc lần thứ n
-    // Kí hiệu Wn là file để ghi lần thứ n
-    // n=1 không ghi
-    //Mở file .CSV đó lên
     string str = fileName;
     if (str[0] == '"')
     {
@@ -197,3 +290,89 @@ void readFileListClass(listClass& lst, const string fileName)
 }
 
 //string fileName = "./dataSchoolYear/Class_" + to_string(schoolYearNow->y.startYear) + " - " + to_string(schoolYearNow->y.endYear) + ".txt";
+
+void evaluateGPA(nodeStudent* studentNow, nodeSchoolYear* schoolYearNow, Semester semesterNow, bool staffViewAllCourseYes, bool staffViewGPAYes)
+{
+    double GPA = 0;
+    int numOfCreadits = 0;
+    string fileCourse = "./dataStudent/" + to_string(studentNow->student.info.idStudent) + "Course" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(semesterNow.NO) + ".txt";
+    ifstream fileCourseR1(fileCourse);
+    if (fileCourseR1.is_open() == false)
+    {
+        return;
+    }
+    int count = 0;
+    string line;
+    while (fileCourseR1.eof() == false)
+    {
+        getline(fileCourseR1, line, '\n');
+        if (line == "")
+            continue;
+        count++;
+    }
+    // count = số dòng
+    int** score = new int* [count];
+    for (int i = 0; i < count; i++)
+    {
+        score[i] = new int[4];
+    }
+    Course* ListCourse = new Course[count];
+    fileCourseR1.close();
+
+
+    ifstream fileCourseR(fileCourse);
+    int i = 0;
+    while (getline(fileCourseR, line, ','))
+    {
+
+        ListCourse[i].info.idCourse = line;
+        getline(fileCourseR, line, ',');
+        ListCourse[i].info.courseName = line;
+        getline(fileCourseR, line, ',');
+        ListCourse[i].info.className = line;
+        getline(fileCourseR, line, ',');
+        ListCourse[i].info.teacherName = line;
+        getline(fileCourseR, line, ',');
+        ListCourse[i].info.numberOfCredits = stoi(line);
+        numOfCreadits += stoi(line);
+        getline(fileCourseR, line, ',');
+        ListCourse[i].info.dayOfWeek = line;
+        getline(fileCourseR, line, ',');
+        getline(fileCourseR, line, ',');
+        score[i][1] = stoi(line);
+        getline(fileCourseR, line, ',');
+        score[i][2] = stoi(line);
+        getline(fileCourseR, line, '\n');
+        score[i][3] = stoi(line);
+        GPA += score[i][3] * ListCourse[i].info.numberOfCredits;
+        i++;
+    }
+    fileCourseR.close();
+    GPA = GPA / numOfCreadits;
+
+
+    //Phần này dành cho giao diện sinh viên
+    if (!staffViewAllCourseYes && !staffViewGPAYes)
+    {
+        cout << "ID course - CourseName - ClassName - Number of credits - Assigment - Midterm - Final - Average\n";
+        for (int i = 0; i < count; i++)
+        {
+            cout << ListCourse[i].info.idCourse << " - " << ListCourse[i].info.courseName << " - " << ListCourse[i].info.className << " - " << ListCourse[i].info.numberOfCredits << " - " << score[i][0] << " - " << score[i][1] << " - " << score[i][2] << " - " << score[i][3] << endl;
+        }
+        cout << "GPA in this semester: " << GPA << endl;
+    }
+
+    if (staffViewGPAYes)//Phần này dành cho giao diện staff xem điểm GPA cả lớp
+    {
+        cout << "ID - Name - GPA\n";
+        cout << studentNow->student.info.idStudent << " - " << studentNow->student.info.lastName + studentNow->student.info.firstName << " - " << GPA << endl;
+    }
+
+    system("Pause");
+    system("cls");
+    for (int i = 0; i < count; i++)
+    {
+        delete score[i];
+    }
+    delete score;
+}

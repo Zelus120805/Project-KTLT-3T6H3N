@@ -325,7 +325,7 @@ void deleteTextAtXY(int x, int y, std::string str);
 void deleteMenu(int x, int y, int height, int width);
 void viewCoursesForStudent(listCourse l1, int start, int end, int x, int y);
 void viewScoresForStudent(listCourse l1, int start, int end, int x, int y);
-void viewClassesForStaff(nodeStaff* staff, int x, int y);
+void viewClassesForStaff(nodeSchoolYear* node, int x, int y);
 void loadCourse(nodeSchoolYear*& schoolYear, Semester& semester);
 void readSemester(listOfSchoolYear& lst);
 void createSchoolYear(listOfSchoolYear& lst, int x, int y);
@@ -347,6 +347,7 @@ void deleteNodeCourse(listCourse& lst, nodeCourse* deletion);
 void exportCSVFile(nodeSchoolYear* schoolYear, Semester semester, const string address, nodeCourse* course);
 void importScoreBoard(nodeSchoolYear* schoolYear, Semester semester, nodeCourse*& course, const string fileName);
 void ViewChooseCourses(listCourse lst, int start, int end, int x, int y);
+void viewClasses(string* className, int start, int end, int x, int y);
 int deleteAStudentForStaffInCourse(listStudent lst);
 
 
@@ -366,6 +367,7 @@ void menuViewSchoolYearForStaff(int x, int y, int height, int width);
 void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semester& semesterNow, nodeCourse* courseNow); 
 void menuViewChooseCourses(int x, int y, int height, int width);
 void menuAboutUs();
+void menuViewClasses(int x, int y, int height, int width);
 void printText(int x, int y, string str);
 
 

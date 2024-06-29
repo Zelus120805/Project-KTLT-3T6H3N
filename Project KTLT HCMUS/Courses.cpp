@@ -388,6 +388,8 @@ nodeCourse* goToCourse(listCourse lstCourse)
 	int height = 17, width = 80;
 	int Sum = 0;
 	nodeCourse* temp = lstCourse.head;
+	if (temp == NULL)
+		return NULL;
 	while (temp != NULL)
 	{
 		temp = temp->Next;
@@ -672,56 +674,132 @@ void updateCourse(nodeSchoolYear* schoolYearNow, Semester semesterNow, nodeCours
 
 	//Cho người dùng lựa chọn: Đổi cái gì. 
 	int optn;
-	cout << "1. ID Course\n";
-	cout << "2. Course Name\n";
-	cout << "3. Class name\n";
-	cout << "4. Teacher name\n";
-	cout << "5. Number of creadit\n";
-	cout << "6. Day of week\n";
-	do
+
+	int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 8;
+	int width = 30, height = 2;
+	int nBox = 6, dis = 1;
+
+	int newX = x + 10, newY = y + 1;
+	int oldX = newX, oldY = newY;
+
+	bool check = true;
+	int cnt = 0;
+	while (true)
 	{
-		cout << "Nhap noi dung ban muon thay doi: ";
-		cin >> optn;
-	} while (optn > 6 || optn < 1);
-	cin.ignore();
-	switch (optn)
-	{
-	case 1:
-	{
-		cout << "Nhap ID Course moi: ";
-		getline(cin, courseNow->crs.info.idCourse);
-		break;
-	}
-	case 2:
-	{
-		cout << "Nhap Course name moi: ";
-		getline(cin, courseNow->crs.info.courseName);
-		break;
-	}
-	case 3:
-	{
-		cout << "Nhap Class name moi: ";
-		getline(cin, courseNow->crs.info.className);
-		break;
-	}
-	case 4:
-	{
-		cout << "Nhap Teacher name moi: ";
-		getline(cin, courseNow->crs.info.teacherName);
-		break;
-	}
-	case 5:
-	{
-		cout << "Nhap Num of creadit moi: ";
-		cin >> courseNow->crs.info.numberOfCredits;
-		break;
-	}
-	case 6:
-	{
-		cout << "Nhap Day of week moi: ";
-		getline(cin, courseNow->crs.info.dayOfWeek);
-		break;
-	}
+		if (cnt == 0)
+		{
+			system("cls");
+			setTextColor(blue); print("Picture\\Update Info Course.txt", WIDTH_CONSOLE / 2 - 35, 1);
+			setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+			setBackgroundColor(lwhite);
+			setTextColor(green); printTwoLine(x, y, 19, 50);
+
+			string* option = new string[nBox];
+			option[0] = "ID Course";
+			option[1] = "Course Name";
+			option[2] = "Class name";
+			option[3] = "Teacher name";
+			option[4] = "Number of credit";
+			option[5] = "Day of week";
+
+			setTextColor(black); drawNBoxByY(x + 10, y + 1, width, height, nBox, dis, option);
+			delete[] option;
+
+			cnt++;
+		}
+		if (check == true)
+		{
+			gotoXY(oldX, oldY);
+			focus(oldX, oldY, width, ' ');
+			oldX = newX, oldY = newY;
+
+			focus(newX, newY, width, (char)174);
+			check = false;
+		}
+		if (_kbhit())
+		{
+			char choose = _getch();
+			if (choose == 27)
+			{
+				return;
+			}
+			else if (choose == 13)
+			{
+				if (newY == y + 1)
+				{
+					setTextColor(blue); gotoXY(x + width, y + 1); cout << "Input new ID course: ";
+					setTextColor(green); drawBox(x + width + strlen("Input new ID course: "), y, 30, 2);
+					setTextColor(black);
+					ShowCur(1); gotoXY(x + width + strlen("Input new ID course: ") + 1, y + 1);
+					cin.ignore();
+					getline(cin, courseNow->crs.info.idCourse);
+					ShowCur(0);
+				}
+				else if (newY == y + 1 + 1 * (height + dis))
+				{
+					setTextColor(blue); gotoXY(x + 55, y + 1); cout << "Input new course name: ";
+					setTextColor(green); drawBox(x + 55 + strlen("Input new course name: "), y, 30, 2);
+					setTextColor(black);
+					ShowCur(1); gotoXY(x + 55 + strlen("Input new course name: ") + 1, y + 1);
+					cin.ignore();
+					getline(cin, courseNow->crs.info.courseName);
+					ShowCur(0);
+				}
+				else if (newY == y + 1 + 2 * (height + dis))
+				{
+					setTextColor(blue); gotoXY(x + 55, y + 1); cout << "Input new class name: ";
+					setTextColor(green); drawBox(x + 55 + strlen("Input new class name: "), y, 30, 2);
+					setTextColor(black);
+					ShowCur(1); gotoXY(x + 55 + strlen("Input new class name: ") + 1, y + 1);
+					cin.ignore();
+					getline(cin, courseNow->crs.info.className);
+					ShowCur(0);
+				}
+				else if (newY == y + 1 + 3 * (height + dis))
+				{
+					setTextColor(blue); gotoXY(x + 55, y + 1); cout << "Input new teacher name: ";
+					setTextColor(green); drawBox(x + 55 + strlen("Input new teacher name: "), y, 30, 2);
+					setTextColor(black);
+					ShowCur(1); gotoXY(x + 55 + strlen("Input new teacher name: ") + 1, y + 1);
+					cin.ignore();
+					getline(cin, courseNow->crs.info.teacherName);
+					ShowCur(0);
+				}
+				else if (newY == y + 1 + 4 * (height + dis))
+				{
+					setTextColor(blue); gotoXY(x + 55, y + 1); cout << "Input new number of credits: ";
+					setTextColor(green); drawBox(x + 55 + strlen("Input new number of credits: "), y, 10, 2);
+					setTextColor(black);
+					ShowCur(1); gotoXY(x + 55 + strlen("Input new number of credits: ") + 1, y + 1);
+					cin.ignore();
+					cin >> courseNow->crs.info.numberOfCredits;
+					ShowCur(0);
+				}
+				else if (newY == y + 1 + 5 * (height + dis))
+				{
+					setTextColor(blue); gotoXY(x + 55, y + 1); cout << "Input new day of week: ";
+					setTextColor(green); drawBox(x + 55 + strlen("Input new day of week: "), y, 20, 2);
+					setTextColor(black);
+					ShowCur(1); gotoXY(x + 55 + strlen("Input new day of week: ") + 1, y + 1);
+					cin.ignore();
+					cin >> courseNow->crs.info.dayOfWeek;
+					ShowCur(0);
+				}
+
+				break;
+				cnt = 0;
+			}
+			else if (choose == -32)
+			{
+				choose = _getch();
+				if (choose == 72 && newY > y + 1)
+					newY = newY - height - dis;
+				else if (choose == 80 && newY < y + 1 + (nBox - 1) * (height + dis))
+					newY = newY + height + dis;
+			}
+
+			check = true;
+		}
 	}
 
 	//Đổi tên file danh sách lớp cho phù hợp. 
