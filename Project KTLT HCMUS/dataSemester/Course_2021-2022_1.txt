@@ -1,1 +1,2 @@
-CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,6,50,Thu
+CSC10005,Dai so tuyen tinh,23CTT5,Nguyen Le Hoang Dung,4,6,50,Thu
+CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,5,50,Thu

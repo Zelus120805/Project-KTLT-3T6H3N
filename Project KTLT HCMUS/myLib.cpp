@@ -349,7 +349,7 @@ void writeACourseToFile(nodeCourse* course, const string fileName)
 	std::ofstream fileCourse(fileName, std::ios_base::app);
 	if (fileCourse.is_open() == false)
 	{
-		std::cout << "Khong the tao file\n";
+		//std::cout << "Khong the tao file\n";
 		return;
 	}
 	fileCourse << course->crs.info.idCourse << "," << course->crs.info.courseName << "," << course->crs.info.className << "," << course->crs.info.teacherName << "," << course->crs.info.numberOfCredits << "," << course->crs.info.numberOfCurrentStudent << "," << course->crs.info.maxStudent << "," << course->crs.info.dayOfWeek << "\n";
@@ -414,56 +414,56 @@ void createNewCourse(listCourse& lst)
 }
 
 //Thêm một học sinh vào danh sách
-void addAStudentToCourse(nodeCourse*& course, nodeStudent* student)
-{
-	string nameFile = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
-	std::ofstream fileList(nameFile, std::ios_base::app);
-
-	string studentFile = "./raw/" + to_string(student->student.info.idStudent) + "_Course" + ".txt";
-	std::ofstream fileStudent(studentFile, std::ios_base::app);
-
-	if (!fileList.is_open() || !fileStudent.is_open())
-	{
-		std::cout << "Khong the mo file\n";
-		return;
-	}
-	course->crs.info.numberOfCurrentStudent++;
-	if (course->crs.info.numberOfCurrentStudent > course->crs.info.maxStudent)
-	{
-		std::cout << "The class has been full\n";
-		return;
-	}
-	//Ghi ra file riêng của học sinh đó
-	fileStudent << course->crs.info.idCourse << "," << course->crs.info.courseName << "," << course->crs.info.className << "," << course->crs.info.teacherName << "," << course->crs.info.numberOfCredits << "," << course->crs.info.dayOfWeek << ",0,0,0,0\n";
-	//Cập nhật danh sách lớp của khóa học đó.
-
-
-	fileList << course->crs.info.numberOfCurrentStudent << "," << student->student.info.idStudent << "," << student->student.info.lastName << "," << student->student.info.firstName << "," << student->student.info.gender << ",0,0,0,0\n";
-
-	std::ifstream fileCourse("./raw/Course.txt");
-	string temp, remember;
-
-	while (!fileCourse.eof())
-	{
-
-		getline(fileCourse, temp);
-		if (temp.find(course->crs.info.idCourse.c_str()) != std::string::npos && temp.find(course->crs.info.className.c_str()) != std::string::npos)
-		{
-			continue;
-		}
-		else
-		{
-			remember = remember + "\n" + temp;
-		}
-	}
-
-	fileCourse.close();
-	std::ofstream update("./raw/Course.txt");
-	update << course->crs.info.idCourse << "," << course->crs.info.courseName << "," << course->crs.info.className << "," << course->crs.info.teacherName << "," << course->crs.info.numberOfCredits << "," << course->crs.info.numberOfCurrentStudent << "," << course->crs.info.maxStudent << "," << course->crs.info.dayOfWeek;
-	update << remember;
-
-	update.close();
-}
+//void addAStudentToCourse(nodeCourse*& course, nodeStudent* student)
+//{
+//	string nameFile = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
+//	std::ofstream fileList(nameFile, std::ios_base::app);
+//
+//	string studentFile = "./raw/" + to_string(student->student.info.idStudent) + "_Course" + ".txt";
+//	std::ofstream fileStudent(studentFile, std::ios_base::app);
+//
+//	if (!fileList.is_open() || !fileStudent.is_open())
+//	{
+//		std::cout << "Khong the mo file\n";
+//		return;
+//	}
+//	course->crs.info.numberOfCurrentStudent++;
+//	if (course->crs.info.numberOfCurrentStudent > course->crs.info.maxStudent)
+//	{
+//		std::cout << "The class has been full\n";
+//		return;
+//	}
+//	//Ghi ra file riêng của học sinh đó
+//	fileStudent << course->crs.info.idCourse << "," << course->crs.info.courseName << "," << course->crs.info.className << "," << course->crs.info.teacherName << "," << course->crs.info.numberOfCredits << "," << course->crs.info.dayOfWeek << ",0,0,0,0\n";
+//	//Cập nhật danh sách lớp của khóa học đó.
+//
+//
+//	fileList << course->crs.info.numberOfCurrentStudent << "," << student->student.info.idStudent << "," << student->student.info.lastName << "," << student->student.info.firstName << "," << student->student.info.gender << ",0,0,0,0\n";
+//
+//	std::ifstream fileCourse("./raw/Course.txt");
+//	string temp, remember;
+//
+//	while (!fileCourse.eof())
+//	{
+//
+//		getline(fileCourse, temp);
+//		if (temp.find(course->crs.info.idCourse.c_str()) != std::string::npos && temp.find(course->crs.info.className.c_str()) != std::string::npos)
+//		{
+//			continue;
+//		}
+//		else
+//		{
+//			remember = remember + "\n" + temp;
+//		}
+//	}
+//
+//	fileCourse.close();
+//	std::ofstream update("./raw/Course.txt");
+//	update << course->crs.info.idCourse << "," << course->crs.info.courseName << "," << course->crs.info.className << "," << course->crs.info.teacherName << "," << course->crs.info.numberOfCredits << "," << course->crs.info.numberOfCurrentStudent << "," << course->crs.info.maxStudent << "," << course->crs.info.dayOfWeek;
+//	update << remember;
+//
+//	update.close();
+//}
 
 //Viết hàm addTail khóa học
 void addTailCourse(listCourse& lst, Course newCourse)
@@ -577,84 +577,84 @@ void addTailStudent(listStudent& lst, nodeStudent* newNode)
 }
 
 //Đọc sinh viên từ file.csv
-void readStudentFromCSV(listStudent& lst, const string fileName)
-{
-	ifstream fileStudent(fileName);
-	if (!fileStudent.is_open())
-	{
-		return;
-	}
-	//Đọc dòng đầu
-	string temp;
-	getline(fileStudent, temp);
-	lst.head = NULL;
-
-	while (!fileStudent.eof())
-	{
-		nodeStudent* Student = new nodeStudent();
-		Student->next = NULL;
-		getline(fileStudent, temp, ',');
-		if (temp == "")
-		{
-			delete Student;
-			return;
-		}
-		Student->student.info.idStudent = std::stoi(temp);
-		getline(fileStudent, temp, ',');
-
-		Student->student.info.lastName = temp;
-		getline(fileStudent, temp, ',');
-
-		Student->student.info.firstName = temp;
-		getline(fileStudent, temp, ',');
-
-		Student->student.info.gender = temp;
-		getline(fileStudent, temp, '/');
-
-		Student->student.info.d.day = std::stoi(temp);
-		getline(fileStudent, temp, '/');
-		Student->student.info.d.month = std::stoi(temp);
-		getline(fileStudent, temp, ',');
-		Student->student.info.d.year = std::stoi(temp);
-		getline(fileStudent, temp, ',');
-
-		Student->student.info.socialId = temp;
-		getline(fileStudent, temp, '\n');
-
-		Student->student.info.inClass = temp;
-		addTailStudent(lst, Student);
-
-	}
-
-	fileStudent.close();
-}
+//void readStudentFromCSV(listStudent& lst, const string fileName)
+//{
+//	ifstream fileStudent(fileName);
+//	if (!fileStudent.is_open())
+//	{
+//		return;
+//	}
+//	//Đọc dòng đầu
+//	string temp;
+//	getline(fileStudent, temp);
+//	lst.head = NULL;
+//
+//	while (!fileStudent.eof())
+//	{
+//		nodeStudent* Student = new nodeStudent();
+//		Student->next = NULL;
+//		getline(fileStudent, temp, ',');
+//		if (temp == "")
+//		{
+//			delete Student;
+//			return;
+//		}
+//		Student->student.info.idStudent = std::stoi(temp);
+//		getline(fileStudent, temp, ',');
+//
+//		Student->student.info.lastName = temp;
+//		getline(fileStudent, temp, ',');
+//
+//		Student->student.info.firstName = temp;
+//		getline(fileStudent, temp, ',');
+//
+//		Student->student.info.gender = temp;
+//		getline(fileStudent, temp, '/');
+//
+//		Student->student.info.d.day = std::stoi(temp);
+//		getline(fileStudent, temp, '/');
+//		Student->student.info.d.month = std::stoi(temp);
+//		getline(fileStudent, temp, ',');
+//		Student->student.info.d.year = std::stoi(temp);
+//		getline(fileStudent, temp, ',');
+//
+//		Student->student.info.socialId = temp;
+//		getline(fileStudent, temp, '\n');
+//
+//		Student->student.info.inClass = temp;
+//		addTailStudent(lst, Student);
+//
+//	}
+//
+//	fileStudent.close();
+//}
 
 //Thêm n sinh viên vào khóa học từ file CSV
-void addNStudentFromFile(nodeCourse*& course, const string fileName)
-{
-	ifstream fileStudent(fileName);
-	if (!fileStudent.is_open())
-	{
-		std::cout << "Khong the doc file" << endl;
-		return;
-	}
-	//Đọc từng sinh viên
-	listStudent lst = { };
-	lst.head = NULL;
-	readStudentFromCSV(lst, fileName);
-	//readFileStudent(lst, fileName.c_str());
-
-	string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
-	ofstream fileCourse(courseName, ios_base::app);
-	nodeStudent* temp = lst.head;
-	while (temp != NULL)
-	{
-		addAStudentToCourse(course, temp);
-		temp = temp->next;
-	}
-	std::cout << "Da them thanh cong\n";
-	fileStudent.close();
-}
+//void addNStudentFromFile(nodeCourse*& course, const string fileName)
+//{
+//	ifstream fileStudent(fileName);
+//	if (!fileStudent.is_open())
+//	{
+//		std::cout << "Khong the doc file" << endl;
+//		return;
+//	}
+//	//Đọc từng sinh viên
+//	listStudent lst = { };
+//	lst.head = NULL;
+//	readStudentFromCSV(lst, fileName);
+//	//readFileStudent(lst, fileName.c_str());
+//
+//	string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
+//	ofstream fileCourse(courseName, ios_base::app);
+//	nodeStudent* temp = lst.head;
+//	while (temp != NULL)
+//	{
+//		addAStudentToCourse(course, temp);
+//		temp = temp->next;
+//	}
+//	std::cout << "Da them thanh cong\n";
+//	fileStudent.close();
+//}
 
 //---------------------------------------------------------------------------
 
@@ -2077,27 +2077,45 @@ void deleteNodeStudent(listStudent& lst, nodeStudent* deletion)
 		delete curr;
 	}
 }
-void printStudent(listStudent lst)
+void printStudent(listStudent lst, int start, int end, int x, int y)
 {
-	if (lst.head == NULL)
+	if (end == 0)
 	{
-		cout << "List is empty\n";
+		setTextColor(red);
+		gotoXY(HEIGHT_CONSOLE / 2, y + 3); cout << "No data of student in this course !!!";
 		return;
 	}
+
+	setTextColor(black);
+	int index = 0, i = 1;
 	nodeStudent* temp = lst.head;
-	int i = 1;
 	while (temp != NULL)
 	{
-		cout << i << ": " << temp->student.info.idStudent << " - " << temp->student.info.lastName << " " << temp->student.info.firstName << endl;
-		temp = temp->next;
+		if (i == start)
+			break;
 		i++;
+		temp = temp->next;
+	}
+
+	while (temp != NULL)
+	{
+		if (i == end + 1)
+			break;
+		gotoXY(x + 1, y + 3 + index); cout << i;
+		gotoXY(x + 5, y + 3 + index); cout << temp->student.info.idStudent;
+		gotoXY(x + 20, y + 3 + index); cout << temp->student.info.lastName;
+		gotoXY(x + 45, y + 3 + index); cout << temp->student.info.firstName;
+
+		temp = temp->next;
+		index++; i++;
 	}
 }
+
 nodeStudent* goToStudent(int No, listStudent lst)
 {
 	if (lst.head == NULL)
 	{
-		cout << "List is empty\n";
+		//cout << "List is empty\n";
 		return NULL;
 	}
 	int i = 1;
@@ -2108,8 +2126,8 @@ nodeStudent* goToStudent(int No, listStudent lst)
 		i++;
 	}
 	return temp;
-
 }
+
 void readListStudentOfACourse(listStudent& lst, const string fileName)
 {
 	ifstream fileStudent(fileName);
@@ -2152,207 +2170,208 @@ void readListStudentOfACourse(listStudent& lst, const string fileName)
 
 	fileStudent.close();
 }
-void deleteAStudentFromCourse(nodeCourse*& course, nodeStudent* deletion)
-{
-	string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
-	ifstream fileCourse(courseName);
-	if (!fileCourse.is_open())
-	{
-		cout << "Cannot open file course\n";
-		return;
-	}
-	listStudent lst = {};
-	lst.head = NULL;
-	readListStudentOfACourse(lst, courseName);
 
-	nodeStudent* Head = lst.head;
-
-	//Xóa khóa học trong file tất cả các bạn học sinh
-	while (Head != NULL)
-	{
-		string Line, Temp;
-		string studentFile = "./raw/" + to_string(Head->student.info.idStudent) + "_Course" + ".txt";
-		std::ifstream fileStudent(studentFile);
-		if (!fileStudent.is_open())
-		{
-			return;
-		}
-		while (std::getline(fileStudent, Line))
-		{
-			if (Line.find(course->crs.info.idCourse) != string::npos)
-			{
-				continue;
-			}
-			else
-			{
-				if (Temp.empty())
-					Temp = Temp + Line;
-				else
-					Temp = Temp + "\n" + Line;
-			}
-		}
-		fileStudent.close();
-		ofstream fileStudent2(studentFile);
-		fileStudent2 << Temp << "\n";
-		fileStudent2.close();
-		Head = Head->next;
-	}
-
-
-	deleteNodeStudent(lst, deletion);
-	printStudent(lst);
-	fileCourse.close();
-
-	ofstream newFile;
-	newFile.open(courseName);
-	newFile << "No," << "Student ID," << "Student Last Name," << "Student First Name," << "Gender," << "Other Mark(Assignment)," << "Midterm Mark," << "Final Mark," << "Average Mark\n";
-	nodeStudent* temp = lst.head;
-	course->crs.info.numberOfCurrentStudent = 0;
-	newFile.close();
-	ifstream fileCourseToRead("./raw/Course.txt");
-
-	string line, remember;
-	while (std::getline(fileCourseToRead, line))
-	{
-
-		if (line.find(course->crs.info.idCourse.c_str()) != string::npos && line.find(course->crs.info.className.c_str()) != string::npos)
-		{
-			continue;
-		}
-		else
-		{
-			if (remember.empty())
-				remember = remember + line;
-			else
-				remember = remember + "\n" + line;
-		}
-	}
-	fileCourse.close();
-
-
-	course->crs.info.numberOfCurrentStudent = 0;
-
-
-
-
-	ofstream fileCourseToWrite("./raw/Course.txt");
-	fileCourseToWrite << remember << "\n";
-	fileCourseToWrite.close();
-	writeACourseToFile(course, "./raw/Course.txt");//fileCourseToWrite.close();
-	while (temp != NULL)
-	{
-		addAStudentToCourse(course, temp);
-		temp = temp->next;
-	}
-	system("cls");
-
-
-	printStudent(lst);
-	system("Pause");
-
-	deleteAllStudent(lst);
-
-}
+//void deleteAStudentFromCourse(nodeCourse*& course, nodeStudent* deletion)
+//{
+//	string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
+//	ifstream fileCourse(courseName);
+//	if (!fileCourse.is_open())
+//	{
+//		cout << "Cannot open file course\n";
+//		return;
+//	}
+//	listStudent lst = {};
+//	lst.head = NULL;
+//	readListStudentOfACourse(lst, courseName);
+//
+//	nodeStudent* Head = lst.head;
+//
+//	//Xóa khóa học trong file tất cả các bạn học sinh
+//	while (Head != NULL)
+//	{
+//		string Line, Temp;
+//		string studentFile = "./raw/" + to_string(Head->student.info.idStudent) + "_Course" + ".txt";
+//		std::ifstream fileStudent(studentFile);
+//		if (!fileStudent.is_open())
+//		{
+//			return;
+//		}
+//		while (std::getline(fileStudent, Line))
+//		{
+//			if (Line.find(course->crs.info.idCourse) != string::npos)
+//			{
+//				continue;
+//			}
+//			else
+//			{
+//				if (Temp.empty())
+//					Temp = Temp + Line;
+//				else
+//					Temp = Temp + "\n" + Line;
+//			}
+//		}
+//		fileStudent.close();
+//		ofstream fileStudent2(studentFile);
+//		fileStudent2 << Temp << "\n";
+//		fileStudent2.close();
+//		Head = Head->next;
+//	}
+//
+//
+//	deleteNodeStudent(lst, deletion);
+//	printStudent(lst);
+//	fileCourse.close();
+//
+//	ofstream newFile;
+//	newFile.open(courseName);
+//	newFile << "No," << "Student ID," << "Student Last Name," << "Student First Name," << "Gender," << "Other Mark(Assignment)," << "Midterm Mark," << "Final Mark," << "Average Mark\n";
+//	nodeStudent* temp = lst.head;
+//	course->crs.info.numberOfCurrentStudent = 0;
+//	newFile.close();
+//	ifstream fileCourseToRead("./raw/Course.txt");
+//
+//	string line, remember;
+//	while (std::getline(fileCourseToRead, line))
+//	{
+//
+//		if (line.find(course->crs.info.idCourse.c_str()) != string::npos && line.find(course->crs.info.className.c_str()) != string::npos)
+//		{
+//			continue;
+//		}
+//		else
+//		{
+//			if (remember.empty())
+//				remember = remember + line;
+//			else
+//				remember = remember + "\n" + line;
+//		}
+//	}
+//	fileCourse.close();
+//
+//
+//	course->crs.info.numberOfCurrentStudent = 0;
+//
+//
+//
+//
+//	ofstream fileCourseToWrite("./raw/Course.txt");
+//	fileCourseToWrite << remember << "\n";
+//	fileCourseToWrite.close();
+//	writeACourseToFile(course, "./raw/Course.txt");//fileCourseToWrite.close();
+//	while (temp != NULL)
+//	{
+//		addAStudentToCourse(course, temp);
+//		temp = temp->next;
+//	}
+//	system("cls");
+//
+//
+//	printStudent(lst);
+//	system("Pause");
+//
+//	deleteAllStudent(lst);
+//
+//}
 //---------------------------------------------------------------------
 
 //--------------------------DELETE A COURSE-----------------------------
-void deleteNodeCourse(listCourse& lst, nodeCourse* deletion)
-{
-	if (lst.head == NULL)
-	{
-		cout << "List is empty\n";
-		return;
-	}
-	while (lst.head->crs.info.idCourse == deletion->crs.info.idCourse && lst.head->crs.info.className == deletion->crs.info.className)
-	{
-		nodeCourse* temp = lst.head;
-		lst.head = lst.head->Next;
-		delete temp;
-		if (lst.head == NULL)
-		{
-			cout << "List is empty\n";
-			return;
-		}
-	}
-	nodeCourse* Prev = lst.head;
-	nodeCourse* Curr = Prev->Next;
-	while (Curr->Next != NULL)
-	{
-		if (Curr->crs.info.idCourse == deletion->crs.info.idCourse && deletion->crs.info.className == deletion->crs.info.className)
-		{
-			nodeCourse* temp = Curr;
-			Curr = Curr->Next;
-			Prev->Next = Curr;
-			delete temp;
-		}
-		else
-		{
-			Prev = Curr;
-			Curr = Curr->Next;
-		}
-	}
-	if (Curr->crs.info.idCourse == deletion->crs.info.idCourse && deletion->crs.info.className == deletion->crs.info.className)
-	{
-		Prev->Next = NULL;
-		delete Curr;
-	}
-
-}
-void deleteACourse(listCourse& lst, nodeCourse* deletion)
-{
-	//Kí hiệu R là file để đọc
-	//Kí hiệu W là file để ghi
-
-	//Xóa dòng chứa khóa học này trong file Course.txt;
-	ifstream fileCourseR("./raw/Course.txt");
-	if (!fileCourseR.is_open())
-	{
-		return;
-	}
-
-	string line, remember;
-	string idCourse = deletion->crs.info.idCourse;
-	string nameClass = deletion->crs.info.className;
-
-	while (std::getline(fileCourseR, line))
-	{
-		if (line.find(idCourse.c_str()) != string::npos && line.find(nameClass.c_str()) != string::npos)
-		{
-			continue;
-		}
-		else
-		{
-			if (remember.empty())
-				remember = remember + line;
-			else
-				remember = remember + "\n" + line;
-		}
-	}
-	fileCourseR.close();
-
-	ofstream fileCourseW("./raw/Course.txt");
-	if (!fileCourseW.is_open())
-	{
-		return;
-	}
-	fileCourseW << remember << "\n";
-	fileCourseW.close();
-	//Xóa toàn bộ học sinh 
-	const string courseName = "./raw/" + deletion->crs.info.courseName + "_" + deletion->crs.info.className + ".txt";
-	listStudent listS;
-	readListStudentOfACourse(listS, courseName);
-	nodeStudent* Temp = listS.head;
-	while (Temp != NULL)
-	{
-		deleteAStudentFromCourse(deletion, Temp);
-		Temp = Temp->next;
-	}
-	deleteNodeCourse(lst, deletion);
-	cout << "The course has been removed\n";
-	system("Pause");
-
-
-}
+//void deleteNodeCourse(listCourse& lst, nodeCourse* deletion)
+//{
+//	if (lst.head == NULL)
+//	{
+//		cout << "List is empty\n";
+//		return;
+//	}
+//	while (lst.head->crs.info.idCourse == deletion->crs.info.idCourse && lst.head->crs.info.className == deletion->crs.info.className)
+//	{
+//		nodeCourse* temp = lst.head;
+//		lst.head = lst.head->Next;
+//		delete temp;
+//		if (lst.head == NULL)
+//		{
+//			cout << "List is empty\n";
+//			return;
+//		}
+//	}
+//	nodeCourse* Prev = lst.head;
+//	nodeCourse* Curr = Prev->Next;
+//	while (Curr->Next != NULL)
+//	{
+//		if (Curr->crs.info.idCourse == deletion->crs.info.idCourse && deletion->crs.info.className == deletion->crs.info.className)
+//		{
+//			nodeCourse* temp = Curr;
+//			Curr = Curr->Next;
+//			Prev->Next = Curr;
+//			delete temp;
+//		}
+//		else
+//		{
+//			Prev = Curr;
+//			Curr = Curr->Next;
+//		}
+//	}
+//	if (Curr->crs.info.idCourse == deletion->crs.info.idCourse && deletion->crs.info.className == deletion->crs.info.className)
+//	{
+//		Prev->Next = NULL;
+//		delete Curr;
+//	}
+//
+//}
+//void deleteACourse(listCourse& lst, nodeCourse* deletion)
+//{
+//	//Kí hiệu R là file để đọc
+//	//Kí hiệu W là file để ghi
+//
+//	//Xóa dòng chứa khóa học này trong file Course.txt;
+//	ifstream fileCourseR("./raw/Course.txt");
+//	if (!fileCourseR.is_open())
+//	{
+//		return;
+//	}
+//
+//	string line, remember;
+//	string idCourse = deletion->crs.info.idCourse;
+//	string nameClass = deletion->crs.info.className;
+//
+//	while (std::getline(fileCourseR, line))
+//	{
+//		if (line.find(idCourse.c_str()) != string::npos && line.find(nameClass.c_str()) != string::npos)
+//		{
+//			continue;
+//		}
+//		else
+//		{
+//			if (remember.empty())
+//				remember = remember + line;
+//			else
+//				remember = remember + "\n" + line;
+//		}
+//	}
+//	fileCourseR.close();
+//
+//	ofstream fileCourseW("./raw/Course.txt");
+//	if (!fileCourseW.is_open())
+//	{
+//		return;
+//	}
+//	fileCourseW << remember << "\n";
+//	fileCourseW.close();
+//	//Xóa toàn bộ học sinh 
+//	const string courseName = "./raw/" + deletion->crs.info.courseName + "_" + deletion->crs.info.className + ".txt";
+//	listStudent listS;
+//	readListStudentOfACourse(listS, courseName);
+//	nodeStudent* Temp = listS.head;
+//	while (Temp != NULL)
+//	{
+//		deleteAStudentFromCourse(deletion, Temp);
+//		Temp = Temp->next;
+//	}
+//	deleteNodeCourse(lst, deletion);
+//	cout << "The course has been removed\n";
+//	system("Pause");
+//
+//
+//}
 
 //----------------------------------------------------------------------
 void changePasswordForStaff(nodeStaff*& staff, const char fileName[])
@@ -2516,44 +2535,44 @@ void changePasswordForStaff(nodeStaff*& staff, const char fileName[])
 //------------------------------------------------------------------------------------------------
 
 //-----------------EXPORT .CSV FILE AND OPERATE WITH SCORE-------------------------
-void exportCSVFile(const string address, nodeCourse* course)
-{
-	string addressFile = address;
-	if (addressFile[0] == '"')
-	{
-		addressFile.erase(0, 1);
-	}
-	if (addressFile[addressFile.size() - 1] == '"')
-	{
-		addressFile.pop_back();
-	}
-
-	if (address.back() == '\\')
-	{
-		addressFile = addressFile + course->crs.info.courseName + "_" + course->crs.info.className + ".csv";
-	}
-	else
-		addressFile = addressFile + "\\" + course->crs.info.courseName + "_" + course->crs.info.className + ".csv";
-	cout << addressFile << endl;
-	system("Pause");
-	ofstream fileCSV(addressFile);
-	if (!fileCSV.is_open())
-	{
-		cout << "Cannot write to file\n";
-		return;
-	}
-	const string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
-	ifstream fileCourseR(courseName);
-	string line;
-	while (std::getline(fileCourseR, line))
-	{
-		fileCSV << line << "\n";
-	}
-	fileCSV.close();
-	fileCourseR.close();
-	cout << "Sucessfully exported!!. Press any key to continue\n";
-	system("Pause");
-}
+//void exportCSVFile(const string address, nodeCourse* course)
+//{
+//	string addressFile = address;
+//	if (addressFile[0] == '"')
+//	{
+//		addressFile.erase(0, 1);
+//	}
+//	if (addressFile[addressFile.size() - 1] == '"')
+//	{
+//		addressFile.pop_back();
+//	}
+//
+//	if (address.back() == '\\')
+//	{
+//		addressFile = addressFile + course->crs.info.courseName + "_" + course->crs.info.className + ".csv";
+//	}
+//	else
+//		addressFile = addressFile + "\\" + course->crs.info.courseName + "_" + course->crs.info.className + ".csv";
+//	cout << addressFile << endl;
+//	system("Pause");
+//	ofstream fileCSV(addressFile);
+//	if (!fileCSV.is_open())
+//	{
+//		cout << "Cannot write to file\n";
+//		return;
+//	}
+//	const string courseName = "./raw/" + course->crs.info.courseName + "_" + course->crs.info.className + ".txt";
+//	ifstream fileCourseR(courseName);
+//	string line;
+//	while (std::getline(fileCourseR, line))
+//	{
+//		fileCSV << line << "\n";
+//	}
+//	fileCSV.close();
+//	fileCourseR.close();
+//	cout << "Sucessfully exported!!. Press any key to continue\n";
+//	system("Pause");
+//}
 
 
 //---------------------------------------------------------------------------------

@@ -1,0 +1,2 @@
+CSC10007,Toan roi rac,23CTT5,Le Van Hop,3,0,120,Fri
+CSC10005,Dai so tuyen tinh,23CTT5,Le Van Hop,3,0,120,Sat

@@ -21,17 +21,15 @@ void createClass(nodeSchoolYear* schoolYear, listClass& lst, int x ,int y)
     gotoXY(x + strlen("Input class name: ") + 1, y + 1); cin.ignore(); getline(cin, newNode->myClass.nameClass);
     ShowCur(0);
 
-    string fileClassName = "./dataSchoolYear/" + newNode->myClass.nameClass + "" + to_string(schoolYear->y.startYear) + " - " + to_string(schoolYear->y.endYear) + ".txt";
+    string fileClassName = "./dataClass/" + newNode->myClass.nameClass + "_" + to_string(schoolYear->y.startYear) + "-" + to_string(schoolYear->y.endYear) + ".txt";
     ofstream fileClassW(fileClassName);
     fileClassW << "ID Student,Last name,First Name,Gender,Date Of Birth,Social ID\n";
     fileClassW.close();
-    string fileClass = "./dataSchoolYear/Class" + to_string(schoolYear->y.startYear) + " - " + to_string(schoolYear->y.endYear) + ".txt";
+
+    string fileClass = "./dataSchoolYear/Class_" + to_string(schoolYear->y.startYear) + "-" + to_string(schoolYear->y.endYear) + ".txt";
     ofstream fileListClass(fileClass, ios_base::app);
     fileListClass << newNode->myClass.nameClass << "\n";
     fileListClass.close();
-    //"C:\Users\pc\Desktop\PythonApplication1\PythonApplication1\file.csv"
-    //Kiểm tra tên lớp có tồn tại hay chưa?
-    //nodeClass* check = lst.head;
 
     string fileName;
     setTextColor(blue); gotoXY(x, y + 5); std::cout << "Input file to import: ";
@@ -47,10 +45,11 @@ void createClass(nodeSchoolYear* schoolYear, listClass& lst, int x ,int y)
     if (temp == NULL)
     {
         // cout << "List is empty\n";
+        string str = "No data of student in this file !!!";
+        printTextAtXY(x + str.length() / 2, y + 7, str);
     }
     else
     {
-
         while (temp != NULL)
         {
             addAStudentToClass(schoolYear, newNode->myClass, temp);
@@ -68,7 +67,7 @@ void createClass(nodeSchoolYear* schoolYear, listClass& lst, int x ,int y)
 
 void addAStudentToClass(nodeSchoolYear* schoolYear, Class& myClass, nodeStudent* student)
 {
-    string fileClassName = "./dataSchoolYear/" + myClass.nameClass + "_" + to_string(schoolYear->y.startYear) + " - " + to_string(schoolYear->y.endYear) + ".txt";
+    string fileClassName = "./dataClass/" + myClass.nameClass + "_" + to_string(schoolYear->y.startYear) + "-" + to_string(schoolYear->y.endYear) + ".txt";
     ofstream fileClassW(fileClassName, ios_base::app);
     if (!fileClassW.is_open())
     {
@@ -128,7 +127,7 @@ void readFileCSVClass(listStudent& lst, const string fileName)
     ifstream fileClassR(str);
     if (!fileClassR.is_open())
     {
-        cout << "ERROR!\n";
+        //cout << "ERROR!\n";
         return;
     }
     string temp;
@@ -157,3 +156,44 @@ void readFileCSVClass(listStudent& lst, const string fileName)
         addTailStudent(lst, newNode);
     }
 }
+
+void addTailClass(listClass& lst, Class newClass)
+{
+    nodeClass* newNode = new nodeClass();
+    newNode->myClass = newClass;
+    newNode->next = NULL;
+    if (lst.head == NULL)
+    {
+        lst.head = newNode;
+        return;
+    }
+    nodeClass* temp = lst.head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+void readFileListClass(listClass& lst, const string fileName)
+{
+    ifstream fileListClass(fileName);
+    if (!fileListClass.is_open())
+    {
+        //	cout << "ok1\n";
+        return;
+    }
+    string Line;
+    while (std::getline(fileListClass, Line))
+    {
+        if (Line == "" || Line == "\n")
+            return;
+        Class newClass;
+        newClass.nameClass = Line;
+
+        addTailClass(lst, newClass);
+    }
+    fileListClass.close();
+}
+
+//string fileName = "./dataSchoolYear/Class_" + to_string(schoolYearNow->y.startYear) + " - " + to_string(schoolYearNow->y.endYear) + ".txt";

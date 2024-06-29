@@ -4,7 +4,7 @@ listStudent lstStudent;
 listOfSchoolYear listOfSY;
 listCourse listOfCourse;
 listStaff lstStaff;
-bool checkScore = true;
+bool checkScore = false;
 
 int main()
 {
@@ -14,6 +14,7 @@ int main()
 	lstStaff.head = NULL;
 
 	readSchoolYear(listOfSY);
+	readSemester(listOfSY);
 	readFileStudent(lstStudent, "accountStudent.txt");
 	readFileStaff(lstStaff, "accountStaff.txt");
 

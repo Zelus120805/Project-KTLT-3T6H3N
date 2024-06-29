@@ -180,7 +180,8 @@ void menuMain()
         {
             setBackgroundColor(lwhite);
             system("cls");
-            setTextColor(aqua); print("Picture\\3T6H3N.txt", WIDTH_CONSOLE / 2 - 58, 1);
+            setTextColor(purple); print("Picture\\3T6H3N.txt", WIDTH_CONSOLE / 2 - 58, 1);
+            setTextColor(aqua); print("Picture\\U.txt", 10, 10); print("Picture\\S.txt", WIDTH_CONSOLE - 20, 10);
             setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
             setBackgroundColor(lwhite); setTextColor(green); printTwoLine(WIDTH_CONSOLE / 2 - 30, HEIGHT_CONSOLE / 2 - 7, 18, 60);
 
@@ -444,8 +445,8 @@ void deleteTextAtXY(int x, int y, std::string str)
 
 void printMovingInstructionsAddTab()
 {
-    gotoXY(WIDTH_CONSOLE / 2 - 32, HEIGHT_CONSOLE);
-    cout << "     Press 'tab' to move next box and 'esc' to cancel register     ";
+    gotoXY(WIDTH_CONSOLE / 2 - 28, HEIGHT_CONSOLE);
+    cout << "     Press 'tab' to move next box and 'esc' to return     ";
 }
 
 void menuChangePassword(int& x, int& y)
@@ -679,29 +680,35 @@ void menuBoxViewScoresForStudent(int x, int y, int height, int width)
 
 void menuSchoolYearForStaff(nodeStaff* staff)
 {
-    system("cls");
-    setTextColor(purple); print("Picture\\School Year.txt", WIDTH_CONSOLE / 2 - 25, 3);
-    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
-    setBackgroundColor(lwhite);
-    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 6;
+    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 8;
     int width = 30, height = 2;
     int nBox = 3, dis = 1;
 
     int newX = x + 5, newY = y + 1;
     int oldX = newX, oldY = newY;
 
-    setTextColor(green); printTwoLine(x, y, 10, 40);
-
-    string* option = new string[nBox];
-    option[0] = "Create School Year";
-    option[1] = "View School Year";
-    option[2] = "Create Semester";
-    setTextColor(black); drawNBoxByY(x + 5, y + 1, width, height, nBox, dis, option);
-    delete[] option;
-
+    int cnt = 0;
     bool check = true;
     while (true)
     {
+        if (cnt == 0)
+        {
+            system("cls");
+            setTextColor(purple); print("Picture\\School Year.txt", WIDTH_CONSOLE / 2 - 25, 1);
+            setTextColor(aqua); print("Picture\\FIT.txt", 20, 18);
+            setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+            setBackgroundColor(lwhite);
+            setTextColor(green); printTwoLine(x, y, 10, 40);
+
+            string* option = new string[nBox];
+            option[0] = "Create School Year";
+            option[1] = "View School Year";
+            option[2] = "Create Semester";
+            setTextColor(black); drawNBoxByY(x + 5, y + 1, width, height, nBox, dis, option);
+            delete[] option;
+
+            cnt++;
+        }
         if (check == true)
         {
             gotoXY(oldX, oldY);
@@ -732,6 +739,8 @@ void menuSchoolYearForStaff(nodeStaff* staff)
                 {
                     createSemester(x + 55, y);
                 }
+
+                cnt = 0;
             }
             else if (choose == -32)
             {
@@ -749,28 +758,34 @@ void menuSchoolYearForStaff(nodeStaff* staff)
 
 void menuClassForStaff(nodeStaff* staff)
 {
-    system("cls");
-    setTextColor(purple); print("Picture\\Class.txt", WIDTH_CONSOLE / 2 - 5, 3);
-    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
-    setBackgroundColor(lwhite);
-    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 6;
+    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 8;
     int width = 20, height = 2;
     int nBox = 2, dis = 1;
 
     int newX = x + 10, newY = y + 1;
     int oldX = newX, oldY = newY;
 
-    setTextColor(green); printTwoLine(x, y, 7, 40);
-
-    string* option = new string[nBox];
-    option[0] = "Create Class";
-    option[1] = "View Classes";
-    setTextColor(black); drawNBoxByY(x + 10, y + 1, width, height, nBox, dis, option);
-    delete[] option;
-
+    int cnt = 0;
     bool check = true;
     while (true)
     {
+        if (cnt == 0)
+        {
+            system("cls");
+            setTextColor(purple); print("Picture\\Class.txt", WIDTH_CONSOLE / 2 - 5, 1);
+            setTextColor(aqua); print("Picture\\FIT.txt", 20, 15);
+            setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+            setBackgroundColor(lwhite);
+            setTextColor(green); printTwoLine(x, y, 7, 40);
+
+            string* option = new string[nBox];
+            option[0] = "Create Class";
+            option[1] = "View Classes";
+            setTextColor(black); drawNBoxByY(x + 10, y + 1, width, height, nBox, dis, option);
+            delete[] option;
+
+            cnt++;
+        }
         if (check == true)
         {
             gotoXY(oldX, oldY);
@@ -787,17 +802,24 @@ void menuClassForStaff(nodeStaff* staff)
                 return;
             else if (choose == 13)
             {
+                int tempx = x + 50, tempy = y;
+                nodeSchoolYear* schoolYearNow = goToSchoolYear(listOfSY, tempx, tempy);
+                deleteMenu(x + 50, y, 15, 50);
                 if (newY == y + 1)
                 {
-                    int tempx = x + 50, tempy = y;
-                    nodeSchoolYear* schoolYearNow = goToSchoolYear(listOfSY, tempx, tempy);
-                    deleteMenu(x + 50, y, 15, 50);
                     createClass(schoolYearNow, schoolYearNow->y.listOfClass, x + 45, y);
                 }
                 else if (newY == y + 1 + height + dis)
                 {
-                    // tu lam
+                    /*listClass listClass;
+                    listClass.head = NULL;
+                    string fileName = "./dataSchoolYear/Class_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + ".txt";
+                    readFileListClass(listClass, fileName);*/
+
+                   
                 }
+
+                cnt = 0;
             }
             else if (choose == -32)
             {
@@ -815,26 +837,32 @@ void menuClassForStaff(nodeStaff* staff)
 
 void menuCourseForStaff(nodeStaff* staff)
 {
-    system("cls");
-    setTextColor(purple); print("Picture\\Course.txt", WIDTH_CONSOLE / 2 - 10, 3);
-    setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
-    setBackgroundColor(lwhite);
-    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 6;
-    setTextColor(green); printTwoLine(x, y, 7, 40);
-    setTextColor(black);
+    int x = WIDTH_CONSOLE / 2 - 50, y = HEIGHT_CONSOLE / 2 - 8;
     int nBox = 2, height = 2, width = 20, dis = 1;
     int newX = x + 10, newY = y + 1;
     int oldX = newX, oldY = newY;
 
-    string* option = new string[nBox];
-    option[0] = "Create Course";
-    option[1] = "View Courses";
-    drawNBoxByY(x + 10, y + 1, width, height, nBox, dis, option);
-    delete[] option;
+    int cnt = 0;
     bool check = true;
-
     while (true)
     {
+        if (cnt == 0) {
+            system("cls");
+            setTextColor(purple); print("Picture\\Course.txt", WIDTH_CONSOLE / 2 - 10, 1);
+            setTextColor(aqua); print("Picture\\FIT.txt", 20, 15);
+            setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+            setBackgroundColor(lwhite);
+            setTextColor(green); printTwoLine(x, y, 7, 40);
+            setTextColor(black);
+
+            string* option = new string[nBox];
+            option[0] = "Create Course";
+            option[1] = "View Courses";
+            drawNBoxByY(x + 10, y + 1, width, height, nBox, dis, option);
+            delete[] option;
+
+            cnt++;
+        }
         if (check == true)
         {
             gotoXY(oldX, oldY);
@@ -854,30 +882,60 @@ void menuCourseForStaff(nodeStaff* staff)
             }
             else if (ch == 13)
             {
+                int tempX = x + 50, tempY = y;
+                nodeSchoolYear* schoolYearNow = goToSchoolYear(listOfSY, tempX, tempY);
+                int optn;
+
+                setTextColor(blue); gotoXY(tempX, tempY); cout << "Input semester (1, 2, 3): ";
+                ShowCur(1); setTextColor(black);
+                do
+                {
+                    gotoXY(tempX + strlen("Input semester (1, 2, 3): "), tempY); cout << "         ";
+                    gotoXY(tempX + strlen("Input semester (1, 2, 3): "), tempY); cin >> optn;
+                } while (optn > 3 || optn < 1);
+                ShowCur(0);
+                Semester semesterNow = schoolYearNow->y.listSemester[optn - 1];
+
                 if (newY == y + 1)
                 {
-                    /*cout << "Chon nam hoc\n";
-                    nodeSchoolYear* schoolYearNow = goToSchoolYear(listOfSY,);
-                    int NOSemester, optn;
-                    do
+                    if (schoolYearNow->y.listSemester[optn - 1].NO == 0)
                     {
-                        cout << "Chon hoc ki muon thao tac (1,2 or 3): ";
-                        cin >> NOSemester;
-                    } while (NOSemester > 3 || NOSemester < 1);
-                    if (schoolYearNow->y.listSemester[NOSemester - 1].NO == 0)
-                    {
-                        cout << "Hoc ki chua duoc khoi tao truoc do\n";
-                        system("Pause");
-                        break;
+                        printTextAtXY(x + 50 + 45 / 2, tempY + 1, "This semester hasn't been initialized !!!");
+                        string str = "Press any key to continue";
+                        setTextColor(red); gotoXY(WIDTH_CONSOLE / 2 - str.length() / 2, HEIGHT_CONSOLE - 3); cout << str;
+                        ch = _getch();
+                        deleteTextAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE - 3, str);
+                        deleteMenu(x + 49, y, 12, 52);
+                        setTextColor(black);
+                        continue;
                     }
-                    Semester semesterNow = schoolYearNow->y.listSemester[NOSemester - 1];
-                    createNewCourse()*/
+                    listOfCourse.head = NULL;
+                    string fileName = "dataSemester\\Course_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(optn);
+                    readCourseFile(listOfCourse, fileName);
+                    createNewCourseForStaff(listOfCourse,schoolYearNow, semesterNow);
+                    deleteAllCourse(listOfCourse);
+                    listOfCourse.head = NULL;
                 }
                 else if (newY == y + 1 + height + dis)
                 {
-                    /*menuViewCoursesForStaff(staff, x, y + 8);
-                    return;*/
+                    nodeCourse* courseNow = goToCourse(semesterNow.listCourse);
+                    if (courseNow == NULL)
+                    {
+                        cnt = 0;
+                        check = true;
+                        continue;
+                    }
+                    if (semesterNow.listCourse.head == NULL)
+                    {
+                        break;
+                    }
+                    listStudent listStudentOfCourseNow;
+                    string fileListStudent = "./dataCourse/" + courseNow->crs.info.courseName + "_" + courseNow->crs.info.className + "_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(semesterNow.NO) + ".txt";
+                    readListStudentOfACourse(listStudentOfCourseNow, fileListStudent);
+                    menuViewListCourses(listStudentOfCourseNow, schoolYearNow, semesterNow, courseNow);
                 }
+
+                cnt = 0;
             }
             else if (ch == -32)
             {
@@ -893,22 +951,199 @@ void menuCourseForStaff(nodeStaff* staff)
     }
 }
 
-void menuViewCoursesForStaff(nodeStaff* staff, int x, int y)
+void menuViewStudentForStaff(int x, int y, int height, int width)
 {
-    listOfSchoolYear lst;
-    lst.head = NULL;
-    readSchoolYear(lst);
-    nodeSchoolYear* schoolYearNow = goToSchoolYear(lst, x, y);
-    int optn;
+    setBackgroundColor(laqua);
+    deleteMenu(x, y, height, width);
+    setTextColor(blue); printTwoLine(x, y, height, width);
+    drawLineByX(x, y + 2, width);
 
-    setTextColor(blue); gotoXY(x, y); cout << "Input semester (1, 2, 3): ";
-    ShowCur(1); setTextColor(black);
-    do
+    drawLineByX(x, y + height - 2, width);
+
+    setTextColor(purple);
+    gotoXY(x + 1, y + 1); cout << "No";
+    gotoXY(x + 5, y + 1); cout << "ID Student";
+    gotoXY(x + 20, y + 1); cout << "Last Name";
+    gotoXY(x + 45, y + 1); cout << "First Name";
+}
+
+void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semester& semesterNow, nodeCourse* courseNow)
+{
+    int x = WIDTH_CONSOLE / 2 - 40, y = HEIGHT_CONSOLE / 2 - 8;
+    int width = 50, height = 2;
+    int nBox = 7, dis = 0;
+
+    int newX = x + 15, newY = y + 2;
+    int oldX = newX, oldY = newY;
+
+    bool check = true;
+    int cnt = 0;
+    while (true)
     {
-        gotoXY(x + strlen("Input semester (1, 2, 3): "), y); cout << "         ";
-        gotoXY(x + strlen("Input semester (1, 2, 3): "), y); cin >> optn;
-    } while (optn > 3 || optn < 1);
-    ShowCur(0);
+        if (cnt == 0)
+        {
+            system("cls");
+            //setTextColor(purple); print("Picture\\School Year.txt", WIDTH_CONSOLE / 2 - 25, 1);
+            setBackgroundColor(lyellow); setTextColor(red); printMovingInstructions();
+            setBackgroundColor(lwhite);
+            setTextColor(green); printTwoLine(x, y, 18, 80);
 
+            string* option = new string[nBox];
+            option[0] = "View List Student In Course";
+            option[1] = "Add N Student To Course By CSV";
+            option[2] = "Update Info Course";
+            option[3] = "Delete A Course";
+            option[4] = "Delete A Student";
+            option[5] = "Export File CSV";
+            option[6] = "Import Scoreboard";
+            setTextColor(black); drawNBoxByY(x + 15, y + 2, width, height, nBox, dis, option);
+            delete[] option;
 
+            for (int i = 1; i <= 6; i++)
+            {
+                gotoXY(x + 15, y + 2 + i * height); cout << (char)195;
+                gotoXY(x + 15 + width, y + 2 + i * height); cout << (char)180;
+            }
+
+            cnt++;
+        }
+        if (check == true)
+        {
+            gotoXY(oldX, oldY);
+            focus(oldX, oldY, width, ' ');
+            oldX = newX, oldY = newY;
+
+            focus(newX, newY, width, (char)174);
+            check = false;
+        }
+        if (_kbhit())
+        {
+            char choose = _getch();
+            if (choose == 27)
+            {
+                return;
+            }
+            else if (choose == 13)
+            {
+                if (newY == y + 2)
+                    viewStudentForStaff(lst);
+                else if (newY == y + 2 + height + dis)
+                {
+                    system("cls");
+                    string fileName;
+                    setTextColor(blue); gotoXY(WIDTH_CONSOLE / 2 - 40, 9); cout << "Input file name: ";
+                    setTextColor(green); drawBox(WIDTH_CONSOLE / 2 - 40 + strlen("Input file name: "), 8, 60, 2);
+                    setTextColor(black);
+                    ShowCur(1); gotoXY(WIDTH_CONSOLE / 2 - 40 + strlen("Input file name: ") + 1, 9);
+                    cin.ignore();
+                    getline(cin, fileName);
+                    ShowCur(0);
+                    addNStudentFromFileForStaff(schoolYearNow, semesterNow, courseNow, fileName);
+                }
+                else if (newY == y + 2 + 2 * (height + dis))
+                {
+                    updateCourse(schoolYearNow, semesterNow, courseNow);
+                }
+                else if (newY == y + 2 + 3 * (height + dis))
+                {
+                    deleteACourse(schoolYearNow, semesterNow, semesterNow.listCourse, courseNow);
+                    deleteNodeCourse(semesterNow.listCourse, courseNow);
+                    return;
+                }
+                else if (newY == y + 2 + 4 * (height + dis))
+                {
+                    deleteAStudentFromCourse(schoolYearNow, semesterNow, courseNow, NULL);
+                }
+                else if (newY == y + 2 + 5 * (height + dis))
+                {
+                    system("cls");
+                    string address;
+                    setTextColor(blue); gotoXY(WIDTH_CONSOLE / 2 - 40, 9); cout << "Input address: ";
+                    setTextColor(green); drawBox(WIDTH_CONSOLE / 2 - 40 + strlen("Input address: "), 8, 65, 2);
+                    setTextColor(black);
+                    ShowCur(1); gotoXY(WIDTH_CONSOLE / 2 - 40 + strlen("Input address: ") + 1, 9);
+                    cin.ignore();
+                    getline(cin, address);
+                    ShowCur(0);
+                    exportCSVFile(schoolYearNow, semesterNow, address, courseNow);
+                }
+                else if (newY == y + 2 + 6 * (height + dis))
+                {
+                    system("cls");
+                    string fileName;
+                    setTextColor(blue); gotoXY(WIDTH_CONSOLE / 2 - 40, 9); cout << "Input file name: ";
+                    setTextColor(green); drawBox(WIDTH_CONSOLE / 2 - 40 + strlen("Input file name: "), 8, 60, 2);
+                    setTextColor(black);
+                    ShowCur(1); gotoXY(WIDTH_CONSOLE / 2 - 40 + strlen("Input file name: ") + 1, 9);
+                    cin.ignore();
+                    getline(cin, fileName);
+                    ShowCur(0);
+                    importScoreBoard(schoolYearNow, semesterNow, courseNow, fileName);
+                    checkScore = true;
+                }
+
+                cnt = 0;
+            }
+            else if (choose == -32)
+            {
+                choose = _getch();
+                if (choose == 72 && newY > y + 2)
+                    newY = newY - height - dis;
+                else if (choose == 80 && newY < y + 2 + (nBox - 1) * (height + dis))
+                    newY = newY + height + dis;
+            }
+
+            check = true;
+        }
+    }
+}
+
+void menuViewChooseCourses(int x, int y, int height, int width)
+{
+    setBackgroundColor(laqua);
+    deleteMenu(x, y, height, width);
+    setTextColor(blue); printTwoLine(x, y, height, width);
+    drawLineByX(x, y + 2, width);
+
+    drawLineByX(x, y + height - 2, width);
+
+    setTextColor(purple);
+    gotoXY(x + 1, y + 1); cout << "No";
+    gotoXY(x + 5, y + 1); cout << "Course Name";
+    gotoXY(x + 35, y + 1); cout << "Teacher Name";
+    gotoXY(x + 65, y + 1); cout << "Class Name";
+}
+
+void ViewChooseCourses(listCourse lst, int start, int end, int x, int y)
+{
+    setTextColor(red);
+    if (end == 0)
+    {
+        gotoXY(WIDTH_CONSOLE / 2 - 30, y + 3); cout << "No data !!!";
+        return;
+    }
+
+    setTextColor(black);
+    int index = 0, i = 1;
+    nodeCourse* temp = lst.head;
+    while (temp != NULL)
+    {
+        if (i == start)
+            break;
+        i++;
+        temp = temp->Next;
+    }
+
+    while (temp != NULL)
+    {
+        if (i == end + 1)
+            break;
+        gotoXY(x + 1, y + 3 + index); cout << i;
+        gotoXY(x + 5, y + 3 + index); cout << temp->crs.info.courseName;
+        gotoXY(x + 35, y + 3 + index); cout << temp->crs.info.teacherName;
+        gotoXY(x + 65, y + 3 + index); cout << temp->crs.info.className;
+
+        temp = temp->Next;
+        index++; i++;
+    }
 }

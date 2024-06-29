@@ -247,7 +247,7 @@ void writeACourseToFile(nodeCourse* course, const string fileName);
 void createNewCourse(listCourse& lst);
 
 //Thêm một học sinh vào khóa học
-void addAStudentToCourse(nodeCourse*& course, nodeStudent* student);
+//void addAStudentToCourse(nodeCourse*& course, nodeStudent* student);
 
 //addTail khóa học
 void addTailCourse(listCourse& lst, Course newCourse);
@@ -258,9 +258,9 @@ void readCourseFileOfStudent(listCourse& lst, const string fileName);
 
 void addTailStudent(listStudent& lst, nodeStudent* newNode);
 //Đọc sinh viên từ .CSV
-void readStudentFromCSV(listStudent& lst, const string fileName);
+//void readStudentFromCSV(listStudent& lst, const string fileName);
 //Thêm N sinh viên từ file .CSV
-void addNStudentFromFile(nodeCourse*& course, const string fileName);
+//void addNStudentFromFile(nodeCourse*& course, const string fileName);
 //Giải phóng bộ nhớ sinh viên
 void deleteAllStudent(listStudent& lst);
 //Giải phóng bộ nhớ khóa học
@@ -283,18 +283,16 @@ bool isInCourse(nodeStudent * student, nodeCourse * course);
 void readListStudentOfACourse(listStudent& lst, const string fileName);
 void deleteNodeStudent(listStudent& lst, nodeStudent* deletion);
 nodeStudent* goToStudent(int No, listStudent lst);
-void printStudent(listStudent lst);
-void deleteAStudentFromCourse(nodeCourse*& course, nodeStudent* deletion);
+void printStudent(listStudent lst, int start, int end, int x, int y);
+//void deleteAStudentFromCourse(nodeCourse*& course, nodeStudent* deletion);
 //--------------------------------------------------------------------------------
 
 //-----------------------DELETE A COURSE------------------------------------------
-void deleteNodeCourse(listCourse& lst, nodeCourse* deletion);
-void deleteACourse(listCourse& lst, nodeCourse* deletion);
 
 //---------------------------------------------------------------------------------
 
 //-----------------EXPORT .CSV FILE AND OPERATE WITH SCORE-------------------------
-void exportCSVFile(const string address, nodeCourse* course);
+//void exportCSVFile(const string address, nodeCourse* course);
 
 //---------------------------------------------------------------------------------
 nodeSchoolYear* goToSchoolYear(listOfSchoolYear listSchoolYear, int& x, int& y);
@@ -328,9 +326,28 @@ void deleteMenu(int x, int y, int height, int width);
 void viewCoursesForStudent(listCourse l1, int start, int end, int x, int y);
 void viewScoresForStudent(listCourse l1, int start, int end, int x, int y);
 void viewClassesForStaff(nodeStaff* staff, int x, int y);
-
+void loadCourse(nodeSchoolYear*& schoolYear, Semester& semester);
+void readSemester(listOfSchoolYear& lst);
 void createSchoolYear(listOfSchoolYear& lst, int x, int y);
 void createSemester(int x, int y);
+void createNewCourseForStaff(listCourse& lst, nodeSchoolYear*& schoolYear, Semester semester);
+void readFileListClass(listClass& lst, const string fileName);
+void addTailClass(listClass& lst, Class newClass);
+nodeCourse* goToCourse(listCourse lstCourse);
+void viewStudentForStaff(listStudent lst);
+
+void addAStudentToCourseForStaff(nodeSchoolYear* schoolYear, Semester semester, nodeCourse*& course, nodeStudent* student);
+bool isInCourse(nodeSchoolYear* schoolYear, Semester semester, nodeStudent* student, nodeCourse* course);
+void readStudentFromCSVForStaff(listStudent& lst, string fileName);
+void addNStudentFromFileForStaff(nodeSchoolYear*& schoolYear, Semester semester, nodeCourse*& course, string fileName);
+void updateCourse(nodeSchoolYear* schoolYearNow, Semester semesterNow, nodeCourse*& courseNow);
+void deleteACourse(nodeSchoolYear* schoolYearNow, Semester& semesterNow, listCourse& lst, nodeCourse* deletion);
+void deleteAStudentFromCourse(nodeSchoolYear* schoolYear, Semester semester, nodeCourse*& course, nodeStudent* deletion);
+void deleteNodeCourse(listCourse& lst, nodeCourse* deletion);
+void exportCSVFile(nodeSchoolYear* schoolYear, Semester semester, const string address, nodeCourse* course);
+void importScoreBoard(nodeSchoolYear* schoolYear, Semester semester, nodeCourse*& course, const string fileName);
+void ViewChooseCourses(listCourse lst, int start, int end, int x, int y);
+int deleteAStudentForStaffInCourse(listStudent lst);
 
 
 void menuRegister();
@@ -344,9 +361,10 @@ void menuViewOfStudent(nodeStudent* Student);
 void menuSchoolYearForStaff(nodeStaff* staff);
 void menuClassForStaff(nodeStaff* staff);
 void menuCourseForStaff(nodeStaff* staff);
-void menuViewCoursesForStaff(nodeStaff* staff, int x, int y);
+void menuViewStudentForStaff(int x, int y, int height, int width);
 void menuViewSchoolYearForStaff(int x, int y, int height, int width);
-
+void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semester& semesterNow, nodeCourse* courseNow); 
+void menuViewChooseCourses(int x, int y, int height, int width);
 
 
 
@@ -354,8 +372,6 @@ bool checkPassword(std::string pass);
 bool KiemTraHoTen(string hoTen);
 void XoaKhoangCach(string& name);
 void ChuanHoaHoTen(string& name);
-
-void importScoreBoard(nodeCourse& course, const string fileName);
 
 int countLine(const string fileName);
 

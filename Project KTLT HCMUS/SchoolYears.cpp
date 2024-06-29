@@ -236,15 +236,20 @@ void createSemester(int x, int y)
     } while (newSemester.NO > 3 || newSemester.NO < 1);
     if (schoolYear->y.listSemester[newSemester.NO - 1].NO != 0)
     {
-        printTextAtXY(x + 45 / 2, tempY + 1, "Semester has not been initialized");
+        ShowCur(0);
+        printTextAtXY(x + 45 / 2, tempY + 1, "Semester has been initialized !!!");
+        string str = "Press any key to continue";
+        setTextColor(red); gotoXY(WIDTH_CONSOLE / 2 - str.length() / 2, HEIGHT_CONSOLE - 3); cout << str;
         char ch = _getch();
-        deleteMenu(x, y, 17, 50);
+        deleteTextAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE - 3, str);
+        deleteMenu(x, y, 12, 52);
+        setTextColor(black);
         return;
     }
     ShowCur(0);
     deleteMenu(x, y, 17, 50);
 
-    setTextColor(green); printTwoLine(x, y, 13, 50);
+    setTextColor(green); printTwoLine(x, y, 11, 50);
     setTextColor(red); gotoXY(x + 5, y + 1); cout << "- SchoolYear: "; setTextColor(black); cout << schoolYear->y.startYear << "-" << schoolYear->y.endYear;
     setTextColor(red); gotoXY(x + 5, y + 2); cout << "- Semester: "; setTextColor(black); cout << newSemester.NO;
     setTextColor(green); drawLineByX(x, y + 3, 50);
@@ -284,7 +289,7 @@ void createSemester(int x, int y)
                     i = 1;
                 else {
                     ShowCur(0);
-                    printTextAtXY(x + 25, y + 11, "Initialize the semester successfully !!!");
+                    printTextAtXY(x + 25, y + 10, "Initialize the semester successfully !!!");
                     break;
                 }
             }
@@ -389,7 +394,7 @@ void createSemester(int x, int y)
     setTextColor(red); gotoXY(WIDTH_CONSOLE / 2 - str.length() / 2, HEIGHT_CONSOLE - 3); cout << str;
     ch = _getch();
     deleteTextAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE - 3, str);
-    deleteMenu(x, y, 9, 45);
+    deleteMenu(x, y, 12, 52);
     setTextColor(black);
 }
 
@@ -401,7 +406,7 @@ void menuViewSchoolYearForStaff(int x, int y, int height, int width) {
     setTextColor(purple);
     gotoXY(x + 2, y + 1); cout << "No";
     gotoXY(x + 8, y + 1); cout << "Start year";
-    gotoXY(x + 29, y + 1); cout << "Start year";
+    gotoXY(x + 29, y + 1); cout << "End year";
 }
 
 void viewSchoolYearForStaff(int x, int y) {
@@ -433,4 +438,55 @@ void viewSchoolYearForStaff(int x, int y) {
     deleteTextAtXY(WIDTH_CONSOLE / 2, HEIGHT_CONSOLE - 3, str);
     deleteMenu(x, y, 3 + add, 52);
     setTextColor(black);
+}
+
+void readSemester(listOfSchoolYear& lst)
+{
+    if (lst.head == NULL)
+    {
+        //cout << "No schoolYear available\n";
+        return;
+    }
+    nodeSchoolYear* temp = lst.head;
+
+    while (temp != NULL)
+    {
+        string fileListCourse = "./dataSchoolYear/Semester_" + to_string(temp->y.startYear) + "-" + to_string(temp->y.endYear) + ".txt";
+        cout << fileListCourse << endl;
+        ifstream fileListCourseR(fileListCourse);
+        if (!fileListCourseR.is_open())
+        {
+            //cout << "Cannot open file list course\n";
+            temp = temp->nextYear;
+            continue;
+        }
+        string Line;
+        for (int i = 0; i < 2; i++)
+        {
+            std::getline(fileListCourseR, Line, ',');
+            if (Line == "" || Line == "\n")
+                break;
+            if (stoi(Line) != 0)
+            {
+                temp->y.listSemester[i].NO = stoi(Line);
+                std::getline(fileListCourseR, Line, '/');
+                temp->y.listSemester[i].startDate.day = stoi(Line);
+                std::getline(fileListCourseR, Line, '/');
+                temp->y.listSemester[i].startDate.month = stoi(Line);
+                std::getline(fileListCourseR, Line, ',');
+                temp->y.listSemester[i].startDate.year = stoi(Line);
+                std::getline(fileListCourseR, Line, '/');
+                temp->y.listSemester[i].endDate.day = stoi(Line);
+                std::getline(fileListCourseR, Line, '/');
+                temp->y.listSemester[i].endDate.month = stoi(Line);
+                std::getline(fileListCourseR, Line, '\n');
+                temp->y.listSemester[i].endDate.year = stoi(Line);
+                loadCourse(temp, temp->y.listSemester[i]);
+
+            }
+        }
+        temp = temp->nextYear;
+        fileListCourseR.close();
+    }
+
 }
