@@ -1,0 +1,5 @@
+PTH002,Vat ly dai cuong 2,23CTT4,Vo Nhu Lieu,4,Mon,0,0,0,0
+PTH0002,Vat ly dai cuong 2,23CTT4,Vo Nhu Lieu,4,Mon,0,0,0,0
+VTP0000H,Vi tich phan 2B,23CTT4,Khoa,4,Tue,0,0,0,0
+CSC10005,Dai so tuyen tinh,23CTT5,Le Van Hop,3,Sat,8,5,2,5
+1111111111,Phap luat dai cuong,23CTT6,An,2,Wed,0,0,0,0

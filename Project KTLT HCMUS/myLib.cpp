@@ -1532,7 +1532,7 @@ void viewInfoStaff(nodeStaff* staff)
 	setBackgroundColor(lwhite);
 	setTextColor(black); gotoXY(x + 3, y + 4); std::cout << "- Username: "; setTextColor(blue); cout << staff->staff.account.userName;
 	setTextColor(black); gotoXY(x + 3, y + 5); std::cout << "- Password: "; setTextColor(blue); cout << staff->staff.account.passWord;
-	setTextColor(black); gotoXY(x + 3, y + 6); std::cout << "- ID student: "; setTextColor(blue); cout << staff->staff.IDofStaff;
+	setTextColor(black); gotoXY(x + 3, y + 6); std::cout << "- ID staff: "; setTextColor(blue); cout << staff->staff.IDofStaff;
 	setTextColor(black); gotoXY(x + 3, y + 7); std::cout << "- Last name: "; setTextColor(blue); cout << staff->staff.lastName;
 	setTextColor(black); gotoXY(x + 3, y + 8); std::cout << "- First name: "; setTextColor(blue); cout << staff->staff.firstName;
 	setTextColor(black); gotoXY(x + 3, y + 9); std::cout << "- Gender: "; setTextColor(blue); cout << staff->staff.gender;
@@ -2274,7 +2274,7 @@ void XoaKhoangCach(string &name)
 	int dodai = name.length();
 	for (int i = 0; i < dodai; i++)
 	{
-		if (name[i] == ' ' && name[i + 1] == ' ')
+		if (name[i] == ' ' && (i + 1 < dodai && name[i + 1] == ' '))
 		{
 			continue;
 		}
@@ -2284,16 +2284,17 @@ void XoaKhoangCach(string &name)
 		}
 	}
 	int i = 0;
-	if (res[0] == ' ');
-	while (i < res.length())
+	while (i < res.length() && res[i] == ' ')
 	{
-		res[i] = res[i + 1];
 		i++;
 	}
-	if (res[res.length()-1] == ' ')
+	res = res.substr(i);
+	i = res.length() - 1;
+	while (i >= 0 && res[i] == ' ')
 	{
-		res[res.length()-1] = '\0';
+		i--;
 	}
+	res = res.substr(0, i + 1);
 	name = res;
 }
 
@@ -2303,8 +2304,14 @@ void ChuanHoaHoTen(string &name)
 	int dem = 0;
 	while (dem < name.length())
 	{
-		if (dem == 0) name[dem] = toupper(name[dem]);
-		else if (name[dem - 1] == ' ') name[dem] = toupper(name[dem]);
+		if (dem == 0)
+		{
+			name[dem] = toupper(name[dem]);
+		}
+		else if (name[dem - 1] == ' ')
+		{
+			name[dem] = toupper(name[dem]);
+		}
 		else
 		{
 			name[dem] = tolower(name[dem]);

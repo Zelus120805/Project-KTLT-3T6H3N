@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Menu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|solutionrelative:Menu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Courses.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|solutionrelative:Courses.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\myLib.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -17,6 +17,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\myLib.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|solutionrelative:myLib.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Class.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|solutionrelative:Class.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{19161C2D-52C2-4115-B198-F0A8295E81C8}|Project KTLT HCMUS.vcxproj|D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\accountStudent.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -50,16 +58,39 @@
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Class.cpp",
+              "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Class.cpp",
+              "RelativeDocumentMoniker": "Class.cpp",
+              "ToolTip": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Class.cpp",
+              "RelativeToolTip": "Class.cpp",
+              "ViewState": "AQIAAGkAAAAAAAAAAAD4v4oAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-30T04:50:36.278Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Courses.cpp",
+              "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Courses.cpp",
+              "RelativeDocumentMoniker": "Courses.cpp",
+              "ToolTip": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Courses.cpp",
+              "RelativeToolTip": "Courses.cpp",
+              "ViewState": "AQIAAHMAAAAAAAAAAAAIwHkAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-30T04:06:12.563Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
               "Title": "myLib.cpp",
               "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\myLib.cpp",
               "RelativeDocumentMoniker": "myLib.cpp",
               "ToolTip": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\myLib.cpp",
               "RelativeToolTip": "myLib.cpp",
-              "ViewState": "AQIAAJMIAAAAAAAAAAAqwEgJAAABAAAA",
+              "ViewState": "AQIAANsIAAAAAAAAAAAIwOMIAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-06-13T05:41:44.986Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T05:41:44.986Z"
             },
             {
               "$type": "Document",
@@ -69,27 +100,26 @@
               "RelativeDocumentMoniker": "myLib.h",
               "ToolTip": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\myLib.h",
               "RelativeToolTip": "myLib.h",
-              "ViewState": "AQIAADABAAAAAAAAAAAAADsBAAAGAAAA",
+              "ViewState": "AQIAADwBAAAAAAAAAAD4v0UBAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-06-13T05:39:32.817Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-13T05:39:32.817Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Menu.cpp",
               "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Menu.cpp",
               "RelativeDocumentMoniker": "Menu.cpp",
               "ToolTip": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Menu.cpp",
               "RelativeToolTip": "Menu.cpp",
-              "ViewState": "AQIAAGIBAAAAcGZmZmb0v2EBAAAqAAAA",
+              "ViewState": "AQIAACECAAAAAAAAAAAnwPcBAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-06-09T04:54:20.639Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "include.cpp",
               "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\include.cpp",
               "RelativeDocumentMoniker": "include.cpp",
@@ -101,20 +131,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AQIAAAoAAAAAAAAAAABAPRcAAAAfAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAAAAABcAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-06-05T17:30:32.141Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T17:30:32.141Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Windows.h",
               "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Windows.h",
               "RelativeDocumentMoniker": "Windows.h",
@@ -126,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Menu.h",
               "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\Menu.h",
               "RelativeDocumentMoniker": "Menu.h",
@@ -138,7 +167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "include.h",
               "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\include.h",
               "RelativeDocumentMoniker": "include.h",
@@ -150,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "accountStudent.txt",
               "DocumentMoniker": "D:\\github\\Project-KTLT-3T6H3N\\Project KTLT HCMUS\\accountStudent.txt",
               "RelativeDocumentMoniker": "accountStudent.txt",

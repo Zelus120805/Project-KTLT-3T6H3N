@@ -1,14 +1,2 @@
 CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,Friday,0,0,0,0
 CSC10007,Toan roi rac,23CTT5,Le Van Hop,3,Thursday,0,0,0,0
-CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,Friday,0,0,0,0
-CSC10007,Toan roi rac,23CTT5,Le Van Hop,3,Thursday,0,0,0,0
-CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,Friday,0,0,0,0
-CSC10007,Toan roi rac,23CTT5,Le Van Hop,3,Thursday,0,0,0,0
-CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,Friday,0,0,0,0
-CSC10007,Toan roi rac,23CTT5,Le Van Hop,3,Thursday,0,0,0,0
-CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,Friday,0,0,0,0
-CSC10007,Toan roi rac,23CTT5,Le Van Hop,3,Thursday,0,0,0,0
-CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,Friday,0,0,0,0
-CSC10007,Toan roi rac,23CTT5,Le Van Hop,3,Thursday,0,0,0,0
-CSC10002,Ki thuat lap trinh,23CTT5,Nguyen Le Hoang Dung,4,Friday,0,0,0,0
-CSC10007,Toan roi rac,23CTT5,Le Van Hop,3,Thursday,0,0,0,0

@@ -1006,10 +1006,7 @@ void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semes
                 else if (newY == y + 2 + 4 * (height + dis))
                 {
                     deleteAStudentFromCourse(schoolYearNow, semesterNow, courseNow, NULL);
-                    string courseName = "./dataCourse/" + courseNow->crs.info.courseName + "_" + courseNow->crs.info.className + "_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(semesterNow.NO) + ".txt";
-                    deleteAllStudent(lst);
-                    lst.head = NULL;
-                    readListStudentOfACourse(lst, courseName);
+
                 }
                 else if (newY == y + 2 + 5 * (height + dis))
                 {
@@ -1040,7 +1037,10 @@ void menuViewListCourses(listStudent& lst, nodeSchoolYear*& schoolYearNow, Semes
                     importScoreBoard(schoolYearNow, semesterNow, courseNow, fileName);
                     checkScore = true;
                 }
-
+                string courseName = "./dataCourse/" + courseNow->crs.info.courseName + "_" + courseNow->crs.info.className + "_" + to_string(schoolYearNow->y.startYear) + "-" + to_string(schoolYearNow->y.endYear) + "_" + to_string(semesterNow.NO) + ".txt";
+                deleteAllStudent(lst);
+                lst.head = NULL;
+                readListStudentOfACourse(lst, courseName);
                 cnt = 0;
             }
             else if (choose == -32)

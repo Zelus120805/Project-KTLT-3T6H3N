@@ -520,7 +520,7 @@ void addNStudentFromFileForStaff(nodeSchoolYear*& schoolYear, Semester semester,
 		printTextAtXY(WIDTH_CONSOLE / 2, 12, "Fail to add !!!");
 	setTextColor(black);
 
-	deleteAllStudent(lst);
+	//deleteAllStudent(lst);
 	fileStudent.close();
 }
 
@@ -727,10 +727,10 @@ void updateCourse(nodeSchoolYear* schoolYearNow, Semester semesterNow, nodeCours
 			{
 				if (newY == y + 1)
 				{
-					setTextColor(blue); gotoXY(x + width, y + 1); cout << "Input new ID course: ";
-					setTextColor(green); drawBox(x + width + strlen("Input new ID course: "), y, 30, 2);
+					setTextColor(blue); gotoXY(x + 55, y + 1); cout << "Input new ID course: ";
+					setTextColor(green); drawBox(x + 55 + strlen("Input new ID course: "), y, 30, 2);
 					setTextColor(black);
-					ShowCur(1); gotoXY(x + width + strlen("Input new ID course: ") + 1, y + 1);
+					ShowCur(1); gotoXY(x + 55 + strlen("Input new ID course: ") + 1, y + 1);
 					cin.ignore();
 					getline(cin, courseNow->crs.info.idCourse);
 					ShowCur(0);
@@ -1038,7 +1038,7 @@ void exportCSVFile(nodeSchoolYear* schoolYear, Semester semester, const string a
 	if (!fileCSV.is_open())
 	{
 		//cout << "Cannot write to file\n";
-		return;
+		//return;
 	}
 	const string courseName = "./dataCourse/" + course->crs.info.courseName + "_" + course->crs.info.className + "_" + to_string(schoolYear->y.startYear) + "-" + to_string(schoolYear->y.endYear) + "_" + to_string(semester.NO) + ".txt";
 	ifstream fileCourseR(courseName);
@@ -1050,8 +1050,9 @@ void exportCSVFile(nodeSchoolYear* schoolYear, Semester semester, const string a
 	fileCSV.close();
 	fileCourseR.close();
 	
-	setBackgroundColor(yellow), setTextColor(red);
+	//setBackgroundColor(yellow), setTextColor(red);
 	printTextAtXY(WIDTH_CONSOLE / 2 - strlen("     Export CSV file successful !!!     ") / 2, 12, "     Export CSV file successful !!!     ");
+	setTextColor(red);
 	string str = "Press any key to continue";
 	gotoXY(WIDTH_CONSOLE / 2 - str.length() / 2, 14); cout << str;
 	char ch = _getch();

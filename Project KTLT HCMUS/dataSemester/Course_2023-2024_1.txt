@@ -1,0 +1,2 @@
+PTH0002,Vat ly dai cuong 2,23CTTT5,Tran Van A,2,0,50,Mon
+CSC1002,Ki thuat lap trinh,23CTTT5,Nguyen Van B,4,0,50,Sat
